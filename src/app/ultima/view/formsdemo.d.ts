@@ -1,0 +1,31 @@
+import { OnInit } from '@angular/core';
+import { CountryService } from '../service/countryservice';
+import { SelectItem, MenuItem } from 'primeng/primeng';
+export declare class FormsDemo implements OnInit {
+    private countryService;
+    country: any;
+    filteredCountries: any[];
+    brands: string[];
+    filteredBrands: any[];
+    brand: string;
+    carOptions: SelectItem[];
+    selectedMultiSelectCars: string[];
+    cities: SelectItem[];
+    citiesListbox: SelectItem[];
+    selectedCity1: any;
+    selectedCity2: any;
+    ratingValue: number;
+    checkboxValues: string[];
+    radioValues: string[];
+    switchChecked: boolean;
+    rangeValues: number[];
+    toggleButtonChecked: boolean;
+    types: SelectItem[];
+    splitButtonItems: MenuItem[];
+    constructor(countryService: CountryService);
+    ngOnInit(): void;
+    filterCountry(event: any): void;
+    searchCountry(query: any, countries: any[]): any[];
+    filterBrands(event: any): void;
+    handleACDropdownClick(): void;
+}

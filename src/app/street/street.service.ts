@@ -27,7 +27,7 @@ export class StreetService {
     });
   }
 
-  createStreet(id: number = 0, name: string = '') {
+  createStreet(id = 0, name = '') {
     let body = '&area_id=' + id + '&name=' + name,
           headers = new Headers();
           headers.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -61,7 +61,7 @@ export class StreetService {
 
   }
 
-  updateStreet(id: number = 0, areaId: number = 0, name: string = '') {
+  updateStreet(id= 0, areaId = 0, name = '') {
     let updateUrl = 'http://crm.unicweb.com.ua/api/streets/update',
           updateId = `?id=${id}`,
           body = 'area_id=' + areaId + '&name=' + name,
@@ -80,7 +80,7 @@ export class StreetService {
 
   }
 
-  searchAreas(query: string = '', areasIds: number[] | string = '') {
+  searchAreas(query = '', areasIds: number[] | string = '') {
     let areaUrl = 'http://crm.unicweb.com.ua/ajax/search/areas',
           areaQuery = '?q=' + query + '&not_id=' + areasIds;
 

@@ -7,26 +7,26 @@ import {
 } from './area.service';
 
 import {
-  DataTableModule,
-  SharedModule,
-  Column,
-  InputText,
-  Growl,
+  // DataTableModule,
+  // SharedModule,
+  // Column,
+  // InputText,
+  // Growl,
   Message,
-  ContextMenuModule,
+  // ContextMenuModule,
   MenuItem,
-  Paginator,
-  DialogModule,
-  Button,
-  Header,
-  Footer,
-  AutoComplete,
-  SelectItem,
-  Dropdown
+  // Paginator,
+  // DialogModule,
+  // Button,
+  // Header,
+  // Footer,
+  // AutoComplete,
+  // SelectItem,
+  // Dropdown
 } from 'primeng/primeng';
 
 @Component({
-  selector: 'an-area',
+  selector: 'app-area',
   providers: [
     AreaService
   ],
@@ -44,7 +44,6 @@ export class AreaComponent implements OnInit {
   items: any[];
   msgs: Message[];
   tieredItems: MenuItem[];
-
 
   dialog: boolean;
   resCRUD: any;
@@ -202,30 +201,30 @@ export class AreaComponent implements OnInit {
 }
 
 export interface Area {
-  id ? : any;
-  name ? : any;
-  settlement ? : any;
+  id ?: any;
+  name ?: any;
+  settlement ?: any;
 }
 
 class NewArea implements Area {
-  constructor(public id ? : any, public name ? : any,
-    public settlement ? : any) {}
+  constructor(public id ?: any, public name ?: any,
+    public settlement ?: any) {}
 }
 
 export interface Search {
-  complete ? : string;
-  result ? : string[];
+  complete ?: string;
+  result ?: string[];
 }
 
 class SearchAreas implements Search {
-  constructor(public complete ? : string, public result ? : string[]) {}
+  constructor(public complete ?: string, public result ?: string[]) {}
 }
 
 export interface Paginate {
-  count ? : string[];
+  count ?: string[];
   curr: number;
 }
 
 class NewPaginate implements Paginate {
-  constructor(public count ? : string[], public curr = 1) {}
+  constructor(public count ?: string[], public curr = 1) {}
 }

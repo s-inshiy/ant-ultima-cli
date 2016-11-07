@@ -10,27 +10,13 @@ import {
 } from '../region/region.service';
 
 import {
-  DataTableModule,
-  SharedModule,
-  Column,
-  InputText,
-  Growl,
   Message,
-  ContextMenuModule,
   MenuItem,
-  Paginator,
-  DialogModule,
-  Button,
-  Header,
-  Footer,
-  AutoComplete,
-  SelectItem,
-  Dropdown,
-  MultiSelectModule
+  SelectItem
 } from 'primeng/primeng';
 
 @Component({
-  selector: 'an-branch',
+  selector: 'app-branch',
   providers: [
     BranchService, RegionService
   ],
@@ -196,31 +182,31 @@ export class BranchComponent implements OnInit {
 }
 
 export interface Branch {
-  id ? : number;
-  name ? : string;
-  regions ? : any;
-  managers ? : string;
+  id ?: number;
+  name ?: string;
+  regions ?: any;
+  managers ?: string;
 }
 
 class NewBranch implements Branch {
-  constructor(public id ? : number, public name ? : string, public regions ? : any,
-    public managers ? : string) {}
+  constructor(public id ?: number, public name ?: string, public regions ?: any,
+    public managers ?: string) {}
 }
 
 export interface Paginate {
-  count ? : string[];
+  count ?: string[];
   curr: number;
 }
 
 class NewPaginate implements Paginate {
-  constructor(public count ? : string[], public curr = 1) {}
+  constructor(public count ?: string[], public curr = 1) {}
 }
 
 export interface Search {
-  complete ? : SelectItem[];
-  result ? : [number];
+  complete ?: SelectItem[];
+  result ?: [number];
 }
 
 class SearchRegion implements Search {
-  constructor(public complete ? : SelectItem[], public result ? : [number]) {}
+  constructor(public complete ?: SelectItem[], public result ?: [number]) {}
 }

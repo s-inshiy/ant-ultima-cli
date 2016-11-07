@@ -153,7 +153,7 @@
           <li class="search-item">
             <span class="md-inputfield">
                             <input type="text">
-                            <label>Search</label>
+                            <label>Поиск</label>
                             <i class="topbar-icon material-icons">search</i>
                         </span>
           </li>
@@ -200,7 +200,22 @@
           </ul>
           <ul id="main-menu" class="ultima-menu clearfix">
             <!--<li role="menuitem"><a [routerLink]="['/']"><i class="material-icons">dashboard</i><span>Dashboard</span></a></li>-->
-            <li role="menuitem"><a class="ripplelink"><i class="material-icons">streetview</i><span>Адресса</span><i class="material-icons">keyboard_arrow_down</i></a>
+            <!-- ------------------------------------
+    Menu Items User
+------------------------------------ -->
+            <li role="menuitem">
+              <a [routerLink]="['/users']" [routerLinkActive]="['active-menulink']" class="ripplelink">
+                <!--<i class="material-icons">streetview</i><span>Пользователи</span>-->
+                <i class="fa ui-icon-person-add"></i><span>Пользователи</span>
+              </a>
+            </li>
+            <!-- ------------------------------------
+    Menu Items Address
+------------------------------------ -->
+            <li role="menuitem">
+              <a class="ripplelink">
+                <i class="material-icons">streetview</i><span>Адресса</span><i class="material-icons">keyboard_arrow_down</i>
+              </a>
               <ul role="menu">
                 <li role="menuitem">
                   <a class="ripplelink" [routerLink]="['/streets']" [routerLinkActive]="['active-menulink']"><i class="material-icons">streetview</i><span>Улицы</span><i class="material-icons">add</i></a>
@@ -216,13 +231,49 @@
                   </a>
                 </li>
                 <li role="menuitem">
-                  <a  class="ripplelink" [routerLink]="['/regions']" [routerLinkActive]="['active-menulink']">
+                  <a class="ripplelink" [routerLink]="['/regions']" [routerLinkActive]="['active-menulink']">
                     <i class="material-icons">streetview</i><span>Регионы</span><i class="material-icons">add</i>
                   </a>
                 </li>
               </ul>
             </li>
-                        <li role="menuitem"><a [routerLink]="['/branches']" [routerLinkActive]="['active-menulink']" class="ripplelink"><i class="material-icons">streetview</i><span>Филиалы</span></a></li>
+            <!-- ------------------------------------
+    Menu Items Branch
+------------------------------------ -->
+            <li role="menuitem">
+              <a [routerLink]="['/branches']" [routerLinkActive]="['active-menulink']" class="ripplelink">
+                <!--<i class="material-icons">streetview</i><span>Филиалы</span>-->
+                <i class="fa ui-icon-group-work"></i><span>Филиалы</span>
+              </a>
+            </li>
+            <!-- ------------------------------------
+    Menu Items Partners
+------------------------------------ -->
+            <li role="menuitem">
+              <a class="ripplelink">
+                <i class="material-icons">streetview</i><span>Партнёры</span><i class="material-icons">keyboard_arrow_down</i>
+              </a>
+              <ul role="menu">
+                <!--<li role="menuitem">
+                  <a class="ripplelink" [routerLink]="['/areas']" [routerLinkActive]="['active-menulink']">
+                    <i class="material-icons">streetview</i><span>Мастера</span><i class="material-icons">add</i>
+                  </a>
+                </li>-->
+                <li role="menuitem">
+                  <a class="ripplelink" [routerLink]="['/managers']" [routerLinkActive]="['active-menulink']"><i class="material-icons">streetview</i><span>Менеджеры</span><i class="material-icons">add</i></a>
+                </li>
+                <!--<li role="menuitem">
+                  <a class="ripplelink" [routerLink]="['/settlements']" [routerLinkActive]="['active-menulink']">
+                    <i class="material-icons">streetview</i><span>Компании</span><i class="material-icons">add</i>
+                  </a>
+                </li>-->
+                <!--<li role="menuitem">
+                  <a  class="ripplelink" [routerLink]="['/regions']" [routerLinkActive]="['active-menulink']">
+                    <i class="material-icons">streetview</i><span>Регионы</span><i class="material-icons">add</i>
+                  </a>
+                </li>-->
+              </ul>
+            </li>
             <li role="menuitem">
               <a href="#" class="ripplelink"><i class="material-icons">palette</i><span>Themes</span><i class="material-icons">keyboard_arrow_down</i></a>
               <ul role="menu">

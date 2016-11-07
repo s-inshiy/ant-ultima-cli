@@ -1,3 +1,45 @@
-<p>
-  manager works!
-</p>
+<div class="ui-g">
+  <div class="ui-g-12">
+    <div class="card">
+      <!-- ------------------------------------
+    Table User
+------------------------------------ -->
+      <p-growl [value]="msgs"></p-growl>
+      <p-dataTable [value]="items" selectionMode="single" [(selection)]="manager" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
+        [responsive]="true" [contextMenu]="forManager">
+        <header>Менеджеры</header>
+        <footer>
+          <div class="ui-helper-clearfix" style="width:100%; margin: 8px 0"><button type="button" pButton style="float:right" (click)="showDialog()" label="Добавить"></button></div>
+        </footer>
+        <p-column field="id" header="№, п/п" [filter]="false"></p-column>
+	    <p-column field="fio" header="ФИО" [filter]="false"></p-column>
+	    <p-column field="branch" header="Филиалы" [filter]="false" ></p-column>
+      </p-dataTable>
+      <p-paginator rows="20" totalRecords="{{pag.count}}" pageLinkSize="10" (onPageChange)="paginate($event)"></p-paginator>
+    </div>
+  </div>
+</div>
+<p-contextMenu #forManager [model]="tieredItems" [style]="{'width':'12.5em'}"></p-contextMenu>
+<!-- ------------------------------------
+    Modal User
+------------------------------------ -->
+<p-dialog header="Пользователь" [(visible)]="dialog" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getAreas(pag.curr)">
+  <div class="ui-g form-group">
+    <div class="ui-g-12">
+      <span class="md-inputfield">
+                <input type="text" pInputText  id="name" [size]="30" [(ngModel)]="manager.name">
+                <label>Имя</label>
+            </span>
+    </div>
+    <div class="ui-g-12" style="margin-bottom:30px">
+      <!--<p-autoComplete  [(ngModel)]="search.complete" [suggestions]="search.result" (completeMethod)="searchUser($event)" field="name"
+        [size]="30" placeholder="Район" [minLength]="3" (onSelect)="manager.userId = $event.id" required></p-autoComplete>-->
+    </div>
+  </div>
+  <footer>
+    <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+      <button type="button" pButton (click)="createManager()" label="Создать" [disabled]="!(manager.id&&manager.name)"></button>
+      <button type="button" pButton (click)="updateManager()" label="Обновить" [disabled]="!(manager.id&&manager.name)"></button>
+    </div>
+  </footer>
+</p-dialog>

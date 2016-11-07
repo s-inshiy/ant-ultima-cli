@@ -7,26 +7,26 @@ import {
 } from './street.service';
 
 import {
-  DataTableModule,
-  SharedModule,
-  Column,
-  InputText,
-  Growl,
+//   DataTableModule,
+//   SharedModule,
+//   Column,
+//   InputText,
+//   Growl,
   Message,
-  ContextMenuModule,
+//   ContextMenuModule,
   MenuItem,
-  Paginator,
-  DialogModule,
-  Button,
-  Header,
-  Footer,
-  AutoComplete,
-  SelectItem,
-  Dropdown
+//   Paginator,
+//   DialogModule,
+//   Button,
+//   Header,
+//   Footer,
+//   AutoComplete,
+//   SelectItem,
+//   Dropdown
 } from 'primeng/primeng';
 
 @Component({
-  selector: 'an-street',
+  selector: 'app-street',
   providers: [
     StreetService
   ],
@@ -109,7 +109,6 @@ export class StreetComponent implements OnInit {
         err => console.error(err),
         () => {
           this.msgs = [];
-          console.log(this.resCRUD);
           if (this.resCRUD.errors.length < 1) {
             this.getStreets(this.pag.curr);
             this.dialog = false;
@@ -228,5 +227,5 @@ export interface Paginate {
 }
 
 class NewPaginate implements Paginate {
-  constructor(public count?: string[], public curr: number = 1) {}
+  constructor(public count?: string[], public curr = 1) {}
 }

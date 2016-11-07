@@ -1,11 +1,10 @@
-// import { Routes, RouterModule } from '@angular/router';
-// import { Home } from './home';
-// import { About } from './about';
 import { StreetComponent } from './street';
 import { AreaComponent } from './area';
 import { SettlementComponent } from './settlement';
 import { RegionComponent } from './region';
 import { BranchComponent } from './branch';
+import { UserComponent} from './user';
+import { ManagerComponent} from './manager';
 import { NoContentComponent } from './no-content';
 // import { DataResolver } from './app.resolver';
 
@@ -39,6 +38,7 @@ export const routes: Routes = [
     // {path: 'empty', component: EmptyDemo},
     // {path: 'charts', component: ChartsDemo},
     // {path: 'file', component: FileDemo},
+    {path: '', redirectTo: 'users', pathMatch: 'full'},
     {path: 'utils', component: UtilsDemo},
     {path: 'documentation', component: Documentation},
     {path: 'streets',    component: StreetComponent},
@@ -46,6 +46,8 @@ export const routes: Routes = [
     {path: 'settlements', component: SettlementComponent},
     {path: 'regions', component: RegionComponent},
     {path: 'branches', component:  BranchComponent},
+    {path: 'users', component:  UserComponent},
+    {path: 'managers', component:  ManagerComponent},
     {path: '**',    component: NoContentComponent }
 ];
 

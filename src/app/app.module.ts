@@ -18,6 +18,7 @@ import { StreetService } from './street/street.service';
 import { AreaService } from './area/area.service';
 import { SettlementService } from './settlement/settlement.service';
 import { RegionService } from './region/region.service';
+import { BranchService } from './branch/branch.service';
 
 import { CarService } from './ultima/service/carservice';
 import { CountryService } from './ultima/service/countryservice';
@@ -43,14 +44,14 @@ import { ContextMenuModule } from 'primeng/primeng';
 import { DataTableModule } from 'primeng/primeng';
 import { DialogModule } from 'primeng/primeng';
 // import {DragDropModule} from 'primeng/primeng';
-// import { DropdownModule } from 'primeng/primeng';
+import { DropdownModule } from 'primeng/primeng';
 // import {EditorModule} from 'primeng/primeng';
 // import { FieldsetModule } from 'primeng/primeng';
 // import {FileUploadModule} from 'primeng/primeng';
 // import {GalleriaModule} from 'primeng/primeng';
 // import {GMapModule} from 'primeng/primeng';
 import { GrowlModule } from 'primeng/primeng';
-// import { InputMaskModule } from 'primeng/primeng';
+import { InputMaskModule } from 'primeng/primeng';
 // import { InputSwitchModule } from 'primeng/primeng';
 import { InputTextModule } from 'primeng/primeng';
 // import { InputTextareaModule } from 'primeng/primeng';
@@ -66,7 +67,7 @@ import {MultiSelectModule} from 'primeng/primeng';
 import { PaginatorModule } from 'primeng/primeng';
 // import { PanelModule } from 'primeng/primeng';
 // import { PanelMenuModule } from 'primeng/primeng';
-// import { PasswordModule } from 'primeng/primeng';
+import { PasswordModule } from 'primeng/primeng';
 // import { PickListModule } from 'primeng/primeng';
 // import { ProgressBarModule } from 'primeng/primeng';
 // import { RadioButtonModule } from 'primeng/primeng';
@@ -112,6 +113,7 @@ import { SettlementComponent } from './settlement';
 import { RegionComponent } from './region';
 import { BranchComponent } from './branch';
 import { ManagerComponent } from './manager/manager.component';
+import { UserComponent } from './user/user.component';
 
 
 // Application wide providers
@@ -154,6 +156,7 @@ type StoreType = {
     RegionComponent,
     BranchComponent,
     ManagerComponent,
+    UserComponent,
   ],
   imports: [ // import Angular's modules
     BrowserModule,
@@ -182,14 +185,14 @@ type StoreType = {
     DataTableModule,
     DialogModule,
     // DragDropModule,
-    // DropdownModule,
+    DropdownModule,
     // EditorModule,
     // FieldsetModule,
     // FileUploadModule,
     // GalleriaModule,
     // GMapModule,
     GrowlModule,
-    // InputMaskModule,
+    InputMaskModule,
     // InputSwitchModule,
     InputTextModule,
     // InputTextareaModule,
@@ -205,7 +208,7 @@ type StoreType = {
     PaginatorModule,
     // PanelModule,
     // PanelMenuModule,
-    // PasswordModule,
+    PasswordModule,
     // PickListModule,
     // ProgressBarModule,
     // RadioButtonModule,
@@ -238,7 +241,7 @@ type StoreType = {
     // ENV_PROVIDERS,
     APP_PROVIDERS,
     CarService, CountryService, EventService, NodeService,
-     StreetService, AreaService, SettlementService, RegionService
+     StreetService, AreaService, SettlementService, RegionService, BranchService
   ]
 })
 export class AppModule {

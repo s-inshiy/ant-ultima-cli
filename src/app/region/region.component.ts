@@ -7,26 +7,26 @@ import {
 } from './region.service';
 
 import {
-  DataTableModule,
-  SharedModule,
-  Column,
-  InputText,
-  Growl,
+  // DataTableModule,
+  // SharedModule,
+  // Column,
+  // InputText,
+  // Growl,
   Message,
-  ContextMenuModule,
+  // ContextMenuModule,
   MenuItem,
-  Paginator,
-  DialogModule,
-  Button,
-  Header,
-  Footer,
-  AutoComplete,
-  SelectItem,
-  Dropdown
+  // Paginator,
+  // DialogModule,
+  // Button,
+  // Header,
+  // Footer,
+  // AutoComplete,
+  // SelectItem,
+  // Dropdown
 } from 'primeng/primeng';
 
 @Component({
-  selector: 'an-region',
+  selector: 'app-region',
   providers: [
     RegionService
   ],

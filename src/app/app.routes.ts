@@ -5,6 +5,9 @@ import { RegionComponent } from './region';
 import { BranchComponent } from './branch';
 import { UserComponent} from './user';
 import { ManagerComponent} from './manager';
+import { CompanyComponent } from './company';
+import { MasterComponent } from './master';
+import { ServiceComponent } from './service';
 import { NoContentComponent } from './no-content';
 // import { DataResolver } from './app.resolver';
 
@@ -48,6 +51,9 @@ export const routes: Routes = [
     {path: 'branches', component:  BranchComponent},
     {path: 'users', component:  UserComponent},
     {path: 'managers', component:  ManagerComponent},
+    {path: 'companies', component:  CompanyComponent},
+    {path: 'masters', component:  MasterComponent},
+    {path: 'services', component:  ServiceComponent},
     {path: '**',    component: NoContentComponent }
 ];
 

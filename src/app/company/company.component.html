@@ -1,0 +1,41 @@
+<div class="ui-g">
+  <div class="ui-g-12">
+    <div class="card">
+      <!-- ------------------------------------
+    Table Company
+------------------------------------ -->
+    <p-growl [value]="msgs"></p-growl>
+      <p-dataTable [value]="items" selectionMode="single" [(selection)]="manager" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
+        [responsive]="true" [contextMenu]="forCompany">
+        <header>Компании</header>
+        <footer>
+          <div class="ui-helper-clearfix" style="width:100%; margin: 8px 0"><button type="button" pButton style="float:right" (click)="showDialog()" label="Добавить"></button></div>
+        </footer>
+        <p-column field="id" header="№, п/п" [filter]="false"></p-column>
+	    <p-column field="name" header="Имя" [filter]="false"></p-column>
+	    <p-column field="masters" header="Мастера" [filter]="false" ></p-column>
+      </p-dataTable>
+      <p-paginator rows="20" totalRecords="{{pag.count}}" pageLinkSize="10" (onPageChange)="paginate($event)"></p-paginator>
+    </div>
+  </div>
+</div>
+<p-contextMenu #forCompany [model]="tieredItems" [style]="{'width':'12.5em'}"></p-contextMenu>
+<!-- ------------------------------------
+    Modal Company
+------------------------------------ -->
+<p-dialog header="Компании" [(visible)]="dialog" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getCompanies(pag.curr)">
+  <div class="ui-g form-group">
+    <div class="ui-g-12">
+      <span class="md-inputfield">
+                <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="company.name">
+                <label>Имя</label>
+            </span>
+    </div>
+  </div>
+  <footer>
+    <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+      <button type="button" pButton (click)="createCompany()" label="Создать" [disabled]="!(company.name)"></button>
+      <button type="button" pButton (click)="updateCompany()" label="Обновить" [disabled]="!(company.name)"></button>
+    </div>
+  </footer>
+</p-dialog>

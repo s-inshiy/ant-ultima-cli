@@ -2,7 +2,7 @@
   <div class="ui-g-12">
     <div class="card">
       <!-- ------------------------------------
-    Table User
+    Table Manager
 ------------------------------------ -->
       <p-growl [value]="msgs"></p-growl>
       <p-dataTable [value]="items" selectionMode="single" [(selection)]="manager" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
@@ -21,25 +21,23 @@
 </div>
 <p-contextMenu #forManager [model]="tieredItems" [style]="{'width':'12.5em'}"></p-contextMenu>
 <!-- ------------------------------------
-    Modal User
+    Modal Manager
 ------------------------------------ -->
-<p-dialog header="Пользователь" [(visible)]="dialog" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getAreas(pag.curr)">
+<p-dialog header="Пользователь" [(visible)]="dialog" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getManagers(pag.curr)">
   <div class="ui-g form-group">
     <div class="ui-g-12">
-      <span class="md-inputfield">
-                <input type="text" pInputText  id="name" [size]="30" [(ngModel)]="manager.name">
-                <label>Имя</label>
-            </span>
+              <p-autoComplete  [(ngModel)]="user.complete" [suggestions]="user.result" (completeMethod)="searchUser($event)" field="second_name"
+        [size]="27" placeholder="Пользователь" [minLength]="3" (onSelect)="user.id = $event.id" required></p-autoComplete>
     </div>
     <div class="ui-g-12" style="margin-bottom:30px">
-      <!--<p-autoComplete  [(ngModel)]="search.complete" [suggestions]="search.result" (completeMethod)="searchUser($event)" field="name"
-        [size]="30" placeholder="Район" [minLength]="3" (onSelect)="manager.userId = $event.id" required></p-autoComplete>-->
+      <p-autoComplete  [(ngModel)]="branch.complete" [suggestions]="branch.result" (completeMethod)="searchBranch($event)" field="name"
+        [size]="27" placeholder="Филиал" [minLength]="3" (onSelect)="branch.id = $event.id" required></p-autoComplete>
     </div>
   </div>
   <footer>
     <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-      <button type="button" pButton (click)="createManager()" label="Создать" [disabled]="!(manager.id&&manager.name)"></button>
-      <button type="button" pButton (click)="updateManager()" label="Обновить" [disabled]="!(manager.id&&manager.name)"></button>
+      <button type="button" pButton (click)="createManager()" label="Создать" [disabled]="!(user.id&&branch.id)"></button>
+      <button type="button" pButton (click)="updateManager()" label="Обновить" [disabled]="!(user.id&&branch.id)"></button>
     </div>
   </footer>
 </p-dialog>

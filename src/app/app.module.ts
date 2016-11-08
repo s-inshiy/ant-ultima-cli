@@ -33,7 +33,7 @@ import { ButtonModule } from 'primeng/primeng';
 // import {CalendarModule} from 'primeng/primeng';
 // import {CarouselModule} from 'primeng/primeng';
 // import {ChartModule} from 'primeng/primeng';
-// import {CheckboxModule} from 'primeng/primeng';
+import {CheckboxModule} from 'primeng/primeng';
 // import {CodeHighlighterModule} from 'primeng/primeng';
 import { ConfirmDialogModule } from 'primeng/primeng';
 import { SharedModule } from 'primeng/primeng';
@@ -54,7 +54,7 @@ import { GrowlModule } from 'primeng/primeng';
 import { InputMaskModule } from 'primeng/primeng';
 // import { InputSwitchModule } from 'primeng/primeng';
 import { InputTextModule } from 'primeng/primeng';
-// import { InputTextareaModule } from 'primeng/primeng';
+import { InputTextareaModule } from 'primeng/primeng';
 // import { LightboxModule } from 'primeng/primeng';
 // import { ListboxModule } from 'primeng/primeng';
 // import { MegaMenuModule } from 'primeng/primeng';
@@ -85,8 +85,8 @@ import { PasswordModule } from 'primeng/primeng';
 // import {ToggleButtonModule} from 'primeng/primeng';
 // import {ToolbarModule} from 'primeng/primeng';
 // import {TooltipModule} from 'primeng/primeng';
-// import {TreeModule} from 'primeng/primeng';
-// import {TreeTableModule} from 'primeng/primeng';
+import {TreeModule} from 'primeng/primeng';
+import {TreeTableModule} from 'primeng/primeng';
 
 // Ultima
 // import {DashboardDemo} from './ultima/view/dashboarddemo';
@@ -114,6 +114,9 @@ import { RegionComponent } from './region';
 import { BranchComponent } from './branch';
 import { ManagerComponent } from './manager/manager.component';
 import { UserComponent } from './user/user.component';
+import { CompanyComponent } from './company/company.component';
+import { MasterComponent } from './master/master.component';
+import { ServiceComponent } from './service/service.component';
 
 
 // Application wide providers
@@ -157,6 +160,9 @@ type StoreType = {
     BranchComponent,
     ManagerComponent,
     UserComponent,
+    CompanyComponent,
+    MasterComponent,
+    ServiceComponent,
   ],
   imports: [ // import Angular's modules
     BrowserModule,
@@ -174,7 +180,7 @@ type StoreType = {
     // CalendarModule,
     // CarouselModule,
     // ChartModule,
-    // CheckboxModule,
+    CheckboxModule,
     // CodeHighlighterModule,
     ConfirmDialogModule,
     SharedModule,
@@ -195,7 +201,7 @@ type StoreType = {
     InputMaskModule,
     // InputSwitchModule,
     InputTextModule,
-    // InputTextareaModule,
+    InputTextareaModule,
     // LightboxModule,
     // ListboxModule,
     // MegaMenuModule,
@@ -226,8 +232,8 @@ type StoreType = {
     // ToggleButtonModule,
     // ToolbarModule,
     // TooltipModule,
-    // TreeModule,
-    // TreeTableModule,
+    TreeModule,
+    TreeTableModule,
     // MenuItem,
     // TranslateModule.forRoot({
     //       provide: TranslateLoader,

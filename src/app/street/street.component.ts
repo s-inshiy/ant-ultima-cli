@@ -140,7 +140,7 @@ export class StreetComponent implements OnInit {
           // console.log(this.results);
         },
         err => console.error(err),
-        // () => console.log('Settelment Seach')
+        () => console.log(this.search.result)
       );
   }
 

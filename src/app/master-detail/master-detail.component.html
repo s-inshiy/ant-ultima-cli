@@ -1,0 +1,24 @@
+<div class="ui-g">
+  <div class="ui-g-12">
+    <div class="card">
+      <p-growl [value]="msgs"></p-growl>
+      <p-dataTable [value]="items" selectionMode="single" [(selection)]="master" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
+        [responsive]="true" [contextMenu]="forMaster">
+        <header>Мастер</header>
+        <footer>
+          <div class="ui-helper-clearfix" style="width:100%; margin: 8px 0">
+              <button type="button" pButton style="float:right" (click)="showDialog()" label="Календарь"></button>
+            </div>
+        </footer>
+        <p-column field="fullName" header="ФИО" [filter]="false"></p-column>
+        <p-column field="worksCount" header="Работ" [filter]="false"></p-column>
+        <p-column field="services" header="Услуги" [filter]="false"></p-column>
+        <p-column field="areas" header="Нас. пункт" [filter]="false"></p-column>
+        <p-column field="rating" header="Рейтинг" [filter]="false"></p-column>
+        <p-column field="companyName" header="Компания" [filter]="false"></p-column>
+        <p-column field="status" header="Cтатус" [filter]="false"></p-column>
+      </p-dataTable>
+    </div>
+  </div>
+</div>
+<p-contextMenu #forMaster [model]="tieredItems" [style]="{'width':'12.5em'}"></p-contextMenu>

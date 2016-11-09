@@ -2,12 +2,12 @@
   <div class="ui-g-12">
     <div class="card">
       <!-- ------------------------------------
-    Table Company
+    Table Master
 ------------------------------------ -->
       <p-growl [value]="msgs"></p-growl>
       <p-dataTable [value]="items" selectionMode="single" [(selection)]="master" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
         [responsive]="true" [contextMenu]="forMaster">
-        <header>Компании</header>
+        <header>Мастера</header>
         <footer>
           <div class="ui-helper-clearfix" style="width:100%; margin: 8px 0"><button type="button" pButton style="float:right" (click)="showDialog()" label="Добавить"></button></div>
         </footer>
@@ -22,3 +22,24 @@
   </div>
 </div>
 <p-contextMenu #forMaster [model]="tieredItems" [style]="{'width':'12.5em'}"></p-contextMenu>
+<!-- ------------------------------------
+    Modal Master
+------------------------------------ -->
+<p-dialog header="Мастер" [(visible)]="dialog" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getMasters(pag.curr)">
+  <div class="ui-g form-group">
+    <div class="ui-g-12">
+              <p-autoComplete  [(ngModel)]="user.complete" [suggestions]="user.result" (completeMethod)="searchUser($event)" field="second_name"
+        [size]="27" placeholder="Пользователь" [minLength]="3" (onSelect)="user.id = $event.id" required></p-autoComplete>
+    </div>
+    <div class="ui-g-12" style="margin-bottom:30px">
+      <p-autoComplete  [(ngModel)]="company.complete" [suggestions]="company.result" (completeMethod)="searchCompany($event)" field="name"
+        [size]="27" placeholder="Компания" [minLength]="3" (onSelect)="company.id = $event.id" required></p-autoComplete>
+    </div>
+  </div>
+  <footer>
+    <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+      <button type="button" pButton (click)="createMaster()" label="Создать" [disabled]="!(user.id&&company.id)"></button>
+      <!--<button type="button" pButton (click)="updateMaster()" label="Обновить" [disabled]="!(user.id&&company.id)"></button>-->
+    </div>
+  </footer>
+</p-dialog>

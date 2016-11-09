@@ -11,7 +11,11 @@
         <p-column field="description" header="Описание"></p-column>
         <p-column field="type" header="Тип" [style]="{'text-align':'center'}"></p-column>
         <footer>
-          <div class="ui-helper-clearfix" style="width:100%; margin: 8px 0"><button type="button" pButton style="float:right" (click)="showDialog()" label="Добавить"></button></div>
+          <div class="ui-helper-clearfix" style="width:100%; margin: 8px 0">
+            <button type="button"  pButton style="float:left"  *ngIf="service"  (click)="deleteService(service.type, service.id)"  label="Удалить"></button>
+            <button type="button"  pButton  style="float:left" *ngIf="service"  (click)="showDialog()"  label="Редактировать"></button>
+            <button type="button" pButton style="float:right" (click)="showDialog()" label="Добавить"></button>
+          </div>
         </footer>
       </p-treeTable>
     </div>
@@ -42,7 +46,7 @@
   <footer>
     <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
       <button type="button" pButton (click)="createService()" label="Создать" [disabled]="!(service.name)"></button>
-      <button type="button" pButton (click)="updateService()" label="Обновить" [disabled]="!(service.name)"></button>
+      <button type="button" pButton (click)="updateService(service.id,service.name,service.description,service.type)" label="Обновить" [disabled]="!(service.name)"></button>
     </div>
   </footer>
 </p-dialog>

@@ -117,6 +117,8 @@ import { UserComponent } from './user/user.component';
 import { CompanyComponent } from './company/company.component';
 import { MasterComponent } from './master/master.component';
 import { ServiceComponent } from './service/service.component';
+import { BidComponent } from './bid/bid.component';
+import { MasterDetailComponent } from './master-detail/master-detail.component';
 
 
 // Application wide providers
@@ -163,6 +165,8 @@ type StoreType = {
     CompanyComponent,
     MasterComponent,
     ServiceComponent,
+    BidComponent,
+    MasterDetailComponent,
   ],
   imports: [ // import Angular's modules
     BrowserModule,

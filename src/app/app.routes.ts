@@ -9,6 +9,7 @@ import { CompanyComponent } from './company';
 import { MasterComponent } from './master';
 import { ServiceComponent } from './service';
 import { NoContentComponent } from './no-content';
+import { MasterDetailComponent } from './master-detail';
 // import { DataResolver } from './app.resolver';
 
 import { Routes, RouterModule } from '@angular/router';
@@ -54,6 +55,7 @@ export const routes: Routes = [
     {path: 'companies', component:  CompanyComponent},
     {path: 'masters', component:  MasterComponent},
     {path: 'services', component:  ServiceComponent},
+    {path: 'master/:id', component: MasterDetailComponent},
     {path: '**',    component: NoContentComponent }
 ];
 

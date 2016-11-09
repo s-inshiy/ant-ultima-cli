@@ -7,7 +7,7 @@ import {
 } from './service.service';
 import {
   Message,
-  MenuItem,
+  // MenuItem,
   TreeNode
 } from 'primeng/primeng';
 
@@ -29,7 +29,7 @@ export class ServiceComponent implements OnInit {
   // PrimeNG
   items: TreeNode[];
   msgs: Message[];
-  tieredItems: MenuItem[];
+  // tieredItems: MenuItem[];
 
   dialog: boolean;
   resCRUD: any;
@@ -212,7 +212,7 @@ export class ServiceComponent implements OnInit {
             this.dialog = false;
             this.msgs.push({
               severity: 'info',
-              summary: 'Категория обновленна',
+              summary: 'Работа обновленна',
               detail: this.service.name
             });
           this.service = new NewService();
@@ -245,7 +245,7 @@ export class ServiceComponent implements OnInit {
             this.dialog = false;
             this.msgs.push({
               severity: 'info',
-              summary: 'Работа обновленна',
+              summary: 'Категория обновленна',
               detail: this.service.name
             });
             this.service = new NewService();
@@ -263,6 +263,7 @@ export class ServiceComponent implements OnInit {
   }
 
   updateService(id: number, name: string, description: string, type: string) {
+    console.log(type);
     type === 'Категория' ? this.updateCategory(id, name, description) : this.updateWork(id, name, description);
   }
 

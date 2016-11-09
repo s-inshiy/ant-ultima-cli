@@ -7,22 +7,8 @@ import {
 } from './area.service';
 
 import {
-  // DataTableModule,
-  // SharedModule,
-  // Column,
-  // InputText,
-  // Growl,
   Message,
-  // ContextMenuModule,
   MenuItem,
-  // Paginator,
-  // DialogModule,
-  // Button,
-  // Header,
-  // Footer,
-  // AutoComplete,
-  // SelectItem,
-  // Dropdown
 } from 'primeng/primeng';
 
 @Component({

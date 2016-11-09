@@ -1,37 +1,15 @@
 import {
   Component,
-  AfterViewInit,
-  ElementRef
+  OnInit
 } from '@angular/core';
-
-declare var Ultima: any;
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
-export class Application implements AfterViewInit {
+export class Application implements OnInit {
 
-  layoutCompact: boolean = true;
+  constructor() {}
 
-  layoutMode: string = 'static';
-
-  darkMenu: boolean = false;
-
-  profileMode: string = 'inline';
-
-  constructor(private el: ElementRef) {}
-
-  ngAfterViewInit() {
-    Ultima.init(this.el.nativeElement);
-  }
-
-  changeTheme(event, theme) {
-    let themeLink: HTMLLinkElement = < HTMLLinkElement > document.getElementById('theme-css');
-    let layoutLink: HTMLLinkElement = < HTMLLinkElement > document.getElementById('layout-css');
-
-    themeLink.href = 'assets/theme/theme-' + theme + '.css';
-    layoutLink.href = 'assets/layout/css/layout-' + theme + '.css';
-    event.preventDefault();
-  }
+  ngOnInit() {}
 }

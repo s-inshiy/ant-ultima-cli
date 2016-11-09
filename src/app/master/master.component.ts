@@ -61,7 +61,7 @@ export class MasterComponent implements OnInit {
   }
 
   gotoMasterDetail(id: any) {
-    this.router.navigate(['master', this.master.id]);
+    this.router.navigate(['dashboard/master', this.master.id]);
   }
   showDialog() {
     this.dialog = true;

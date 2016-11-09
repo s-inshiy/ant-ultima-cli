@@ -10,6 +10,8 @@ import { MasterComponent } from './master';
 import { ServiceComponent } from './service';
 import { NoContentComponent } from './no-content';
 import { MasterDetailComponent } from './master-detail';
+import { LoginComponent } from './login';
+import { DashboardComponent } from './dashboard';
 // import { DataResolver } from './app.resolver';
 
 import { Routes, RouterModule } from '@angular/router';
@@ -42,20 +44,24 @@ export const routes: Routes = [
     // {path: 'empty', component: EmptyDemo},
     // {path: 'charts', component: ChartsDemo},
     // {path: 'file', component: FileDemo},
-    {path: '', redirectTo: 'users', pathMatch: 'full'},
-    {path: 'utils', component: UtilsDemo},
-    {path: 'documentation', component: Documentation},
-    {path: 'streets',    component: StreetComponent},
-    {path: 'areas', component: AreaComponent},
-    {path: 'settlements', component: SettlementComponent},
-    {path: 'regions', component: RegionComponent},
-    {path: 'branches', component:  BranchComponent},
-    {path: 'users', component:  UserComponent},
-    {path: 'managers', component:  ManagerComponent},
-    {path: 'companies', component:  CompanyComponent},
-    {path: 'masters', component:  MasterComponent},
-    {path: 'services', component:  ServiceComponent},
-    {path: 'master/:id', component: MasterDetailComponent},
+    { path: 'dashboard', component:  DashboardComponent, children: [
+            {path: '', redirectTo: 'users', pathMatch: 'full'},
+            {path: 'utils', component: UtilsDemo},
+            {path: 'documentation', component: Documentation},
+            {path: 'streets',    component: StreetComponent},
+            {path: 'areas', component: AreaComponent},
+            {path: 'settlements', component: SettlementComponent},
+            {path: 'regions', component: RegionComponent},
+            {path: 'branches', component:  BranchComponent},
+            {path: 'users', component:  UserComponent},
+            {path: 'managers', component:  ManagerComponent},
+            {path: 'companies', component:  CompanyComponent},
+            {path: 'masters', component:  MasterComponent},
+            {path: 'services', component:  ServiceComponent},
+            {path: 'master/:id', component: MasterDetailComponent},
+         ]
+    },
+    {path: '', component: LoginComponent},
     {path: '**',    component: NoContentComponent }
 ];
 

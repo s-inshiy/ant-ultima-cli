@@ -112,13 +112,15 @@ import { AreaComponent } from './area';
 import { SettlementComponent } from './settlement';
 import { RegionComponent } from './region';
 import { BranchComponent } from './branch';
-import { ManagerComponent } from './manager/manager.component';
-import { UserComponent } from './user/user.component';
-import { CompanyComponent } from './company/company.component';
-import { MasterComponent } from './master/master.component';
-import { ServiceComponent } from './service/service.component';
-import { BidComponent } from './bid/bid.component';
-import { MasterDetailComponent } from './master-detail/master-detail.component';
+import { ManagerComponent } from './manager';
+import { UserComponent } from './user';
+import { CompanyComponent } from './company';
+import { MasterComponent } from './master';
+import { ServiceComponent } from './service';
+import { BidComponent } from './bid';
+import { MasterDetailComponent } from './master-detail';
+import { LoginComponent } from './login';
+import { DashboardComponent } from './dashboard';
 
 
 // Application wide providers
@@ -167,6 +169,8 @@ type StoreType = {
     ServiceComponent,
     BidComponent,
     MasterDetailComponent,
+    LoginComponent,
+    DashboardComponent,
   ],
   imports: [ // import Angular's modules
     BrowserModule,

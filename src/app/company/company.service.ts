@@ -3,25 +3,25 @@ import {
 } from '@angular/core';
 import {
   Http,
-  Response,
-  Headers
+  Response
 } from '@angular/http';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/map';
 
+import {
+  AuthHttp
+} from 'angular2-jwt';
 
 @Injectable()
 export class CompanyService {
 
-  constructor(private http: Http) {}
+  constructor(private http: Http, public authHttp: AuthHttp) {}
 
   getCompanies(page: number) {
     let crmUrl = 'http://crm.unicweb.com.ua/api/companies',
-      queryString = '?per-page=20&page=' + page,
-      headers = new Headers();
-    headers.append('Accept', 'application/json;q=0.9');
+      queryString = '?per-page=20&page=' + page;
 
-    return this.http.get(crmUrl + queryString, {headers : headers}).map((res: Response) => {
+    return this.authHttp.get(crmUrl + queryString).map((res: Response) => {
       return [{
         json: res.json()
       }];
@@ -30,30 +30,22 @@ export class CompanyService {
 
   createCompany(name = '') {
     let crmUrl = 'http://crm.unicweb.com.ua/api/companies/create',
-      body = '&name=' + name,
-      headers = new Headers();
-      headers.append('Accept', 'application/json;q=0.9');
-      headers.append('Content-Type', 'application/x-www-form-urlencoded');
+           body = '&name=' + name;
 
-      return this.http.post(crmUrl, body, { headers: headers})
-        .map((res: Response) => {
-          return [{
-            json: res.json()
-          }];
-        });
+    return this.authHttp.post(crmUrl, body)
+      .map((res: Response) => {
+        return [{
+          json: res.json()
+        }];
+      });
   }
 
   updateCompany(id = 0, name = '') {
     let crmUrl = 'http://crm.unicweb.com.ua/api/companies/update?',
       companyId = '&id=' + id,
-      body = '&name=' + name,
-      headers = new Headers;
-      headers.append('Accept', 'application/json;q=0.9');
-      headers.append('Content-Type', 'application/x-www-form-urlencoded');
+      body = '&name=' + name;
 
-    return this.http.post(crmUrl + companyId, body, {
-        headers: headers
-      })
+    return this.authHttp.post(crmUrl + companyId, body)
       .map((res: Response) => {
         return [{
           json: res.json()
@@ -63,12 +55,10 @@ export class CompanyService {
 
   deleteCompany(id: number) {
     let crmUrl = 'http://crm.unicweb.com.ua/api/companies/delete?',
-          companyId = '&id=' + id,
-          body = '',
-          headers = new Headers;
-          headers.append('Accept', 'application/json;q=0.9');
+      companyId = '&id=' + id,
+      body = '';
 
-    return this.http.post(crmUrl + companyId, body, {headers : headers})
+    return this.authHttp.post(crmUrl + companyId, body)
       .map((res: Response) => {
         return [{
           json: res.json()

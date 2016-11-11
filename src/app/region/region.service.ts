@@ -3,27 +3,27 @@ import {
 } from '@angular/core';
 import {
   Http,
-  Response,
-  Headers
+  Response
 } from '@angular/http';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/map';
 
+import {
+  AuthHttp
+} from 'angular2-jwt';
+
+
 @Injectable()
 export class RegionService {
 
-  constructor(private http: Http) {}
+  constructor(private http: Http, public authHttp: AuthHttp) {}
 
   getRegions(page: number) {
 
     let crmUrl = 'http://crm.unicweb.com.ua/api/regions',
-      queryString = `?per-page=20&page=${page}`,
-      headers = new Headers();
-    headers.append('Accept', 'application/json;q=0.9');
+      queryString = `?per-page=20&page=${page}`;
 
-    return this.http.get(crmUrl + queryString, {
-      headers: headers
-    }).map((res: Response) => {
+    return this.authHttp.get(crmUrl + queryString).map((res: Response) => {
       return [{
         json: res.json()
       }];
@@ -32,14 +32,9 @@ export class RegionService {
 
   createRegion(name = '') {
     let body = '&name=' + name,
-      createUrl = 'http://crm.unicweb.com.ua/api/regions/create',
-      headers = new Headers();
-      headers.append('Accept', 'application/json;q=0.9');
-      headers.append('Content-Type', 'application/x-www-form-urlencoded');
+      createUrl = 'http://crm.unicweb.com.ua/api/regions/create';
 
-    return this.http.post(createUrl, body, {
-      headers: headers
-    }).map((res: Response) => {
+    return this.authHttp.post(createUrl, body).map((res: Response) => {
       return [{
         create: res.json()
       }];
@@ -49,14 +44,9 @@ export class RegionService {
   updateRegion(id = 0, name = '') {
     let updateUrl = 'http://crm.unicweb.com.ua/api/regions/update',
           updateId = `?id=${id}`,
-          body = '&name=' + name,
-          headers = new Headers();
-          headers.append('Content-Type', 'application/x-www-form-urlencoded');
-          headers.append('Accept', 'application/json;q=0.9');
+          body = '&name=' + name;
 
-    return this.http.post(updateUrl + updateId, body, {
-        headers: headers
-      })
+    return this.authHttp.post(updateUrl + updateId, body)
       .map((res: Response) => {
         return [{
           update: res.json()
@@ -66,13 +56,9 @@ export class RegionService {
 
   deleteRegion(id: number) {
     let deleteUrl = 'http://crm.unicweb.com.ua/api/regions/delete',
-      deleteId = `?id=${id}`,
-      headers = new Headers();
+      deleteId = `?id=${id}`;
 
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    return this.http.post(deleteUrl + deleteId, '', {
-        headers: headers
-      })
+    return this.authHttp.post(deleteUrl + deleteId, '')
       .map((res: Response) => {
         return [{
           delete: res.json

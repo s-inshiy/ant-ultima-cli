@@ -2,27 +2,14 @@ import {
   Component,
   OnInit
 } from '@angular/core';
+
 import {
   ManagerService
 } from './manager.service';
 
 import {
-  // DataTableModule,
-  // SharedModule,
-  // Column,
-  // InputText,
-  // Growl,
   Message,
-  // ContextMenuModule,
-  MenuItem,
-  // Paginator,
-  // DialogModule,
-  // Button,
-  // Header,
-  // Footer,
-  // AutoComplete,
-  // SelectItem,
-  // Dropdown
+  MenuItem
 } from 'primeng/primeng';
 
 @Component({
@@ -33,6 +20,7 @@ import {
     ManagerService
   ]
 })
+
 export class ManagerComponent implements OnInit {
 
   // Classes
@@ -48,7 +36,6 @@ export class ManagerComponent implements OnInit {
 
   dialog: boolean;
   resCRUD: any;
-
 
   constructor(private managerService: ManagerService) {}
 
@@ -75,9 +62,9 @@ export class ManagerComponent implements OnInit {
           this.pag.count = data[0].json['page-count'];
         },
         err => console.error(err),
-        () => {
-          // console.log('GET Managers!');
-        }
+        // () => {
+        //   console.log('GET Managers!');
+        // }
       );
   }
 
@@ -102,9 +89,9 @@ export class ManagerComponent implements OnInit {
           this.user.result = data[0].json.data;
         },
         err => console.error(err),
-        () => {
-          console.log(this.user.result);
-        }
+        // () => {
+        //   console.log(this.user.result);
+        // }
       );
   }
 
@@ -212,30 +199,30 @@ export class ManagerComponent implements OnInit {
 
 
 export interface Manager {
-  id ? : number;
-  fio ? : string;
-  branch ? : string;
+  id ?: number;
+  fio ?: string;
+  branch ?: string;
 }
 
 class NewManager implements Manager {
-  constructor(public id ? : number, public fio ? : string, public branch ? : string) {}
+  constructor(public id ?: number, public fio ?: string, public branch ?: string) {}
 }
 
 export interface Paginate {
-  count ? : string[];
+  count ?: string[];
   curr: number;
 }
 
 class NewPaginate implements Paginate {
-  constructor(public count ? : string[], public curr = 1) {}
+  constructor(public count ?: string[], public curr = 1) {}
 }
 
 export interface Search {
-  id ? : number;
-  complete ? : string;
-  result ? : any[];
+  id ?: number;
+  complete ?: string;
+  result ?: any[];
 }
 
 class SearchUsers implements Search {
-  constructor(public id ? : number, public complete ? : string, public result ? : string[]) {}
+  constructor(public id ?: number, public complete ?: string, public result ?: string[]) {}
 }

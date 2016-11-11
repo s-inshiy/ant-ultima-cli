@@ -172,7 +172,7 @@
             </a>
           </div>
           <ul id="profile-menu" class="ultima-menu" [hidden]="profileMode!='inline'">
-            <li role="menuitem">
+            <!--<li role="menuitem">
               <a href="#" class="ripplelink">
                 <i class="material-icons">person</i>
                 <span>Profile</span>
@@ -189,11 +189,11 @@
                 <i class="material-icons">settings_application</i>
                 <span>Settings</span>
               </a>
-            </li>
+            </li>-->
             <li role="menuitem">
               <a href="#" class="ripplelink">
                 <i class="material-icons">power_settings_new</i>
-                <span>Logout</span>
+                <span>Виход</span>
               </a>
             </li>
           </ul>
@@ -204,6 +204,14 @@
             <li role="menuitem">
               <a [routerLink]="['/dashboard/users']" [routerLinkActive]="['active-menulink']" class="ripplelink">
                 <i class="fa ui-icon-person-add"></i><span>Пользователи</span>
+              </a>
+            </li>
+            <!-- ------------------------------------
+    Menu Item Bid
+------------------------------------ -->
+            <li role="menuitem">
+              <a [routerLink]="['/dashboard/bids']" [routerLinkActive]="['active-menulink']" class="ripplelink">
+                <i class="fa ui-icon ui-icon-record-voice-over"></i><span>Заявки</span>
               </a>
             </li>
             <!-- ------------------------------------

@@ -3,24 +3,25 @@ import {
 } from '@angular/core';
 import {
   Http,
-  Response,
-  Headers
+  Response
 } from '@angular/http';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/map';
 
+import {
+  AuthHttp
+} from 'angular2-jwt';
+
 @Injectable()
 export class AreaService {
 
-  constructor(private http: Http) {}
+  constructor(private http: Http, public authHttp: AuthHttp) {}
 
   getAreas(page: number) {
     let areasUrl = 'http://crm.unicweb.com.ua/api/areas',
-          areasQuery = `?per-page=20&page=${page}`,
-          headers = new Headers();
-          headers.append('Accept', 'application/json;q=0.9');
+      areasQuery = `?per-page=20&page=${page}`;
 
-    return this.http.get(areasUrl + areasQuery, {headers: headers }).map((res: Response) => {
+    return this.authHttp.get(areasUrl + areasQuery).map((res: Response) => {
       return [{
         json: res.json()
       }];
@@ -30,7 +31,7 @@ export class AreaService {
   searchSettlement(query: string) {
     let settlementUrl = 'http://crm.unicweb.com.ua/ajax/search/settlements',
       settlementQuery = `?q=${query}`;
-    return this.http.get(settlementUrl + settlementQuery).map((res: Response) => {
+    return this.authHttp.get(settlementUrl + settlementQuery).map((res: Response) => {
       return [{
         search: res.json()
       }];
@@ -39,14 +40,9 @@ export class AreaService {
 
   createArea(id = 0, name = '') {
     let body = '&settlement_id=' + id + '&name=' + name,
-          createUrl = 'http://crm.unicweb.com.ua/api/areas/create',
-          headers = new Headers();
-          headers.append('Content-Type', 'application/x-www-form-urlencoded');
-          headers.append('Accept', 'application/json;q=0.9');
+      createUrl = 'http://crm.unicweb.com.ua/api/areas/create';
 
-    return this.http.post(createUrl, body, {
-      headers: headers
-    }).map((res: Response) => {
+    return this.authHttp.post(createUrl, body).map((res: Response) => {
       return [{
         create: res.json()
       }];
@@ -55,14 +51,9 @@ export class AreaService {
 
   deleteArea(id: number) {
     let deleteUrl = 'http://crm.unicweb.com.ua/api/areas/delete',
-      deleteId = `?id=${id}`,
-      headers = new Headers();
-      headers.append('Content-Type', 'application/x-www-form-urlencoded');
-      headers.append('Accept', 'application/json;q=0.9');
+      deleteId = `?id=${id}`;
 
-    return this.http.post(deleteUrl + deleteId, '', {
-        headers: headers
-      })
+    return this.authHttp.post(deleteUrl + deleteId, '')
       .map((res: Response) => {
         return [{
           delete: res.json
@@ -72,15 +63,10 @@ export class AreaService {
 
   updateArea(id = 0, settlementId = 0, name = '') {
     let updateUrl = 'http://crm.unicweb.com.ua/api/areas/update',
-          updateId = `?id=${id}`,
-          body = 'settlement_id=' + settlementId + '&name=' + name,
-          headers = new Headers();
-          headers.append('Content-Type', 'application/x-www-form-urlencoded');
-          headers.append('Accept', 'application/json;q=0.9');
+      updateId = `?id=${id}`,
+      body = 'settlement_id=' + settlementId + '&name=' + name;
 
-    return this.http.post(updateUrl + updateId, body, {
-        headers: headers
-      })
+    return this.authHttp.post(updateUrl + updateId, body)
       .map((res: Response) => {
         return [{
           update: res.json()

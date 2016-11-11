@@ -12,12 +12,16 @@ import {
   SelectItem
 } from 'primeng/primeng';
 
+import {
+  LoginService
+} from '../login/login.service';
+
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'],
   providers: [
-    UserService
+    UserService, LoginService
   ]
 })
 export class UserComponent implements OnInit {
@@ -27,7 +31,7 @@ export class UserComponent implements OnInit {
   user: User = new NewUser();
 
   // PrimeNG
-    items: any;
+  items: any;
   msgs: Message[];
   tieredItems: MenuItem[];
   userRoles: SelectItem[];

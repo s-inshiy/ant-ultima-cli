@@ -3,27 +3,25 @@ import {
 } from '@angular/core';
 import {
   Http,
-  Response,
-  Headers
+  Response
 } from '@angular/http';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/map';
 
+import {
+  AuthHttp
+} from 'angular2-jwt';
 
 @Injectable()
 export class UserService {
 
-  constructor(private http: Http) {}
+  constructor(private http: Http, public authHttp: AuthHttp) {}
 
   getUsers(page: number) {
     let crmUrl = 'http://crm.unicweb.com.ua/api/users',
-      queryString = '?per-page=20&page=' + page,
-      headers = new Headers();
-    headers.append('Accept', 'application/json;q=0.9');
+      queryString = '?per-page=20&page=' + page;
 
-    return this.http.get(crmUrl + queryString, {
-        headers: headers
-      })
+    return this.authHttp.get(crmUrl + queryString)
       .map((res: Response) => {
         return [{
           json: res.json()
@@ -35,15 +33,10 @@ export class UserService {
     email = '', phone = '', username = '', password = '') {
     let baseUrl = 'http://crm.unicweb.com.ua/api/users/create',
       body = '&first_name=' + firstName + '&second_name=' + secondName +
-      '&patronymic=' + patronymic + '&email=' + email + '&phone=' + encodeURIComponent(phone) + '&username=' + username
-       + '&password=' + password,
-      headers = new Headers;
-    headers.append('Accept', 'application/json;q=0.9');
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+      '&patronymic=' + patronymic + '&email=' + email + '&phone=' + encodeURIComponent(phone) + '&username=' + username +
+      '&password=' + password;
 
-    return this.http.post(baseUrl, body, {
-        headers: headers
-      })
+    return this.authHttp.post(baseUrl, body)
       .map((res: Response) => {
         return [{
           json: res.json()
@@ -53,14 +46,10 @@ export class UserService {
 
   deleteUser(id: number) {
     let baseUrl = 'http://crm.unicweb.com.ua/api/users/delete?',
-      userId = '&id=' + id,
-      body = '',
-      headers = new Headers;
-    headers.append('Accept', 'application/json;q=0.9');
+      userId = 'id=' + id,
+      body = '';
 
-    return this.http.post(baseUrl + userId, body, {
-        headers: headers
-      })
+    return this.authHttp.post(baseUrl + userId, body)
       .map((res: Response) => {
         return [{
           json: res.json()
@@ -70,12 +59,10 @@ export class UserService {
 
   editUserRole(id: number, role = 'admin') {
     let baseUrl = 'http://crm.unicweb.com.ua/api/users/change-role?',
-          userId = '&id=' + id,
-          userRole = '&role=' + role,
-          headers = new Headers;
-          headers.append('Accept', 'application/json;q=0.9');
+      userId = '&id=' + id,
+      userRole = '&role=' + role;
 
-    return this.http.get(baseUrl + userId + userRole, {headers: headers})
+    return this.authHttp.get(baseUrl + userId + userRole)
       .map((res: Response) => {
         return [{
           json: res.json()
@@ -85,11 +72,9 @@ export class UserService {
 
   blockUser(id: number) {
     let baseUrl = 'http://crm.unicweb.com.ua/api/users/block?',
-      userId = '&id=' + id,
-      headers = new Headers;
-    headers.append('Accept', 'application/json;q=0.9');
+      userId = '&id=' + id;
 
-    return this.http.get(baseUrl + userId, {headers: headers})
+    return this.authHttp.get(baseUrl + userId)
       .map((res: Response) => {
         return [{
           json: res.json()
@@ -99,11 +84,9 @@ export class UserService {
 
   unBlockUser(id: number) {
     let baseUrl = 'http://crm.unicweb.com.ua/api/users/unblock?',
-      userId = '&id=' + id,
-      headers = new Headers;
-      headers.append('Accept', 'application/json;q=0.9');
+      userId = '&id=' + id;
 
-    return this.http.get(baseUrl + userId, {headers: headers})
+    return this.authHttp.get(baseUrl + userId)
       .map((res: Response) => {
         return [{
           json: res.json()

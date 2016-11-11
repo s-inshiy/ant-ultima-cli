@@ -7,28 +7,20 @@ import {
 } from './street.service';
 
 import {
-//   DataTableModule,
-//   SharedModule,
-//   Column,
-//   InputText,
-//   Growl,
+  LoginService
+} from '../login/login.service';
+
+import {
   Message,
-//   ContextMenuModule,
-  MenuItem,
-//   Paginator,
-//   DialogModule,
-//   Button,
-//   Header,
-//   Footer,
-//   AutoComplete,
-//   SelectItem,
-//   Dropdown
+  MenuItem
 } from 'primeng/primeng';
+
+// import { JwtHelper } from 'angular2-jwt';
 
 @Component({
   selector: 'app-street',
   providers: [
-    StreetService
+    StreetService, LoginService
   ],
   templateUrl: './street.component.html'
 })
@@ -39,6 +31,8 @@ export class StreetComponent implements OnInit {
   search: Search = new SearchAreas();
   street: Street = new NewStreet();
   pag: Paginate = new NewPaginate();
+
+  // jwtHelper: JwtHelper = new JwtHelper();
 
   // PrimeNG
   items: any;
@@ -62,8 +56,20 @@ export class StreetComponent implements OnInit {
       icon: 'fa ui-icon-edit',
       command: (event) => this.showDialog()
     }];
+
+    // this.useJwtHelper();
   }
 
+
+// useJwtHelper() {
+//   let token = localStorage.getItem('id_token');
+
+//   console.log(
+//     this.jwtHelper.decodeToken(token),
+//     this.jwtHelper.getTokenExpirationDate(token),
+//     this.jwtHelper.isTokenExpired(token)
+//   );
+// }
 
   getStreets(page: number) {
     this.streetService

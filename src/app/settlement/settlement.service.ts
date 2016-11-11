@@ -9,19 +9,21 @@ import {
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/map';
 
+import {
+  AuthHttp
+} from 'angular2-jwt';
+
 @Injectable()
 export class SettlementService {
 
-  constructor(private http: Http) {}
+  constructor(private http: Http, public authHttp: AuthHttp) {}
 
   getSettlements(page: number) {
 
     let crmUrl = 'http://crm.unicweb.com.ua/api/settlements/',
-          queryString = `?per-page=20&page=${page}`,
-          headers = new Headers();
-          headers.append('Accept', 'application/json;q=0.9');
+          queryString = `?per-page=20&page=${page}`;
 
-    return this.http.get(crmUrl + queryString, {headers: headers }).map((res: Response) => {
+    return this.authHttp.get(crmUrl + queryString).map((res: Response) => {
       return [{
         json: res.json()
       }];
@@ -31,7 +33,7 @@ export class SettlementService {
   searchRegion(query: string) {
     let regionUrl = 'http://crm.unicweb.com.ua/ajax/search/regions',
       regionQuery = `?q=${query}`;
-    return this.http.get(regionUrl + regionQuery).map((res: Response) => {
+    return this.authHttp.get(regionUrl + regionQuery).map((res: Response) => {
       return [{
         search: res.json()
       }];
@@ -40,14 +42,9 @@ export class SettlementService {
 
   createSettlement(id = 0, name = '') {
     let body = '&region_id=' + id + '&name=' + name,
-          createUrl = 'http://crm.unicweb.com.ua/api/settlements/create',
-          headers = new Headers();
-          headers.append('Accept', 'application/json;q=0.9');
-          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          createUrl = 'http://crm.unicweb.com.ua/api/settlements/create';
 
-    return this.http.post(createUrl, body, {
-      headers: headers
-    }).map((res: Response) => {
+    return this.authHttp.post(createUrl, body).map((res: Response) => {
       return [{
         create: res.json()
       }];
@@ -57,14 +54,9 @@ export class SettlementService {
   updateSettlement(id = 0, regionId = 0, name = '') {
     let updateUrl = 'http://crm.unicweb.com.ua/api/settlements/update',
           updateId = `?id=${id}`,
-          body = 'region_id=' + regionId + '&name=' + name,
-          headers = new Headers();
-          headers.append('Content-Type', 'application/x-www-form-urlencoded');
-          headers.append('Accept', 'application/json;q=0.9');
+          body = 'region_id=' + regionId + '&name=' + name;
 
-      return this.http.post(updateUrl + updateId, body, {
-          headers: headers
-        })
+      return this.authHttp.post(updateUrl + updateId, body)
         .map((res: Response) => {
           return [{
             update: res.json()
@@ -74,14 +66,9 @@ export class SettlementService {
 
   deleteSettlement(id: number) {
     let deleteUrl = 'http://crm.unicweb.com.ua/api/settlements/delete',
-          deleteId = `?id=${id}`,
-          headers = new Headers();
-          headers.append('Accept', 'application/json;q=0.9');
-          headers.append('Content-Type', 'application/x-www-form-urlencoded');
+          deleteId = `?id=${id}`;
 
-    return this.http.post(deleteUrl + deleteId, '', {
-        headers: headers
-      })
+    return this.authHttp.post(deleteUrl + deleteId, '')
       .map((res: Response) => {
         return [{
           delete: res.json

@@ -35,7 +35,6 @@ export class MasterComponent implements OnInit {
   msgs: Message[];
   tieredItems: MenuItem[];
 
-
   dialog: boolean;
   resCRUD: any;
 
@@ -207,7 +206,6 @@ export class MasterComponent implements OnInit {
         }
       );
   }
-
 
 }
 

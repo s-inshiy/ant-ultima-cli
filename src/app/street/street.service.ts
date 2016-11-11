@@ -3,39 +3,33 @@ import {
 } from '@angular/core';
 import {
   Http,
-  Response,
-  Headers
+  Response
 } from '@angular/http';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/map';
 
+import { AuthHttp } from 'angular2-jwt';
+
 @Injectable()
 export class StreetService {
 
-  constructor(private http: Http) {}
+  constructor(private http: Http, public authHttp: AuthHttp) {}
 
   getStreets(page: number) {
     let crmUrl = 'http://crm.unicweb.com.ua/api/streets',
-          queryString = `?per-page=20&page=${page}`,
-          headers = new Headers();
-          headers.append('Accept', 'application/json;q=0.9');
+          queryString = `?per-page=20&page=${page}`;
 
-    return this.http.get(crmUrl + queryString, {headers: headers }).map((res: Response) => {
-      return [{
-        json: res.json()
-      }];
-    });
+      return this.authHttp.get(crmUrl + queryString).map((res: Response) => {
+        return [{
+          json: res.json()
+        }];
+      });
   }
 
   createStreet(id = 0, name = '') {
-    let body = '&area_id=' + id + '&name=' + name,
-          headers = new Headers();
-          headers.append('Content-Type', 'application/x-www-form-urlencoded');
-          headers.append('Accept', 'application/json;q=0.9');
+    let body = '&area_id=' + id + '&name=' + name;
 
-    return this.http.post('http://crm.unicweb.com.ua/api/streets/create', body, {
-        headers: headers
-      })
+    return this.authHttp.post('http://crm.unicweb.com.ua/api/streets/create', body)
       .map((res: Response) => {
         return [{
           json: res.json()
@@ -45,14 +39,9 @@ export class StreetService {
 
   deleteStreet(id: number) {
     let deleteUrl = 'http://crm.unicweb.com.ua/api/streets/delete',
-          deleteId = `?id=${id}`,
-          headers = new Headers();
-          headers.append('Content-Type', 'application/x-www-form-urlencoded');
-          headers.append('Accept', 'application/json;q=0.9');
+          deleteId = `?id=${id}`;
 
-    return this.http.post(deleteUrl + deleteId, '', {
-        headers: headers
-      })
+    return this.authHttp.post(deleteUrl + deleteId, '')
       .map((res: Response) => {
         return [{
           delete: res.json
@@ -61,17 +50,12 @@ export class StreetService {
 
   }
 
-  updateStreet(id= 0, areaId = 0, name = '') {
+  updateStreet(id = 0, areaId = 0, name = '') {
     let updateUrl = 'http://crm.unicweb.com.ua/api/streets/update',
           updateId = `?id=${id}`,
-          body = 'area_id=' + areaId + '&name=' + name,
-          headers = new Headers();
-          headers.append('Content-Type', 'application/x-www-form-urlencoded');
-          headers.append('Accept', 'application/json;q=0.9');
+          body = 'area_id=' + areaId + '&name=' + name;
 
-    return this.http.post(updateUrl + updateId, body, {
-        headers: headers
-      })
+    return this.authHttp.post(updateUrl + updateId, body)
       .map((res: Response) => {
         return [{
           update: res.json()
@@ -82,14 +66,13 @@ export class StreetService {
 
   searchAreas(query = '', areasIds: number[] | string = '') {
     let areaUrl = 'http://crm.unicweb.com.ua/ajax/search/areas',
-          areaQuery = '?q=' + query + '&not_id=' + areasIds;
+      areaQuery = '?q=' + query + '&not_id=' + areasIds;
 
-    return this.http.get(areaUrl + areaQuery).map((res: Response) => {
+    return this.authHttp.get(areaUrl + areaQuery).map((res: Response) => {
       return [{
         search: res.json()
       }];
     });
   }
-
 
 }

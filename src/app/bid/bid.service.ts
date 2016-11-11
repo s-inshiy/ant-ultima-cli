@@ -4,23 +4,25 @@ import {
 import {
   Http,
   Response,
-  Headers
+  // Headers
 } from '@angular/http';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/map';
 
+import {
+  AuthHttp
+} from 'angular2-jwt';
+
 @Injectable()
 export class BidService {
 
-  constructor(private http: Http) {}
+  constructor(private http: Http, public authHttp: AuthHttp) {}
 
-  getBids(page: string, id: any = '', fio: any = '', phone: any = '') {
+  getBids(page: number, id: any = '', fio: any = '', phone: any = '') {
     let bidsUrl = 'http://crm.unicweb.com.ua/api/bids/',
-      queryString = `?per-page=40&page=${page}&id=${id}&fio=${fio}&phone=${phone}`,
-      headers = new Headers();
-    headers.append('Accept', 'application/json;q=0.9');
+      queryString = `?per-page=40&page=${page}&id=${id}&fio=${fio}&phone=${phone}`;
 
-    return this.http.get(bidsUrl + queryString).map((res: Response) => {
+    return this.authHttp.get(bidsUrl + queryString).map((res: Response) => {
       return [{
         json: res.json()
       }];
@@ -28,14 +30,9 @@ export class BidService {
   }
 
   addMaster(bid_id: number | string, master_id: number | string, datetime: string) {
-    let body = '&bid_id=' + bid_id + '&master_id=' + master_id + '&datetime=' + datetime,
-      headers = new Headers();
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        headers.append('Accept', 'application/json;q=0.9');
+    let body = '&bid_id=' + bid_id + '&master_id=' + master_id + '&datetime=' + datetime;
 
-    return this.http.post('http://crm.unicweb.com.ua/api/shedules/create ', body, {
-        headers: headers
-      })
+    return this.authHttp.post('http://crm.unicweb.com.ua/api/shedules/create ', body)
       .map((res: Response) => {
         return [{
           json: res.json()
@@ -45,14 +42,9 @@ export class BidService {
 
   deleteBid(id: number) {
     let deleteUrl = 'http://crm.unicweb.com.ua/api/bids/delete',
-      deleteId = `?id=${id}`,
-      headers = new Headers();
+      deleteId = `?id=${id}`;
 
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        headers.append('Accept', 'application/json;q=0.9');
-    return this.http.post(deleteUrl + deleteId, '', {
-        headers: headers
-      })
+    return this.authHttp.post(deleteUrl + deleteId, '')
       .map((res: Response) => {
         return [{
           delete: res.json
@@ -62,20 +54,14 @@ export class BidService {
 
   createClientBid(address_id: any, service_id: any) {
     let createBids = 'http://crm.unicweb.com.ua/api/bids/delete',
-      body = 'address_id=' + address_id + 'service_id=' + service_id,
-      headers = new Headers();
-    headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        headers.append('Accept', 'application/json;q=0.9');
+      body = 'address_id=' + address_id + 'service_id=' + service_id;
 
-    return this.http.post(createBids, body, {
-        headers: headers
-      })
+    return this.authHttp.post(createBids, body)
       .map((res: Response) => {
         return [{
           json: res.json()
         }];
       });
   }
-
 
 }

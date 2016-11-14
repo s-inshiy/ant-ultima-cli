@@ -209,7 +209,7 @@
             <!-- ------------------------------------
     Menu Item Bid
 ------------------------------------ -->
-            <li role="menuitem">
+            <li role="menuitem" *ngIf="role!='manager'">
               <a [routerLink]="['/dashboard/bids']" [routerLinkActive]="['active-menulink']" class="ripplelink">
                 <i class="fa ui-icon ui-icon-record-voice-over"></i><span>Заявки</span>
               </a>

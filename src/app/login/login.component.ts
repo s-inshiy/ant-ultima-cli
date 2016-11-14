@@ -45,7 +45,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginService.logout();
-    // this.loggedIn();
   }
 
   login() {
@@ -53,7 +52,7 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.user.login, this.user.password)
       .subscribe(result => {
         if (result === true) {
-          this.router.navigate(['/dashboard/bids']);
+          this.router.navigate(['/dashboard/masters']);
         } else {
           this.loading = false;
           this.msgs = [];

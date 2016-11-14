@@ -215,6 +215,7 @@ import {
 import {
   DashboardComponent
 } from './dashboard';
+import { MasterScheduleComponent } from './master-schedule/master-schedule.component';
 
 
 // Application wide providers
@@ -251,6 +252,7 @@ type StoreType = {
     MasterDetailComponent,
     LoginComponent,
     DashboardComponent,
+    MasterScheduleComponent,
   ],
   imports: [ // import Angular's modules
     BrowserModule,

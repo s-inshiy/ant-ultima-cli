@@ -52,17 +52,17 @@ import {
 import {
   BidComponent
 } from './bid';
-
 import {
   AuthGuard
 } from './guard';
+
 
 export const routes: Routes = [{
   path: 'dashboard',
   component: DashboardComponent,
   canActivate: [AuthGuard],
   data: {
-    roles: ['admin']
+    roles: ['admin', 'manager']
   },
       children: [
           {
@@ -86,7 +86,11 @@ export const routes: Routes = [{
             component: BranchComponent
           }, {
             path: 'users',
-            component: UserComponent
+            component: UserComponent,
+            canActivate: [AuthGuard],
+            data: {
+              roles: ['admin', 'manager']
+            },
           }, {
             path: 'managers',
             component: ManagerComponent
@@ -105,17 +109,17 @@ export const routes: Routes = [{
           },
           {
             path: 'bids',
-            component: BidComponent
+            component: BidComponent,
+            canActivate: [AuthGuard],
+            data: {
+              roles: ['admin']
+            },
           }
       ]
     },
  {
   path: '',
   component: LoginComponent,
-  // canActivate: [AuthGuard],
-  // data: {
-  //   roles: ['logout']
-  // }
 }, {
   path: '**',
   component: NoContentComponent

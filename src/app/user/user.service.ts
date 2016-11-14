@@ -23,6 +23,9 @@ export class UserService {
 
     return this.authHttp.get(crmUrl + queryString)
       .map((res: Response) => {
+        // if (res.status === 401) {
+        //   console.log('Log In');
+        // }
         return [{
           json: res.json()
         }];

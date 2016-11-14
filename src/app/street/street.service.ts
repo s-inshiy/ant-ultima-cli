@@ -8,7 +8,9 @@ import {
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/map';
 
-import { AuthHttp } from 'angular2-jwt';
+import {
+  AuthHttp
+} from 'angular2-jwt';
 
 @Injectable()
 export class StreetService {
@@ -17,13 +19,16 @@ export class StreetService {
 
   getStreets(page: number) {
     let crmUrl = 'http://crm.unicweb.com.ua/api/streets',
-          queryString = `?per-page=20&page=${page}`;
+      queryString = `?per-page=20&page=${page}`;
 
-      return this.authHttp.get(crmUrl + queryString).map((res: Response) => {
-        return [{
-          json: res.json()
-        }];
-      });
+    return this.authHttp.get(crmUrl + queryString).map((res: Response) => {
+      // if (res.status === 401) {
+      //   console.log('Log In');
+      // }
+      return [{
+        json: res.json()
+      }];
+    });
   }
 
   createStreet(id = 0, name = '') {
@@ -39,7 +44,7 @@ export class StreetService {
 
   deleteStreet(id: number) {
     let deleteUrl = 'http://crm.unicweb.com.ua/api/streets/delete',
-          deleteId = `?id=${id}`;
+      deleteId = `?id=${id}`;
 
     return this.authHttp.post(deleteUrl + deleteId, '')
       .map((res: Response) => {
@@ -52,8 +57,8 @@ export class StreetService {
 
   updateStreet(id = 0, areaId = 0, name = '') {
     let updateUrl = 'http://crm.unicweb.com.ua/api/streets/update',
-          updateId = `?id=${id}`,
-          body = 'area_id=' + areaId + '&name=' + name;
+      updateId = `?id=${id}`,
+      body = 'area_id=' + areaId + '&name=' + name;
 
     return this.authHttp.post(updateUrl + updateId, body)
       .map((res: Response) => {

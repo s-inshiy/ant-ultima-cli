@@ -4,6 +4,10 @@ import {
   ElementRef
 } from '@angular/core';
 
+import {
+  JwtHelper
+} from 'angular2-jwt';
+
 declare var Ultima: any;
 
 @Component({
@@ -22,10 +26,17 @@ export class DashboardComponent implements AfterViewInit {
 
   profileMode: string = 'inline';
 
+  jwtHelper: JwtHelper = new JwtHelper();
+
+  token: string;
+
+  role: string;
+
   constructor(private el: ElementRef) {}
 
   ngAfterViewInit() {
     Ultima.init(this.el.nativeElement);
+    this.getToken();
   }
 
   changeTheme(event, theme) {
@@ -36,4 +47,11 @@ export class DashboardComponent implements AfterViewInit {
     layoutLink.href = 'assets/layout/css/layout-' + theme + '.css';
     event.preventDefault();
   }
+
+  getToken() {
+    this.token = localStorage.getItem('id_token');
+    this.role = this.jwtHelper.decodeToken(this.token).rol;
+  }
+
+
 }

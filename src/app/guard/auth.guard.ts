@@ -16,26 +16,46 @@ import {
 export class AuthGuard implements CanActivate {
 
   jwtHelper: JwtHelper = new JwtHelper();
-  token = localStorage.getItem('id_token');
+  token: string;
 
   constructor(private router: Router) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
+  getToken() {
+    this.token = localStorage.getItem('id_token');
+  }
+
+  canActivate(route ?: ActivatedRouteSnapshot, state ?: RouterStateSnapshot): boolean {
+
+    this.getToken();
 
     if (this.token) {
-      // console.log(this.jwtHelper.decodeToken(this.token));
-      let rol = this.jwtHelper.decodeToken(this.token).rol;
-      let roles = route.data['roles'] as Array < string > ;
 
-      if ((roles == null || roles.indexOf(rol) !== -1)) {
-        console.log('auth 2');
-        return true;
-      } else {
-        this.router.navigate(['/']);
-        console.log('auth 1');
-        return false;
+    console.log(this.jwtHelper.decodeToken(this.token));
+
+      let roles = route.data['roles'] as Array < string > ,
+            role = this.jwtHelper.decodeToken(this.token).rol;
+
+      switch (roles !== null) {
+        case (roles.indexOf('admin') !== -1 && role === 'admin'):
+          return true;
+        case (roles.indexOf('manager') !== -1 && role === 'manager'):
+          return true;
+        default:
+          return false;
       }
+
     }
+
+    // if ((roles == null || roles.indexOf('admin') !== -1)) {
+    //   // console.log('auth 2');
+    //   this.role.admin = true;
+    //   // return true;
+    // } else {
+    //   this.router.navigate(['/']);
+    //   console.log('auth 1');
+    //   return false;
+    // }
+
 
     this.router.navigate(['/']);
     console.log('auth');

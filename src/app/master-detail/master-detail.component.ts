@@ -6,7 +6,8 @@ import {
   MasterDetailService
 } from './master-detail.service';
 import {
-  ActivatedRoute
+  ActivatedRoute,
+  Router
 } from '@angular/router';
 
 import {
@@ -24,11 +25,16 @@ import {
 })
 export class MasterDetailComponent implements OnInit {
 
-  id: number;
-  items: any[];
+  masters: any[];
   services: any[];
   areas: any[];
+  events: any[];
 
+  id: number;
+  headerConfig: any;
+  ru: any;
+
+  masterEvent: Event = new NewMaster();
   service: Search = new SearchAreas();
   area: Search = new SearchAreas();
   pag: Paginate = new NewPaginate();
@@ -40,9 +46,10 @@ export class MasterDetailComponent implements OnInit {
 
   dialog: boolean;
   dialogArea: boolean;
+  dialogEvent: boolean;
   resCRUD: any;
 
-  constructor(private masterDetailService: MasterDetailService, private route: ActivatedRoute) {}
+  constructor(private masterDetailService: MasterDetailService, private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -65,7 +72,32 @@ export class MasterDetailComponent implements OnInit {
       label: 'Удалить',
       icon: 'fa ui-icon-delete-forever',
       command: (event) => this.deleteMasterArea(this.area.id, this.id)
-    }]
+    }];
+    // Master Schedule
+    this.getMasterSchedule(this.id);
+    this.headerConfig = {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'month,agendaWeek'
+    };
+    this.ru = {
+      monthNames: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
+        'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
+      ],
+      monthNamesShort: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн',
+        'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'
+      ],
+      dayNames: ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'],
+      dayNamesShort: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
+      buttonText: {
+        month: 'Месяц',
+        week: 'Неделя',
+        day: 'День',
+        list: 'Повестка дня',
+        today: 'Сегодня',
+      },
+      allDayText: 'Весь день',
+    };
   }
 
   showDialogArea() {
@@ -81,12 +113,10 @@ export class MasterDetailComponent implements OnInit {
       .getMasterDetail(id)
       .subscribe(
         data => {
-          this.items = data[0].json;
+          this.masters = data[0].json;
         },
         err => console.error(err),
-        // () => {
-        //   console.log(this.masterDetail);
-        // }
+        // () => {}
       );
   }
 
@@ -98,9 +128,7 @@ export class MasterDetailComponent implements OnInit {
           this.services = data[0].json;
         },
         err => console.error(err),
-        // () => {
-        //   console.log(this.masterDetail);
-        // }
+        // () => {}
       );
   }
 
@@ -112,10 +140,7 @@ export class MasterDetailComponent implements OnInit {
           this.service.result = data[0].search.results;
         },
         err => console.error(err),
-        () => {
-          //  console.log('Work Search...');
-          console.log(this.service.result)
-        }
+        // () => { }
       );
   }
 
@@ -166,8 +191,6 @@ export class MasterDetailComponent implements OnInit {
     this.area = new SearchAreas();
   }
 
-
-
   deleteMasterService(serviceId: number, masterId: number) {
     this.masterDetailService
       .deleteMasterService(this.service.id, this.id)
@@ -207,8 +230,7 @@ export class MasterDetailComponent implements OnInit {
           this.areas = data[0].json;
         },
         err => console.error(err),
-        //  () => {
-        //  }
+        //  () => { }
       );
   }
 
@@ -220,9 +242,7 @@ export class MasterDetailComponent implements OnInit {
           this.area.result = data[0].search.data;
         },
         err => console.error(err),
-        // () => {
-        //   console.log('Area Search..');
-        // }
+        // () => {}
       );
   }
 
@@ -289,26 +309,91 @@ export class MasterDetailComponent implements OnInit {
       );
   }
 
+  // Master Schedule & Events
+
+  getMasterSchedule(id: number) {
+    this.masterDetailService
+      .getMasterSchedule(id)
+      .subscribe(
+        data => {
+          this.events = data[0].json.data;
+        },
+        err => console.error(err),
+        // () => {}
+      );
+  }
+
+  //   showDialogEvent() {
+  //   this.dialogEvent = true;
+  // }
+
+  detailEvent(event: any) {
+    this.masterDetailService
+      .detailEvent(this.masterEvent.id = event.calEvent.id)
+      .subscribe(
+        data => {
+          this.masterEvent = data[0].json[0];
+        },
+        err => console.error(err),
+        () => {
+          this.dialogEvent = true;
+        }
+      );
+  }
+
+  updateEventTime(event: any) {
+    this.masterDetailService
+      .updateEventTime(this.masterEvent.id = event.event.id,
+        this.masterEvent.start = event.event.start.format().replace('T', ' '))
+      .subscribe(
+        data => {
+          this.resCRUD = data[0].json;
+        },
+        err => console.error(err),
+        () => {
+          console.log(this.resCRUD);
+        }
+      );
+  }
+
+  	// updateEventDuration(event: any) {
+		// 	this.masterEvent.duration	= moment.utc(moment(event.event.end.format().replace('T',' '),'YYYY-MM-DD HH:mm:ss')
+		// 	.diff(moment(event.event.start.format().replace('T',' '),'YYYY-MM-DD HH:mm:ss'))).valueOf();
+		// 	this.masterEvent.duration =  moment.duration(this.masterEvent.duration).asSeconds();
+
+		// 	this._managerService
+		// 		.updateEventDuration(event.event.id, this.masterEvent.duration)
+		// 		.subscribe(
+		// 			data => {
+		// 				this.resEventDuration = data[0].json;
+		// 			},
+		// 			err => console.error(err),
+		// 			() => {
+		// 				console.log(this.resEventDuration);
+		// 			}
+		// 		);
+		// }
+
 }
 
 export interface Master {
-  areas ?: string;
-  companyName ?: string;
-  fullName ?: string;
-  id ?: number;
-  rating ?: number;
-  services ?: string;
-  status ?: string;
-  worksCount ?: number;
+  areas ? : string;
+  companyName ? : string;
+  fullName ? : string;
+  id ? : number;
+  rating ? : number;
+  services ? : string;
+  status ? : string;
+  worksCount ? : number;
 }
 
 class NewMaster implements Master {
-  constructor(public areas ?: string, public companyName ?: string, public fullName ?: string, public id ?: number,
-    public rating ?: number, public services ?: string, public status ?: string, public worksCount ?: number) {}
+  constructor(public areas ? : string, public companyName ? : string, public fullName ? : string, public id ? : number,
+    public rating ? : number, public services ? : string, public status ? : string, public worksCount ? : number) {}
 }
 
 export interface Search {
-  id ?: number;
+  id ? : number;
   name ? : string;
   complete ? : string;
   result ? : string[];
@@ -316,14 +401,34 @@ export interface Search {
 }
 
 class SearchAreas implements Search {
-  constructor(public complete ?: string, public result ?: string[]) {}
+  constructor(public complete ? : string, public result ? : string[]) {}
 }
 
 export interface Paginate {
-  count ?: string[];
+  count ? : string[];
   curr: number;
 }
 
 class NewPaginate implements Paginate {
-  constructor(public count ?: string[], public curr = 1) {}
+  constructor(public count ? : string[], public curr = 1) {}
+}
+
+export interface Event {
+  id ? : number;
+  titile ? : string;
+  allDay ? : boolean;
+  master ? : string;
+  start ? : string;
+  end ? : string;
+  urlData ? : string;
+  status ? : string;
+  price ? : number;
+  duration ? : number | string;
+}
+
+class NewEvent implements Event {
+  constructor(public id ? : number, public titile ? : string, public allDay ? : boolean, public master ? : string,
+    public start ? : string, public end ? : string, public urlData ? : string, public status ? : string,
+    public price ? : number, public duration ? : number | string
+  ) {}
 }

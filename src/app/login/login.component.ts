@@ -65,13 +65,19 @@ export class LoginComponent implements OnInit {
       });
   }
 
+  // keyDownFunction(event) {
+  //   if (event.keyCode == 13) {
+  //     alert('you just clicked enter');
+  //   }
+  // }
+
 }
 
 export interface User {
-  login ?: string;
-  password ?: string;
+  login ? : string;
+  password ? : string;
 }
 
 class NewUser implements User {
-  constructor(login ?: string, password ?: string) {}
+  constructor(login ? : string, password ? : string) {}
 }

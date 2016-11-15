@@ -43,15 +43,10 @@ export class MasterComponent implements OnInit {
   ngOnInit() {
     this.getMasters(this.pag.curr);
     this.tieredItems = [{
-      label: 'Просмотр',
-      icon: 'fa ui-icon-remove-red-eye',
+      label: 'Детально',
+      icon: 'fa ui-icon-search',
       command: (event) => this.gotoMasterDetail(this.master.id)
     },
-    //  {
-    //   label: 'Редактировать',
-    //   icon: 'fa ui-icon-edit',
-    //   command: (event) => this.showDialog()
-    // },
      {
       label: 'Удалить',
       icon: 'fa ui-icon-delete-forever',

@@ -5,40 +5,107 @@
   <div class="ui-g-12">
     <div class="card">
       <p-growl [value]="msgs"></p-growl>
-      <p-dataTable [value]="items" selectionMode="single" [(selection)]="master" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
-        [responsive]="true" [contextMenu]="forMaster">
-        <header>Мастер</header>
-        <footer>
-          <div class="ui-helper-clearfix" style="width:100%; margin: 8px 0">
-            <button type="button" pButton style="float:right" (click)="showDialog()" label="Календарь"></button>
-          </div>
-        </footer>
-        <p-column field="fullName" header="ФИО" [filter]="false"></p-column>
-        <p-column field="worksCount" header="Работ" [filter]="false"></p-column>
-        <p-column field="services" header="Услуги" [filter]="false"></p-column>
-        <p-column field="areas" header="Нас. пункт" [filter]="false"></p-column>
-        <p-column field="rating" header="Рейтинг" [filter]="false"></p-column>
-        <p-column field="companyName" header="Компания" [filter]="false"></p-column>
-        <p-column field="status" header="Cтатус" [filter]="false"></p-column>
-      </p-dataTable>
+      <div class="shadow-box ui-shadow-3">
+        <p-dataTable [value]="masters" [responsive]="true">
+          <header>Мастер</header>
+          <footer>
+            <div class="ui-helper-clearfix" style="width:100%; margin: 8px 0">
+              <!--<button type="button" pButton style="float:right" icon="ui-icon ui-icon-perm-contact-calendar" (click)="gotoMasterSchedule()"
+                label="Календарь">
+              </button>-->
+            </div>
+          </footer>
+          <p-column field="fullName" header="ФИО" [filter]="false"></p-column>
+          <p-column field="worksCount" header="Работ" [filter]="false"></p-column>
+          <p-column field="services" header="Услуги" [filter]="false"></p-column>
+          <p-column field="areas" header="Нас. пункт" [filter]="false"></p-column>
+          <p-column field="rating" header="Рейтинг" [filter]="false"></p-column>
+          <p-column field="companyName" header="Компания" [filter]="false"></p-column>
+          <p-column field="status" header="Cтатус" [filter]="false"></p-column>
+        </p-dataTable>
+      </div>
     </div>
   </div>
+  <!-- ------------------------------------
+    Master Schedule
+------------------------------------ -->
+  <div class="ui-g-12">
+    <div class="card">
+      <p-panel header="Рассписание" [collapsed]="false" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+        <h4>Выберите соответствующуюю Услугу, далее нажмите правую кнопку мишы и выберете нужный Вам пункт "<i class="fa ui-icon-edit"></i>Редактировать",
+          "
+          <i class="fa ui-icon-delete-forever"></i>Удалить"</h4>
+        <p-schedule [events]="events" [header]="headerConfig" [locale]="ru" minTime="08:00:00" maxTime="19:00:00" [eventLimit]="4"
+          [editable]="true" [allDaySlot]="false" (onEventDrop)="updateEventTime($event)" (onEventClick)="detailEvent($event)"
+          (onEventResize)="updateEventDuration($event)" defaultView="agendaWeek"></p-schedule>
+      </p-panel>
+    </div>
+  </div>
+  <!-- ------------------------------------
+    Modal Schedule
+------------------------------------ -->
+  <p-dialog header="Информация о событии" [(visible)]="dialogEvent" [modal]="true" showEffect="fade" [responsive]="true">
+    <div class="ui-g">
+      <!--<div class="ui-g-4"  style="margin-bottom:30px">
+          №, п/п
+      </div>
+      <div class="ui-g-8" style="margin-bottom:30px">
+        {{masterEvent.id}}
+      </div>-->
+      <div class="ui-g-4">
+        Название
+      </div>
+      <div class="ui-g-8">
+        {{masterEvent.title}}
+      </div>
+      <div class="ui-g-4">
+        Начало
+      </div>
+      <div class="ui-g-8">
+        {{masterEvent.start}}
+      </div>
+      <div class="ui-g-4">
+        Завершение
+      </div>
+      <div class="ui-g-8">
+        {{masterEvent.end}}
+      </div>
+      <div class="ui-g-4">
+        Статус
+      </div>
+      <div class="ui-g-8">
+        {{masterEvent.status}}
+      </div>
+      <div class="ui-g-4">
+        Цена
+      </div>
+      <div class="ui-g-8">
+        {{masterEvent.price}}
+      </div>
+    </div>
+  </p-dialog>
   <!-- ------------------------------------
     Table Service
 ------------------------------------ -->
   <div class="ui-g-12">
     <div class="card">
-      <p-dataTable [value]="services" selectionMode="single" (onRowSelect)="onRowSelectService($event)"  (onRowUnselect)="onRowUnselect($event)" [responsive]="true" [contextMenu]="forService">
-        <header>Услуга</header>
-        <p-column field="name" header="Имя" [filter]="false"></p-column>
-        <p-column field="price" header="Цена" [filter]="false"></p-column>
-        <footer>
-          <div class="ui-helper-clearfix" style="width:100%; margin: 8px 0;">
-            <button type="button" pButton style="float:right" (click)="showDialog()" label="Добавить"></button>
-          </div>
-        </footer>
-      </p-dataTable>
-      <p-contextMenu #forService [model]="tieredItems" [style]="{'width':'12.5em'}"></p-contextMenu>
+      <p-panel header="Услуги" [collapsed]="true" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+        <h4>Выберите соответствующуюю Услугу, далее нажмите правую кнопку мишы и выберете нужный Вам пункт "<i class="fa ui-icon-edit"></i>Редактировать",
+          "
+          <i class="fa ui-icon-delete-forever"></i>Удалить"</h4>
+        <p-dataTable [value]="services" selectionMode="single" (onRowSelect)="onRowSelectService($event)" (onRowUnselect)="onRowUnselect($event)"
+          [responsive]="true" [contextMenu]="forService">
+          <header>Услуга</header>
+          <p-column field="name" header="Имя" [filter]="false"></p-column>
+          <p-column field="price" header="Цена" [filter]="false"></p-column>
+          <footer>
+            <div class="ui-helper-clearfix" style="width:100%; margin: 8px 0;">
+              <button type="button" pButton style="float:right" (click)="showDialog()" icon="ui-icon ui-icon-playlist-add" label="Добавить"></button>
+            </div>
+          </footer>
+        </p-dataTable>
+        <p-contextMenu #forService [model]="tieredItems" [style]="{'width':'12.5em'}"></p-contextMenu>
+      </p-panel>
     </div>
   </div>
   <!-- ------------------------------------
@@ -47,8 +114,8 @@
   <p-dialog header="Услуга" [(visible)]="dialog" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getMasterServices(id)">
     <div class="ui-g form-group">
       <div class="ui-g-12">
-        <p-autoComplete [(ngModel)]="service.complete" [suggestions]="service.result" (completeMethod)="searchService($event.query)" field="name"
-          [size]="27" placeholder="Поиск услуги" [minLength]="3" (onSelect)="service.id = $event.id" required></p-autoComplete>
+        <p-autoComplete [(ngModel)]="service.complete" [suggestions]="service.result" (completeMethod)="searchService($event.query)"
+          field="name" [size]="27" placeholder="Поиск услуги" [minLength]="3" (onSelect)="service.id = $event.id" required></p-autoComplete>
       </div>
       <div class="ui-g-12" style="margin-bottom:30px">
         <span class="md-inputfield">
@@ -69,34 +136,39 @@
 ------------------------------------ -->
   <div class="ui-g-12">
     <div class="card">
-      <p-dataTable [value]="areas" (onRowSelect)="onRowSelectArea($event)" selectionMode="single" [contextMenu]="forArea">
-        <header>Нас. пункт</header>
-        <p-column field="name" header="Имя" [filter]="false"></p-column>
-        <p-column field="settlement" header="Районный центр" [filter]="false"></p-column>
-        <footer>
-          <div class="ui-helper-clearfix" style="width:100%; margin: 8px 0;">
-            <button type="button" pButton style="float:right" (click)="showDialogArea()" label="Добавить"></button>
-          </div>
-        </footer>
-      </p-dataTable>
+      <p-panel header="Населённые пункты" [collapsed]="true" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+        <h4>Выберите соответствующий Нас. пункт, далее нажмите правую кнопку мишы и выберете нужный Вам пункт "<i class="fa ui-icon-edit"></i>Редактировать",
+          "
+          <i class="fa ui-icon-delete-forever"></i>Удалить"</h4>
+        <p-dataTable [value]="areas" (onRowSelect)="onRowSelectArea($event)" selectionMode="single" [contextMenu]="forArea">
+          <header>Нас. пункт</header>
+          <p-column field="name" header="Имя" [filter]="false"></p-column>
+          <p-column field="settlement" header="Районный центр" [filter]="false"></p-column>
+          <footer>
+            <div class="ui-helper-clearfix" style="width:100%; margin: 8px 0;">
+              <button type="button" pButton style="float:right" (click)="showDialogArea()" label="Добавить"></button>
+            </div>
+          </footer>
+        </p-dataTable>
+      </p-panel>
+      <p-contextMenu #forArea [model]="areaItems" [style]="{'width':'12.5em'}"></p-contextMenu>
     </div>
-    <p-contextMenu #forArea [model]="areaItems" [style]="{'width':'12.5em'}"></p-contextMenu>
   </div>
 </div>
-  <!-- ------------------------------------
+<!-- ------------------------------------
     Modal Areas
 ------------------------------------ -->
-  <p-dialog header="Населённый пункт" [(visible)]="dialogArea" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getMasterAreas(id)">
-    <div class="ui-g form-group">
-      <div class="ui-g-12"  style="margin-bottom:30px">
-        <p-autoComplete [(ngModel)]="area.complete" [suggestions]="area.result" (completeMethod)="searchArea($event.query)" field="name"
-          [size]="27" placeholder="Поиск нас. пункта" [minLength]="3" (onSelect)="area.id = $event.id" required></p-autoComplete>
-      </div>
+<p-dialog header="Населённый пункт" [(visible)]="dialogArea" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getMasterAreas(id)">
+  <div class="ui-g form-group">
+    <div class="ui-g-12" style="margin-bottom:30px">
+      <p-autoComplete [(ngModel)]="area.complete" [suggestions]="area.result" (completeMethod)="searchArea($event.query)" field="name"
+        [size]="27" placeholder="Поиск нас. пункта" [minLength]="3" (onSelect)="area.id = $event.id" required></p-autoComplete>
     </div>
-    <footer>
-      <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-        <button type="button" pButton (click)="addMasterArea()" label="Создать" [disabled]="!(area.id)"></button>
-        <!--<button type="button" pButton (click)="updateMaster()" label="Обновить" [disabled]="!(user.id&&company.id)"></button>-->
-      </div>
-    </footer>
-  </p-dialog>
+  </div>
+  <footer>
+    <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+      <button type="button" pButton (click)="addMasterArea()" label="Создать" [disabled]="!(area.id)"></button>
+      <!--<button type="button" pButton (click)="updateMaster()" label="Обновить" [disabled]="!(user.id&&company.id)"></button>-->
+    </div>
+  </footer>
+</p-dialog>

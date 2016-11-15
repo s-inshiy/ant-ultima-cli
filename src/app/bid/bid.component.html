@@ -9,9 +9,9 @@
         [responsive]="true" [contextMenu]="forBids">
         <header>Заявки</header>
         <footer>
-          <div class="ui-helper-clearfix" style="width:100%; margin: 8px 0">
+          <!--<div class="ui-helper-clearfix" style="width:100%; margin: 8px 0">
             <button type="button" pButton style="float:right" (click)="showDialog()" multiple="true" dropdown="true" label="Добавить"></button>
-          </div>
+          </div>-->
         </footer>
         <p-column field="id" header="№, п/п" [filter]="false"></p-column>
         <p-column field="fio" header="ФИО" [filter]="false" [sortable]="false"></p-column>
@@ -20,6 +20,8 @@
         <p-column field="master" header="Мастер" [filter]="false" [sortable]="false"></p-column>
         <p-column field="phone" header="Телефон" [filter]="false" [sortable]="false"></p-column>
         <p-column field="created_at" header="Создано в" [filter]="false" [sortable]="false"></p-column>
+        <p-column field="contact_person" header="Конт. лицо" [filter]="false" [sortable]="false"></p-column>
+        <p-column field="description" header="Описание" [filter]="false" [sortable]="false"></p-column>
       </p-dataTable>
       <p-paginator rows="20" totalRecords="{{pag.count}}" pageLinkSize="10" (onPageChange)="paginate($event)"></p-paginator>
     </div>
@@ -29,3 +31,20 @@
 <!-- ------------------------------------
     Modal Bids
 ------------------------------------ -->
+<p-dialog header="Мастер" [(visible)]="dialog" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getMasters(pag.curr)">
+  <div class="ui-g form-group">
+    <div class="ui-g-12">
+      	<p-dropdown [options]="master.result" [(ngModel)]="master.complete" (onChange)="shedule.id = $event.value" [style]="{'width':'100%'}"></p-dropdown>
+    </div>
+    <div class="ui-g-12" style="margin-bottom:30px">
+      <!--<p-autoComplete  [(ngModel)]="company.complete" [suggestions]="company.result" (completeMethod)="searchCompany($event)" field="name"
+        [size]="27" placeholder="Компания" [minLength]="3" (onSelect)="company.id = $event.id" required></p-autoComplete>-->
+    </div>
+  </div>
+  <footer>
+    <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+      <!--<button type="button" pButton (click)="createMaster()" label="Создать" [disabled]="!(user.id&&company.id)"></button>-->
+      <!--<button type="button" pButton (click)="updateMaster()" label="Обновить" [disabled]="!(user.id&&company.id)"></button>-->
+    </div>
+  </footer>
+</p-dialog>

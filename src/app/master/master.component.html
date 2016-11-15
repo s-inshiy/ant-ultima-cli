@@ -5,6 +5,7 @@
     Table Master
 ------------------------------------ -->
       <p-growl [value]="msgs"></p-growl>
+      <h4>Выберите соответствующего Мастера, далее нажмите правую кнопку мишы и выберете  нужный Вам пункт  "<i class="fa ui-icon-search"></i>Детально", "<i class="fa ui-icon-delete-forever"></i>Удалить"</h4>
       <p-dataTable [value]="items" selectionMode="single" [(selection)]="master" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
         [responsive]="true" [contextMenu]="forMaster">
         <header>Мастера</header>

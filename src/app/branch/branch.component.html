@@ -5,6 +5,8 @@
     Table Branch
 ------------------------------------ -->
       <p-growl [value]="msgs"></p-growl>
+                <h4>Выберите соответствующий Филиал, далее нажмите правую кнопку мишы и выберете нужный Вам пункт "<i class="fa ui-icon-edit"></i>Редактировать",
+        "<i class="fa ui-icon-delete-forever"></i>Удалить"</h4>
       <p-dataTable [value]="items" (onRowSelect)="onRowSelect($event)" [responsive]="true" selectionMode="single" [contextMenu]="forBranch">
         <header>Филиалы</header>
         <p-column field="name" header="Имя" [filter]="false"></p-column>

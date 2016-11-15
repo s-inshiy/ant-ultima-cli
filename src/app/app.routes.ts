@@ -55,7 +55,9 @@ import {
 import {
   AuthGuard
 } from './guard';
-
+import {
+  MasterScheduleComponent
+} from './master-schedule';
 
 export const routes: Routes = [{
   path: 'dashboard',
@@ -64,60 +66,67 @@ export const routes: Routes = [{
   data: {
     roles: ['admin', 'manager']
   },
-      children: [
-          {
-            path: '',
-            redirectTo: 'users',
-            pathMatch: 'full'
-          }, {
-            path: 'streets',
-            component: StreetComponent
-          }, {
-            path: 'areas',
-            component: AreaComponent
-          }, {
-            path: 'settlements',
-            component: SettlementComponent
-          }, {
-            path: 'regions',
-            component: RegionComponent
-          }, {
-            path: 'branches',
-            component: BranchComponent
-          }, {
-            path: 'users',
-            component: UserComponent,
-            canActivate: [AuthGuard],
-            data: {
-              roles: ['admin', 'manager']
-            },
-          }, {
-            path: 'managers',
-            component: ManagerComponent
-          }, {
-            path: 'companies',
-            component: CompanyComponent
-          }, {
-            path: 'masters',
-            component: MasterComponent
-          }, {
-            path: 'services',
-            component: ServiceComponent
-          }, {
-            path: 'master/:id',
-            component: MasterDetailComponent
-          },
-          {
-            path: 'bids',
-            component: BidComponent,
-            canActivate: [AuthGuard],
-            data: {
-              roles: ['admin']
-            },
-          }
-      ]
+  children: [{
+    path: '',
+    redirectTo: 'users',
+    pathMatch: 'full'
+  }, {
+    path: 'streets',
+    component: StreetComponent
+  }, {
+    path: 'areas',
+    component: AreaComponent
+  }, {
+    path: 'settlements',
+    component: SettlementComponent
+  }, {
+    path: 'regions',
+    component: RegionComponent
+  }, {
+    path: 'branches',
+    component: BranchComponent
+  }, {
+    path: 'users',
+    component: UserComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['admin', 'manager']
     },
- {
+  }, {
+    path: 'managers',
+    component: ManagerComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['admin']
+    },
+  }, {
+    path: 'companies',
+    component: CompanyComponent
+  }, {
+    path: 'masters',
+    component: MasterComponent
+  }, {
+    path: 'services',
+    component: ServiceComponent
+  }, {
+    path: 'master/:id',
+    component: MasterDetailComponent
+  }, {
+    path: 'bids',
+    component: BidComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['admin', 'manager']
+    }
+  }, {
+    path: 'master-schedule/:id',
+    component: MasterScheduleComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['admin', 'manager']
+    },
+  }]
+}, {
   path: '',
   component: LoginComponent,
 }, {

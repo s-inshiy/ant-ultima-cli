@@ -2,7 +2,6 @@ import {
   Injectable
 } from '@angular/core';
 import {
-  Http,
   Response,
 } from '@angular/http';
 import 'rxjs/add/observable/from';
@@ -16,7 +15,7 @@ import {
 @Injectable()
 export class MasterDetailService {
 
-  constructor(private http: Http, public authHttp: AuthHttp) {}
+  constructor(public authHttp: AuthHttp) {}
 
   getMasterDetail(id: number | string) {
     let _baseUrl = 'http://crm.unicweb.com.ua/api/masters/view?',
@@ -120,8 +119,9 @@ export class MasterDetailService {
     });
   }
 
+  // Master Schedule
 
-  getMasterSchedule(id: number) {
+    getMasterSchedule(id: number) {
     let baseUrl = 'http://crm.unicweb.com.ua/api/shedules?',
       masterId = 'master_id=' + id;
 
@@ -166,7 +166,5 @@ export class MasterDetailService {
       }];
     });
   }
-
-
 
 }

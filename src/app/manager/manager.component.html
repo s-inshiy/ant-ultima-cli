@@ -5,6 +5,8 @@
     Table Manager
 ------------------------------------ -->
       <p-growl [value]="msgs"></p-growl>
+      <h4>Выберите соответствующего Менеджера, далее нажмите правую кнопку мишы и выберете нужный Вам пункт "<i class="fa ui-icon-edit"></i>Редактировать",
+        " <i class="fa ui-icon-delete-forever"></i>Удалить"</h4>
       <p-dataTable [value]="items" selectionMode="single" [(selection)]="manager" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
         [responsive]="true" [contextMenu]="forManager">
         <header>Менеджеры</header>
@@ -12,8 +14,8 @@
           <div class="ui-helper-clearfix" style="width:100%; margin: 8px 0"><button type="button" pButton style="float:right" (click)="showDialog()" label="Добавить"></button></div>
         </footer>
         <p-column field="id" header="№, п/п" [filter]="false"></p-column>
-	    <p-column field="fio" header="ФИО" [filter]="false"></p-column>
-	    <p-column field="branch" header="Филиалы" [filter]="false" ></p-column>
+        <p-column field="fio" header="ФИО" [filter]="false"></p-column>
+        <p-column field="branch" header="Филиалы" [filter]="false"></p-column>
       </p-dataTable>
       <p-paginator rows="20" totalRecords="{{pag.count}}" pageLinkSize="10" (onPageChange)="paginate($event)"></p-paginator>
     </div>
@@ -26,11 +28,11 @@
 <p-dialog header="Пользователь" [(visible)]="dialog" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getManagers(pag.curr)">
   <div class="ui-g form-group">
     <div class="ui-g-12">
-              <p-autoComplete  [(ngModel)]="user.complete" [suggestions]="user.result" (completeMethod)="searchUser($event)" field="second_name"
+      <p-autoComplete [(ngModel)]="user.complete" [suggestions]="user.result" (completeMethod)="searchUser($event)" field="second_name"
         [size]="27" placeholder="Пользователь" [minLength]="3" (onSelect)="user.id = $event.id" required></p-autoComplete>
     </div>
     <div class="ui-g-12" style="margin-bottom:30px">
-      <p-autoComplete  [(ngModel)]="branch.complete" [suggestions]="branch.result" (completeMethod)="searchBranch($event)" field="name"
+      <p-autoComplete [(ngModel)]="branch.complete" [suggestions]="branch.result" (completeMethod)="searchBranch($event)" field="name"
         [size]="27" placeholder="Филиал" [minLength]="3" (onSelect)="branch.id = $event.id" required></p-autoComplete>
     </div>
   </div>

@@ -2,7 +2,7 @@ import {
   Injectable
 } from '@angular/core';
 import {
-  Http,
+  // Http,
   Response,
   // Headers
 } from '@angular/http';
@@ -16,13 +16,24 @@ import {
 @Injectable()
 export class BidService {
 
-  constructor(private http: Http, public authHttp: AuthHttp) {}
+  constructor(public authHttp: AuthHttp) {}
 
   getBids(page: number, id: any = '', fio: any = '', phone: any = '') {
     let bidsUrl = 'http://crm.unicweb.com.ua/api/bids/',
       queryString = `?per-page=40&page=${page}&id=${id}&fio=${fio}&phone=${phone}`;
 
     return this.authHttp.get(bidsUrl + queryString).map((res: Response) => {
+      return [{
+        json: res.json()
+      }];
+    });
+  }
+
+  getBidsMasters(id: any) {
+    let masterUrl = 'http://crm.unicweb.com.ua/api/bids/assign-master',
+      queryId = `?bid_id=${id}`;
+
+    return this.authHttp.get(masterUrl + queryId).map((res: Response) => {
       return [{
         json: res.json()
       }];

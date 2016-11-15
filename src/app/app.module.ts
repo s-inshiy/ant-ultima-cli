@@ -136,7 +136,9 @@ import {
 import {
   PaginatorModule
 } from 'primeng/primeng';
-// import { PanelModule } from 'primeng/primeng';
+import {
+  PanelModule
+} from 'primeng/primeng';
 // import { PanelMenuModule } from 'primeng/primeng';
 import {
   PasswordModule
@@ -145,7 +147,9 @@ import {
 // import { ProgressBarModule } from 'primeng/primeng';
 // import { RadioButtonModule } from 'primeng/primeng';
 // import {RatingModule} from 'primeng/primeng';
-// import {ScheduleModule} from 'primeng/primeng';
+import {
+  ScheduleModule
+} from 'primeng/primeng';
 // import { SelectButtonModule } from 'primeng/primeng';
 // import { SlideMenuModule } from 'primeng/primeng';
 // import {SliderModule} from 'primeng/primeng';
@@ -215,8 +219,9 @@ import {
 import {
   DashboardComponent
 } from './dashboard';
-import { MasterScheduleComponent } from './master-schedule/master-schedule.component';
-
+import {
+  MasterScheduleComponent
+} from './master-schedule/master-schedule.component';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -302,14 +307,14 @@ type StoreType = {
     // OrderListModule,
     // OverlayPanelModule,
     PaginatorModule,
-    // PanelModule,
+    PanelModule,
     // PanelMenuModule,
     PasswordModule,
     // PickListModule,
     // ProgressBarModule,
     // RadioButtonModule,
     // RatingModule,
-    // ScheduleModule,
+    ScheduleModule,
     // SelectButtonModule,
     // SlideMenuModule,
     // SliderModule,

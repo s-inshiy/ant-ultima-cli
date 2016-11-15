@@ -1,3 +1,12 @@
-<p>
-  master-schedule works!
-</p>
+<div class="ui-g">
+  <!-- ------------------------------------
+    Master Schedule
+------------------------------------ -->
+  <div class="ui-g-12">
+    <div class="card">
+        <p-schedule [events]="items" [header]="headerConfig" [locale]="ru" minTime="08:00:00" maxTime="19:00:00" [eventLimit]="4"
+          [editable]="true" [allDaySlot]="false" (onEventDrop)="updateEventTime($event)" (onEventClick)="detailEvent($event)"
+          (onEventResize)="updateEventDuration($event)"></p-schedule>
+    </div>
+  </div>
+</div>

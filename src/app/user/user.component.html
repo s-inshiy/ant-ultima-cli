@@ -5,6 +5,7 @@
     Table User
 ------------------------------------ -->
       <p-growl [value]="msgs"></p-growl>
+      <h4>Выберите соответствующего Пользователя, далее нажмите правую кнопку мишы и выберете  нужный Вам пункт "<i class="fa ui-icon-edit"></i>Изменить роль", "<i class="fa ui-icon-block"></i>Заблокировать", "<i class="fa ui-icon-beenhere"></i>Разблокировать", "<i class="fa ui-icon-delete-forever"></i>Удалить"</h4>
       <p-dataTable [value]="items" selectionMode="single" [(selection)]="street" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
         [responsive]="true" [contextMenu]="forUser">
         <header>Пользователи</header>

@@ -56,8 +56,9 @@ import {
   AuthGuard
 } from './guard';
 import {
-  MasterScheduleComponent
-} from './master-schedule';
+  ClientBidComponent
+} from './client-bid';
+
 
 export const routes: Routes = [{
   path: 'dashboard',
@@ -118,14 +119,12 @@ export const routes: Routes = [{
     data: {
       roles: ['admin', 'manager']
     }
-  }, {
-    path: 'master-schedule/:id',
-    component: MasterScheduleComponent,
-    canActivate: [AuthGuard],
-    data: {
-      roles: ['admin', 'manager']
-    },
-  }]
+  },
+  {
+    path: 'client',
+    component: ClientBidComponent
+  }
+  ]
 }, {
   path: '',
   component: LoginComponent,

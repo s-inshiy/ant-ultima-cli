@@ -75,7 +75,7 @@ import {
 import {
   ButtonModule
 } from 'primeng/primeng';
-// import {CalendarModule} from 'primeng/primeng';
+import {CalendarModule} from 'primeng/primeng';
 // import {CarouselModule} from 'primeng/primeng';
 // import {ChartModule} from 'primeng/primeng';
 import {
@@ -219,9 +219,8 @@ import {
 import {
   DashboardComponent
 } from './dashboard';
-import {
-  MasterScheduleComponent
-} from './master-schedule/master-schedule.component';
+import { ClientBidComponent } from './client-bid/client-bid.component';
+
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -257,7 +256,7 @@ type StoreType = {
     MasterDetailComponent,
     LoginComponent,
     DashboardComponent,
-    MasterScheduleComponent,
+    ClientBidComponent,
   ],
   imports: [ // import Angular's modules
     BrowserModule,
@@ -272,7 +271,7 @@ type StoreType = {
     AutoCompleteModule,
     // BreadcrumbModule,
     ButtonModule,
-    // CalendarModule,
+    CalendarModule,
     // CarouselModule,
     // ChartModule,
     CheckboxModule,

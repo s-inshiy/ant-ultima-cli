@@ -1,6 +1,6 @@
 import {
   Component,
-  OnInit
+  OnInit,
 } from '@angular/core';
 
 import {
@@ -38,27 +38,68 @@ export class BidComponent implements OnInit {
 
   dialog: boolean;
   resCRUD: any;
+  ru: any;
 
   constructor(private bidService: BidService) {}
 
   ngOnInit() {
     this.getBids(this.pag.curr);
     this.tieredItems = [{
-      label: 'Удалить',
-      icon: 'fa ui-icon-delete-forever',
-      // command: (event) => this.deleteArea(this.area.id, this.area.name)
-    }, {
       label: 'Мастер',
       icon: 'fa ui-icon-add',
       command: (event) => this.showDialog()
+    }, {
+      label: 'Удалить',
+      icon: 'fa ui-icon-delete-forever',
+      // command: (event) => this.deleteArea(this.area.id, this.area.name)
     }];
+    // Locale Calendar
+    this.ru = {
+      // Date 
+      closeText: 'Закрыть',
+      prevText: '&#x3C;Пред',
+      nextText: 'След&#x3E;',
+      currentText: 'Сегодня',
+      monthNames: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
+        'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
+      ],
+      monthNamesShort: ['Янв', 'Фев', 'Мар', 'Апр', 'Май', 'Июн',
+        'Июл', 'Авг', 'Сен', 'Окт', 'Ноя', 'Дек'
+      ],
+      dayNames: ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'],
+      dayNamesShort: ['вск', 'пнд', 'втр', 'срд', 'чтв', 'птн', 'сбт'],
+      dayNamesMin: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
+      weekHeader: 'Нед',
+      // dateFormat: 'yy-mm-dd',
+      // firstDay: 1,
+      // isRTL: false,
+      // showMonthAfterYear: false,
+      // yearSuffix: '',
+      // TIme
+      // timeOnlyTitle: 'Выберите время',
+      // timeText: 'Время',
+      // hourText: 'Часы',
+      // minuteText: 'Минуты',
+      // secondText: 'Секунды',
+      // millisecText: 'Миллисекунды',
+      // microsecText: 'Микросекунды',
+      // timezoneText: 'Часовой пояс',
+      // timeFormat: 'HH:mm',
+      // timeSuffix: '',
+      // amNames: ['AM', 'A'],
+      // pmNames: ['PM', 'P'],
+    };
   }
 
   showDialog() {
     this.dialog = true;
   }
 
-  getBids(page: number, id ?: any, fio ?: any, phone ?: any) {
+getSeconds(event: any) {
+  this.schedule.milisec = event.getTime();
+}
+
+  getBids(page: number, id ? : any, fio ? : any, phone ? : any) {
     this.bidService
       .getBids(this.pag.curr, this.searchBid.id, this.searchBid.fio, this.searchBid.phone)
       .subscribe(
@@ -90,7 +131,7 @@ export class BidComponent implements OnInit {
 
   addMaster() {
     this.bidService
-      .addMaster(this.bid.id, this.schedule.id, this.schedule.datetime)
+      .addMaster(this.bid.id, this.schedule.id, this.schedule.milisec)
       .subscribe(
         data => {
           this.resCRUD = data[0].json;
@@ -98,13 +139,14 @@ export class BidComponent implements OnInit {
         err => console.error(err),
         () => {
           this.msgs = [];
+          this.dialog = false;
           if (this.resCRUD.errors.length < 1) {
             this.getBids(this.pag.curr);
             // this.showMaster = false;
             this.msgs.push({
               severity: 'info',
               summary: 'Задание добавлено',
-              detail: this.resCRUD[0].label
+              detail: 'Задание добавлено'
             });
             this.schedule = new NewSсhedule();
           }
@@ -183,9 +225,10 @@ class NewPaginate implements Paginate {
 
 export interface Schedule {
   id ? : number;
-  datetime ? : string;
+  datetime ? : Date;
+  milisec ?: number;
 }
 
 class NewSсhedule implements Schedule {
-  constructor(public id ? : number, public datetime ? : string) {}
+  constructor(public id ? : number, public datetime ? : Date, public milisec ?: number) {}
 }

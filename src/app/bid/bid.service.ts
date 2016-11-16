@@ -40,7 +40,7 @@ export class BidService {
     });
   }
 
-  addMaster(bid_id: number | string, master_id: number | string, datetime: string) {
+  addMaster(bid_id: number | string, master_id: number | string, datetime: number | Date) {
     let body = '&bid_id=' + bid_id + '&master_id=' + master_id + '&datetime=' + datetime;
 
     return this.authHttp.post('http://crm.unicweb.com.ua/api/shedules/create ', body)

@@ -31,19 +31,18 @@
 <!-- ------------------------------------
     Modal Bids
 ------------------------------------ -->
-<p-dialog header="Мастер" [(visible)]="dialog" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getMasters(pag.curr)">
+<p-dialog header="Мастер" [(visible)]="dialog" [modal]="true" showEffect="fade" [responsive]="true" width="340" (onBeforeHide)="getBids(pag.curr)">
   <div class="ui-g form-group">
-    <div class="ui-g-12">
-      	<p-dropdown [options]="master.result" [(ngModel)]="master.complete" (onChange)="shedule.id = $event.value" [style]="{'width':'100%'}"></p-dropdown>
+    <div class="ui-g-12" style="margin-bottom:30px">
+      <p-dropdown [options]="master.result" [(ngModel)]="master.complete" (onChange)="schedule.id = $event.value" [style]="{'width':'100%'}"></p-dropdown>
     </div>
     <div class="ui-g-12" style="margin-bottom:30px">
-      <!--<p-autoComplete  [(ngModel)]="company.complete" [suggestions]="company.result" (completeMethod)="searchCompany($event)" field="name"
-        [size]="27" placeholder="Компания" [minLength]="3" (onSelect)="company.id = $event.id" required></p-autoComplete>-->
+      	<p-calendar [(ngModel)]="schedule.datetime" [showTime]="true" [inline]="true" (onSelect)="getSeconds($event)"   dateFormat="dd-mm-yy"  hourFormat="24"></p-calendar>
     </div>
   </div>
   <footer>
     <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-      <!--<button type="button" pButton (click)="createMaster()" label="Создать" [disabled]="!(user.id&&company.id)"></button>-->
+      <button type="button" pButton (click)="addMaster()" label="Создать" [disabled]="!(schedule.id&&schedule.datetime)"></button>
       <!--<button type="button" pButton (click)="updateMaster()" label="Обновить" [disabled]="!(user.id&&company.id)"></button>-->
     </div>
   </footer>

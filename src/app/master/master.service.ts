@@ -2,9 +2,7 @@ import {
   Injectable
 } from '@angular/core';
 import {
-  Http,
   Response,
-  Headers
 } from '@angular/http';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/map';
@@ -16,7 +14,7 @@ import {
 @Injectable()
 export class MasterService {
 
-  constructor(private http: Http, public authHttp: AuthHttp) {}
+  constructor( public authHttp: AuthHttp) {}
 
   getMasters(count: number) {
     let crmUrl = 'http://crm.unicweb.com.ua/api/masters',

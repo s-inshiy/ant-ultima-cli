@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.user.login, this.user.password)
       .subscribe(result => {
         if (result === true) {
-          this.router.navigate(['/dashboard/masters']);
+          this.router.navigate(['/dashboard/bids']);
         } else {
           this.loading = false;
           this.msgs = [];

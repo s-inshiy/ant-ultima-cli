@@ -92,7 +92,7 @@ import {
   ContextMenuModule
 } from 'primeng/primeng';
 // import { DataGridModule } from 'primeng/primeng';
-// import { DataListModule } from 'primeng/primeng';
+import { DataListModule } from 'primeng/primeng';
 // import { DataScrollerModule } from 'primeng/primeng';
 import {
   DataTableModule
@@ -219,7 +219,9 @@ import {
 import {
   DashboardComponent
 } from './dashboard';
+import { SettingComponent } from './setting/setting.component';
 import { ClientBidComponent } from './client-bid/client-bid.component';
+import { ClientComponent } from './client/client.component';
 
 
 // Application wide providers
@@ -256,7 +258,9 @@ type StoreType = {
     MasterDetailComponent,
     LoginComponent,
     DashboardComponent,
+    SettingComponent,
     ClientBidComponent,
+    ClientComponent,
   ],
   imports: [ // import Angular's modules
     BrowserModule,
@@ -280,7 +284,7 @@ type StoreType = {
     SharedModule,
     ContextMenuModule,
     // DataGridModule,
-    // DataListModule,
+    DataListModule,
     // DataScrollerModule,
     DataTableModule,
     DialogModule,

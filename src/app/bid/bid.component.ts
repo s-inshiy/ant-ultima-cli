@@ -108,7 +108,7 @@ getSeconds(event: any) {
           this.pag.count = data[0].json['total-count'];
         },
         err => console.error(err),
-        // () => console.log(this.items)
+        () => console.log(this.items)
       );
   }
 

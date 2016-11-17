@@ -25,15 +25,13 @@ import {
 })
 export class MasterDetailComponent implements OnInit {
 
+  // Data
   masters: any[];
   services: any[];
   areas: any[];
   events: any[];
 
-  id: number;
-  headerConfig: any;
-  ru: any;
-
+  // Classes
   masterEvent: Event = new NewMaster();
   service: Search = new SearchAreas();
   area: Search = new SearchAreas();
@@ -43,11 +41,14 @@ export class MasterDetailComponent implements OnInit {
   msgs: Message[];
   tieredItems: MenuItem[];
   areaItems: MenuItem[];
+  headerConfig: any;
+  ru: any;
 
+  id: number;
+  resCRUD: any;
   dialog: boolean;
   dialogArea: boolean;
   dialogEvent: boolean;
-  resCRUD: any;
 
   constructor(private masterDetailService: MasterDetailService, private route: ActivatedRoute, private router: Router) {}
 

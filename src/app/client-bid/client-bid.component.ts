@@ -25,6 +25,10 @@ export class ClientBidComponent implements OnInit {
 
   bids: any[];
 
+  // PrimeNG
+  msgs: Message[];
+  tieredItems: MenuItem[];
+
   constructor(private clientBidService: ClientBidService) {}
 
   ngOnInit() {

@@ -66,8 +66,6 @@ export class MasterComponent implements OnInit {
   onRowSelect(event: any) {
     this.master.id = event.data.id;
     this.master.fullName = event.data.fullName;
-    // this.area.settlement = event.data.settlement;
-    // console.log(this.area);
   }
 
   onRowUnselect($event) {
@@ -83,9 +81,9 @@ export class MasterComponent implements OnInit {
           this.pag.count = data[0].json['page-count'];
         },
         err => console.error(err),
-        () => {
-          // console.log('GET Masters');
-        }
+        // () => {
+        //   console.log('GET Masters');
+        // }
       );
   }
 

@@ -58,79 +58,101 @@ import {
 import {
   ClientBidComponent
 } from './client-bid';
-
+import {
+  ClientComponent
+} from './client';
+import {
+  SettingComponent
+} from './setting';
 
 export const routes: Routes = [{
-  path: 'dashboard',
-  component: DashboardComponent,
-  canActivate: [AuthGuard],
-  data: {
-    roles: ['admin', 'manager']
-  },
-  children: [{
-    path: '',
-    redirectTo: 'users',
-    pathMatch: 'full'
-  }, {
-    path: 'streets',
-    component: StreetComponent
-  }, {
-    path: 'areas',
-    component: AreaComponent
-  }, {
-    path: 'settlements',
-    component: SettlementComponent
-  }, {
-    path: 'regions',
-    component: RegionComponent
-  }, {
-    path: 'branches',
-    component: BranchComponent
-  }, {
-    path: 'users',
-    component: UserComponent,
+    path: 'dashboard',
+    component: DashboardComponent,
     canActivate: [AuthGuard],
     data: {
       roles: ['admin', 'manager']
     },
-  }, {
-    path: 'managers',
-    component: ManagerComponent,
-    canActivate: [AuthGuard],
-    data: {
-      roles: ['admin']
-    },
-  }, {
-    path: 'companies',
-    component: CompanyComponent
-  }, {
-    path: 'masters',
-    component: MasterComponent
-  }, {
-    path: 'services',
-    component: ServiceComponent
-  }, {
-    path: 'master/:id',
-    component: MasterDetailComponent
-  }, {
-    path: 'bids',
-    component: BidComponent,
-    canActivate: [AuthGuard],
-    data: {
-      roles: ['admin', 'manager']
-    }
-  },
-  {
-    path: 'client',
-    component: ClientBidComponent
+    //  Admin Routes
+    children: [{
+        path: '',
+        redirectTo: 'users',
+        pathMatch: 'full'
+      }, {
+        path: 'streets',
+        component: StreetComponent
+      }, {
+        path: 'areas',
+        component: AreaComponent
+      }, {
+        path: 'settlements',
+        component: SettlementComponent
+      }, {
+        path: 'regions',
+        component: RegionComponent
+      }, {
+        path: 'branches',
+        component: BranchComponent
+      }, {
+        path: 'users',
+        component: UserComponent,
+        canActivate: [AuthGuard],
+        data: {
+          roles: ['admin', 'manager']
+        },
+      }, {
+        path: 'managers',
+        component: ManagerComponent,
+        canActivate: [AuthGuard],
+        data: {
+          roles: ['admin']
+        },
+      }, {
+        path: 'companies',
+        component: CompanyComponent
+      }, {
+        path: 'masters',
+        component: MasterComponent
+      }, {
+        path: 'services',
+        component: ServiceComponent
+      }, {
+        path: 'master/:id',
+        component: MasterDetailComponent
+      }, {
+        path: 'bids',
+        component: BidComponent,
+        canActivate: [AuthGuard],
+        data: {
+          roles: ['admin', 'manager']
+        }
+      }, {
+        path: 'settings',
+        component: SettingComponent
+      },
+      //  Client Routes
+      {
+        path: 'client',
+        component: ClientComponent,
+        children: [{
+          path: '',
+          redirectTo: 'bids',
+          pathMatch: 'full'
+        }, {
+          path: 'bids',
+          component: ClientBidComponent
+        }
+        ]
+      }
+    ]
   }
-  ]
-}, {
-  path: '',
-  component: LoginComponent,
-}, {
-  path: '**',
-  component: NoContentComponent
-}];
+  //  Root Routes
+  , {
+    path: '',
+    component: LoginComponent,
+  }, {
+    path: '**',
+    component: NoContentComponent
+  }
+];
 
 export const AppRoutes: ModuleWithProviders = RouterModule.forRoot(routes);

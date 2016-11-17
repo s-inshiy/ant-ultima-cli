@@ -168,11 +168,11 @@
             <div class="profile-image"></div>
             <a id="profile-options" href="#">
               <span class="profile-name">Sergei Slesarev</span>
-              <i class="material-icons">keyboard_arrow_down</i>
+              <!--<i class="material-icons">keyboard_arrow_down</i>-->
             </a>
           </div>
-          <ul id="profile-menu" class="ultima-menu" [hidden]="profileMode!='inline'">
-            <!--<li role="menuitem">
+          <!--<ul id="profile-menu" class="ultima-menu" [hidden]="profileMode!='inline'">
+            <li role="menuitem">
               <a href="#" class="ripplelink">
                 <i class="material-icons">person</i>
                 <span>Profile</span>
@@ -189,14 +189,14 @@
                 <i class="material-icons">settings_application</i>
                 <span>Settings</span>
               </a>
-            </li>-->
+            </li>
             <li role="menuitem">
               <a href="#" class="ripplelink">
                 <i class="material-icons">power_settings_new</i>
                 <span>Виход</span>
               </a>
             </li>
-          </ul>
+          </ul>-->
           <ul id="main-menu" class="ultima-menu clearfix">
             <!-- ------------------------------------
     Menu Items User
@@ -280,6 +280,23 @@
                   </a>
                 </li>
               </ul>
+            </li>
+            <!-- ------------------------------------
+    Menu Items Settings
+------------------------------------ -->
+            <li role="menuitem">
+              <a [routerLink]="['/dashboard/settings']" [routerLinkActive]="['active-menulink']" class="ripplelink">
+                <i class="fa ui-icon-settings"></i><span>Настройки</span>
+              </a>
+            </li>
+            <!-- ------------------------------------
+    Menu Items Logout
+------------------------------------ -->
+            <li role="menuitem">
+              <a href="#" class="ripplelink">
+                <i class="material-icons">power_settings_new</i>
+                <span>Виход</span>
+              </a>
             </li>
             <!--<li role="menuitem">
               <a href="#" class="ripplelink"><i class="material-icons">palette</i><span>Themes</span><i class="material-icons">keyboard_arrow_down</i></a>

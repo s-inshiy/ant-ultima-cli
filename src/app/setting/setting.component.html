@@ -1,0 +1,213 @@
+<p-growl [value]="msgs"></p-growl>
+<div class="ui-g">
+  <!-- ------------------------------------
+    List Profile
+------------------------------------ -->
+  <div class="ui-g-12">
+    <p-dataList [value]="profiles">
+      <header>Профиль</header>
+      <template let-property>
+        <li style="padding:20px">
+          <div class="ui-g">
+            <div class="ui-g-4">Фамилия: </div>
+            <div class="ui-g-8">{{property.second_name}}</div>
+          </div>
+          <div class="ui-g">
+            <div class="ui-g-4">Имя: </div>
+            <div class="ui-g-8">{{property.first_name}}</div>
+          </div>
+          <div class="ui-g">
+            <div class="ui-g-4">Отчество: </div>
+            <div class="ui-g-8">{{property.patronymic}}</div>
+          </div>
+          <div class="ui-g">
+            <div class="ui-g-4">Телефон: </div>
+            <div class="ui-g-8">{{property.phone}}</div>
+          </div>
+          <div class="ui-g">
+            <div class="ui-g-4">Пол: </div>
+            <div class="ui-g-8">{{property.sex}}</div>
+          </div>
+          <div class="ui-g">
+            <div class="ui-g-4">День рождения: </div>
+            <div class="ui-g-8">{{property.birthday}}</div>
+          </div>
+          <div class="ui-g">
+            <div class="ui-g-4">Скайп: </div>
+            <div class="ui-g-8">{{property.skype}}</div>
+          </div>
+          <div class="ui-g">
+            <div class="ui-g-4">Другие тел. н-ра:</div>
+            <div class="ui-g-7">{{property.phones}}</div>
+            <div class="ui-g-1"> <button type="button" pButton (click)="showDialog()" icon="fa ui-icon-edit" style="float:right"></button></div>
+          </div>
+        </li>
+      </template>
+    </p-dataList>
+  </div>
+  <!-- ------------------------------------
+    Table Profile
+------------------------------------ -->
+  <!--<p-dataTable [value]="profiles" selectionMode="single" [(selection)]="selectedBid" scrollHeight="680" (onRowSelect)="$event"
+        [responsive]="true" [stacked]="stacked">
+        <header>Профиль</header>
+        <p-column field="second_name" header="Фамилия" [filter]="false" [sortable]="false"></p-column>
+        <p-column field="first_name" header="Имя" [filter]="false" [sortable]="false"></p-column>
+        <p-column field="patronymic" header="Отчество" [filter]="false" [sortable]="false"></p-column>
+        <p-column field="phone" header="Телефон" [filter]="false" [sortable]="false"></p-column>
+        <p-column field="sex" header="Пол" [filter]="false" [sortable]="false"></p-column>
+        <p-column field="birthday" header="День рождения" [filter]="false" [sortable]="false"></p-column>
+        <p-column field="skype" header="Скайп" [filter]="false" [sortable]="false"></p-column>
+        <p-column field="phones" header="Другие тел. н-ра" [filter]="false" [sortable]="false"></p-column>
+        <footer>
+          <div class="ui-helper-clearfix" style="width:100%; margin: 8px 0;">
+            <button type="button" pButton style="float:right" (click)="showDialog()" label="Редактировать"></button>
+          </div>
+        </footer>
+      </p-dataTable>-->
+  <!-- ------------------------------------
+    Modal Profile
+------------------------------------ -->
+  <p-dialog header="Профиль" [(visible)]="dialog" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getProfile()">
+    <div class="ui-g form-group">
+      <div class="ui-g-12" style="margin-bottom:30px">
+        <span class="md-inputfield">
+                <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="profile.secondName">
+                <label>Фамилия</label>
+            </span>
+      </div>
+      <div class="ui-g-12" style="margin-bottom:30px">
+        <span class="md-inputfield">
+                <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="profile.firstName">
+                <label>Имя</label>
+            </span>
+      </div>
+      <div class="ui-g-12" style="margin-bottom:30px">
+        <span class="md-inputfield">
+                <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="profile.patronymic">
+                <label>Отчество</label>
+            </span>
+      </div>
+      <div class="ui-g-12" style="margin-bottom:30px">
+        <span class="md-inputfield">
+                   <p-inputMask mask="+380999999999" [size]="27" placeholder="Телефон" [(ngModel)]="profile.phone"></p-inputMask>
+            </span>
+      </div>
+    </div>
+    <footer>
+      <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+        <button type="button" pButton (click)="updateProfile()" label="Сохранить" [disabled]="!(profile.secondName||profile.firstName||profile.patronymic||profile.phone)"></button>
+      </div>
+    </footer>
+  </p-dialog>
+  <!-- ------------------------------------
+    List Account
+------------------------------------ -->
+  <div class="ui-g-12">
+    <p-dataList [value]="accounts">
+      <header>Аккаунт</header>
+      <template let-acc>
+        <li style="padding:20px">
+          <div class="ui-g">
+            <div class="ui-g-4">Логин: </div>
+            <div class="ui-g-8">{{acc.username}}</div>
+          </div>
+          <div class="ui-g">
+            <div class="ui-g-4">Електронная почта: </div>
+            <div class="ui-g-8">{{acc.email}}</div>
+          </div>
+          <div class="ui-g">
+            <div class="ui-g-4">Адрес:</div>
+            <div class="ui-g-7">{{acc.default_address}}</div>
+            <div class="ui-g-1"> <button type="button" pButton (click)="showDialogAcc()" icon="fa ui-icon-edit" style="float:right"></button></div>
+          </div>
+        </li>
+      </template>
+    </p-dataList>
+  </div>
+  <!-- ------------------------------------
+    Modal Account
+------------------------------------ -->
+  <p-dialog header="Профиль" [(visible)]="dialogAcc" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getAccount()">
+    <div class="ui-g form-group">
+      <div class="ui-g-12" style="margin-bottom:30px">
+        <span class="md-inputfield">
+                <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="acc.username">
+                <label>Фамилия</label>
+            </span>
+      </div>
+      <div class="ui-g-12" style="margin-bottom:30px">
+        <span class="md-inputfield">
+                <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="acc.email">
+                <label>Имя</label>
+            </span>
+      </div>
+      <div class="ui-g-12" style="margin-bottom:30px">
+        <span class="md-inputfield">
+                <input type="password" pInputText [size]="27" autocomplete="off" [(ngModel)]="acc.password">
+                <label>Пароль</label>
+            </span>
+      </div>
+    </div>
+    <footer>
+      <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+        <button type="button" pButton (click)="updateAccount()" label="Сохранить" [disabled]="!(acc.username||acc.email||acc.password)"></button>
+      </div>
+    </footer>
+  </p-dialog>
+  <!-- ------------------------------------
+    List Phones
+------------------------------------ -->
+  <div class="ui-g-12">
+    <p-panel header="Дополнительные телефонные номера" [collapsed]="true" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+      <p-dataTable [value]="phones" selectionMode="single" [(selection)]="selectedBid" scrollHeight="680" (onRowSelect)="$event"
+        [responsive]="true" [stacked]="stacked">
+        <header>Телефоны</header>
+        <p-column field="id" header="№, п/п" [filter]="false" [sortable]="false"></p-column>
+        <p-column field="phone" header="Телефоны" [filter]="false" [sortable]="false"></p-column>
+        <footer>
+          <div class="ui-helper-clearfix" style="width:100%; margin: 8px 0;">
+            <button type="button" pButton style="float:right" (click)="showDialogPhone()" label="Добавить"></button>
+          </div>
+        </footer>
+      </p-dataTable>
+    </p-panel>
+  </div>
+  <!-- ------------------------------------
+    Modal Phones
+------------------------------------ -->
+  <p-dialog header="Населенный пункт" [(visible)]="dialogPhone" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getPhones()">
+    <div class="ui-g form-group">
+      <div class="ui-g-12" style="margin-bottom:30px">
+        <span class="md-inputfield">
+                   <p-inputMask mask="+380999999999" [size]="27" placeholder="Телефон" [(ngModel)]="phone"></p-inputMask>
+            </span>
+      </div>
+    </div>
+    <footer>
+      <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+        <button type="button" pButton (click)="createPhone()" label="Создать" [disabled]="!(phone)"></button>
+      </div>
+    </footer>
+  </p-dialog>
+  <!-- ------------------------------------
+    Table Address
+------------------------------------ -->
+  <div class="ui-g-12">
+    <p-panel header="Дополнительные адреса" [collapsed]="true" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+      <p-dataTable [value]="addresses" selectionMode="single" [(selection)]="selectedBid" scrollHeight="680" (onRowSelect)="$event"
+        [responsive]="true" [stacked]="stacked">
+        <header>Профиль</header>
+        <p-column field="area" header="Город" [filter]="false" [sortable]="false"></p-column>
+        <p-column field="street" header="Улица" [filter]="false" [sortable]="false"></p-column>
+        <p-column field="house" header="Дом" [filter]="false" [sortable]="false"></p-column>
+        <p-column field="description" header="Описание" [filter]="false" [sortable]="false"></p-column>
+        <footer>
+          <div class="ui-helper-clearfix" style="width:100%; margin: 8px 0;">
+            <button type="button" pButton style="float:right" (click)="showDialog()" label="Добавить"></button>
+          </div>
+        </footer>
+      </p-dataTable>
+    </p-panel>
+  </div>
+</div>

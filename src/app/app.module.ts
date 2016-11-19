@@ -220,8 +220,8 @@ import {
   DashboardComponent
 } from './dashboard';
 import { SettingComponent } from './setting/setting.component';
-import { ClientBidComponent } from './client-bid/client-bid.component';
-import { ClientComponent } from './client/client.component';
+// import { ClientBidComponent } from './client-bid/client-bid.component';
+// import { ClientComponent } from './client/client.component';
 
 
 // Application wide providers
@@ -259,8 +259,8 @@ type StoreType = {
     LoginComponent,
     DashboardComponent,
     SettingComponent,
-    ClientBidComponent,
-    ClientComponent,
+    // ClientBidComponent,
+    // ClientComponent,
   ],
   imports: [ // import Angular's modules
     BrowserModule,

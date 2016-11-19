@@ -68,7 +68,7 @@
   <!-- ------------------------------------
     Modal Profile
 ------------------------------------ -->
-  <p-dialog header="Профиль" [(visible)]="dialog" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getProfile()">
+  <p-dialog header="Профиль" width="340" [(visible)]="dialog" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getProfile()">
     <div class="ui-g form-group">
       <div class="ui-g-12" style="margin-bottom:30px">
         <span class="md-inputfield">
@@ -92,6 +92,19 @@
         <span class="md-inputfield">
                    <p-inputMask mask="+380999999999" [size]="27" placeholder="Телефон" [(ngModel)]="profile.phone"></p-inputMask>
             </span>
+      </div>
+      <div class="ui-g-12" style="margin-bottom:30px">
+        <span class="md-inputfield">
+                <input type="text" pInputText  id="skype" [size]="27" [(ngModel)]="profile.skype">
+                <label>Скайп</label>
+            </span>
+      </div>
+      <div class="ui-g-12" style="margin-bottom:30px">
+        <span class="md-inputfield">
+      <label>Дата рождения</label>  
+      <p-calendar [(ngModel)]="profile.birthday" [showTime]="true" [inline]="true" (onSelect)="getSeconds($event)" dateFormat="dd-mm-yy"
+        hourFormat="24"></p-calendar>
+                </span>
       </div>
     </div>
     <footer>
@@ -119,7 +132,7 @@
           <div class="ui-g">
             <div class="ui-g-4">Адрес:</div>
             <div class="ui-g-7">{{acc.default_address}}</div>
-            <div class="ui-g-1"> <button type="button" pButton (click)="showDialogAcc()" icon="fa ui-icon-edit" style="float:right"></button></div>
+            <div class="ui-g-1"> <button type="button" pButton (click)="showAccount()" icon="fa ui-icon-edit" style="float:right"></button></div>
           </div>
         </li>
       </template>
@@ -128,40 +141,40 @@
   <!-- ------------------------------------
     Modal Account
 ------------------------------------ -->
-  <p-dialog header="Профиль" [(visible)]="dialogAcc" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getAccount()">
+  <p-dialog header="Аккаунт" [(visible)]="dialogAccount" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getAccount()">
     <div class="ui-g form-group">
       <div class="ui-g-12" style="margin-bottom:30px">
         <span class="md-inputfield">
-                <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="acc.username">
-                <label>Фамилия</label>
+                <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="account.username">
+                <label>Логин</label>
             </span>
       </div>
       <div class="ui-g-12" style="margin-bottom:30px">
         <span class="md-inputfield">
-                <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="acc.email">
-                <label>Имя</label>
+                <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="account.email">
+                <label>Електронная почта</label>
             </span>
       </div>
       <div class="ui-g-12" style="margin-bottom:30px">
         <span class="md-inputfield">
-                <input type="password" pInputText [size]="27" autocomplete="off" [(ngModel)]="acc.password">
+                <input type="password" pInputText [size]="27" autocomplete="off" [(ngModel)]="account.password">
                 <label>Пароль</label>
             </span>
       </div>
     </div>
     <footer>
       <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-        <button type="button" pButton (click)="updateAccount()" label="Сохранить" [disabled]="!(acc.username||acc.email||acc.password)"></button>
+        <button type="button" pButton (click)="updateAccount()" label="Сохранить" [disabled]="!(account.username||account.email||account.password)"></button>
       </div>
     </footer>
   </p-dialog>
   <!-- ------------------------------------
-    List Phones
+    Table Phones
 ------------------------------------ -->
   <div class="ui-g-12">
-    <p-panel header="Дополнительные телефонные номера" [collapsed]="true" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+    <p-panel header="Телефонные номера" [collapsed]="true" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
       <p-dataTable [value]="phones" selectionMode="single" [(selection)]="selectedBid" scrollHeight="680" (onRowSelect)="$event"
-        [responsive]="true" [stacked]="stacked">
+        [responsive]="true" [stacked]="stacked" [contextMenu]="forPhone">
         <header>Телефоны</header>
         <p-column field="id" header="№, п/п" [filter]="false" [sortable]="false"></p-column>
         <p-column field="phone" header="Телефоны" [filter]="false" [sortable]="false"></p-column>
@@ -173,10 +186,11 @@
       </p-dataTable>
     </p-panel>
   </div>
+  <p-contextMenu #forPhone [model]="tieredAddress" [style]="{'width':'12.5em'}"></p-contextMenu>
   <!-- ------------------------------------
     Modal Phones
 ------------------------------------ -->
-  <p-dialog header="Населенный пункт" [(visible)]="dialogPhone" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getPhones()">
+  <p-dialog header="Телефон" [(visible)]="dialogPhone" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getPhones()">
     <div class="ui-g form-group">
       <div class="ui-g-12" style="margin-bottom:30px">
         <span class="md-inputfield">
@@ -194,9 +208,9 @@
     Table Address
 ------------------------------------ -->
   <div class="ui-g-12">
-    <p-panel header="Дополнительные адреса" [collapsed]="true" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+    <p-panel header="Адреса" [collapsed]="true" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
       <p-dataTable [value]="addresses" selectionMode="single" [(selection)]="selectedBid" scrollHeight="680" (onRowSelect)="$event"
-        [responsive]="true" [stacked]="stacked">
+        [responsive]="true" [stacked]="stacked" [contextMenu]="forAddress">
         <header>Профиль</header>
         <p-column field="area" header="Город" [filter]="false" [sortable]="false"></p-column>
         <p-column field="street" header="Улица" [filter]="false" [sortable]="false"></p-column>
@@ -204,10 +218,40 @@
         <p-column field="description" header="Описание" [filter]="false" [sortable]="false"></p-column>
         <footer>
           <div class="ui-helper-clearfix" style="width:100%; margin: 8px 0;">
-            <button type="button" pButton style="float:right" (click)="showDialog()" label="Добавить"></button>
+            <button type="button" pButton style="float:right" (click)="showAddress()" label="Добавить"></button>
           </div>
         </footer>
       </p-dataTable>
     </p-panel>
   </div>
+  <p-contextMenu #forAddress [model]="tieredAddress" [style]="{'width':'12.5em'}"></p-contextMenu>
+  <!-- ------------------------------------
+    Modal Address
+------------------------------------ -->
+  <p-dialog header="Адрес" [(visible)]="dialogAddress" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getAddress()">
+    <div class="ui-g form-group">
+      <div class="ui-g-12" style="margin-bottom:30px">
+        <p-autoComplete [(ngModel)]="street.complete" [suggestions]="street.result" (completeMethod)="searchStreet($event)" field="name"
+          [size]="27" placeholder="Поиск улицы" [minLength]="3" (onSelect)="street.id = $event.id" required></p-autoComplete>
+      </div>
+      <div class="ui-g-12" style="margin-bottom:30px">
+        <span class="md-inputfield">
+                <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="street.house">
+                <label>Дом</label>
+            </span>
+      </div>
+      <div class="ui-g-12" style="margin-bottom:30px">
+        <p-checkbox [(ngModel)]="street.isDefault" binary="true" label="По умолчанию"></p-checkbox>
+      </div>
+      <div class="ui-g-12" style="margin-bottom:30px">
+        <textarea rows="5" cols="27" pInputTextarea placeholder="Описание" [(ngModel)]="street.description"></textarea>
+      </div>
+    </div>
+    <footer>
+      <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+        <button type="button" pButton (click)="createAddress()" label="Создать" [disabled]="!(street.id&&street.house)"></button>
+        <!--<button type="button" pButton (click)="updateArea()" label="Обновить" [disabled]="!(street.id)"></button>-->
+      </div>
+    </footer>
+  </p-dialog>
 </div>

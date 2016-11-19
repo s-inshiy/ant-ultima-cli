@@ -56,12 +56,6 @@ import {
   AuthGuard
 } from './guard';
 import {
-  ClientBidComponent
-} from './client-bid';
-import {
-  ClientComponent
-} from './client';
-import {
   SettingComponent
 } from './setting';
 
@@ -128,20 +122,6 @@ export const routes: Routes = [{
       }, {
         path: 'settings',
         component: SettingComponent
-      },
-      //  Client Routes
-      {
-        path: 'client',
-        component: ClientComponent,
-        children: [{
-          path: '',
-          redirectTo: 'bids',
-          pathMatch: 'full'
-        }, {
-          path: 'bids',
-          component: ClientBidComponent
-        }
-        ]
       }
     ]
   }

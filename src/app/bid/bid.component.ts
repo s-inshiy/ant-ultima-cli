@@ -69,25 +69,7 @@ export class BidComponent implements OnInit {
       dayNames: ['воскресенье', 'понедельник', 'вторник', 'среда', 'четверг', 'пятница', 'суббота'],
       dayNamesShort: ['вск', 'пнд', 'втр', 'срд', 'чтв', 'птн', 'сбт'],
       dayNamesMin: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
-      weekHeader: 'Нед',
-      // dateFormat: 'yy-mm-dd',
-      // firstDay: 1,
-      // isRTL: false,
-      // showMonthAfterYear: false,
-      // yearSuffix: '',
-      // TIme
-      // timeOnlyTitle: 'Выберите время',
-      // timeText: 'Время',
-      // hourText: 'Часы',
-      // minuteText: 'Минуты',
-      // secondText: 'Секунды',
-      // millisecText: 'Миллисекунды',
-      // microsecText: 'Микросекунды',
-      // timezoneText: 'Часовой пояс',
-      // timeFormat: 'HH:mm',
-      // timeSuffix: '',
-      // amNames: ['AM', 'A'],
-      // pmNames: ['PM', 'P'],
+      weekHeader: 'Нед'
     };
   }
 

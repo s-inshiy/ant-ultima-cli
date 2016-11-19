@@ -38,7 +38,7 @@ export class SettingService {
 
   createAddress(street_id = '' , house = '', is_default: boolean, description = '') {
     let createUrl = 'http://crm.unicweb.com.ua/api/addresses/create',
-      body = '&street_id=' + street_id + '&house=' + house + '&is_default=' + is_default + '&description=' + description + '&user_id=8';
+      body = '&street_id=' + street_id + '&house=' + house + '&is_default=' + is_default + '&description=' + description;
 
     return this.authHttp.post(createUrl, body)
       .map((res: Response) => {
@@ -119,10 +119,10 @@ export class SettingService {
     });
   }
 
-  updateProfile(firstName = '', secondName = '', patronymic = '', phone = '') {
+  updateProfile(firstName = '', secondName = '', patronymic = '', phone = '', skype = '', birthday = '') {
     let profileUrl = 'http://crm.unicweb.com.ua/api/settings/profile',
       body = '&first_name=' + firstName + '&second_name=' + secondName +
-       '&patronymic=' + patronymic + '&phone=' + encodeURIComponent(phone);
+       '&patronymic=' + patronymic + '&phone=' + encodeURIComponent(phone) + '&skype=' + skype + '&birthday=' + birthday;
 
     return this.authHttp.post(profileUrl, body)
       .map((res: Response) => {

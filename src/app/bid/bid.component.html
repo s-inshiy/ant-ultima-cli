@@ -8,11 +8,6 @@
       <p-dataTable [value]="items" selectionMode="single" [(selection)]="area" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
         [responsive]="true" [contextMenu]="forBids">
         <header>Заявки</header>
-        <footer>
-          <!--<div class="ui-helper-clearfix" style="width:100%; margin: 8px 0">
-            <button type="button" pButton style="float:right" (click)="showDialog()" multiple="true" dropdown="true" label="Добавить"></button>
-          </div>-->
-        </footer>
         <p-column field="id" header="№, п/п" [filter]="false"></p-column>
         <p-column field="fio" header="ФИО" [filter]="false" [sortable]="false"></p-column>
         <p-column field="address" header="Адрес" [filter]="false" [sortable]="false"></p-column>
@@ -23,6 +18,11 @@
         <p-column field="planned" header="Запланировано на" [filter]="false" [sortable]="false"></p-column>
         <p-column field="contact_person" header="Конт. лицо" [filter]="false" [sortable]="false"></p-column>
         <p-column field="description" header="Описание" [filter]="false" [sortable]="false"></p-column>
+        <footer>
+          <div class="ui-helper-clearfix" style="width:100%; margin: 8px 0;">
+            <button type="button" pButton style="float:right" (click)="showBid()" label="Добавить"></button>
+          </div>
+        </footer>
       </p-dataTable>
       <p-paginator rows="20" totalRecords="{{pag.count}}" pageLinkSize="10" (onPageChange)="paginate($event)"></p-paginator>
     </div>
@@ -38,7 +38,8 @@
       <p-dropdown [options]="master.result" [(ngModel)]="master.complete" (onChange)="schedule.id = $event.value" [style]="{'width':'100%'}"></p-dropdown>
     </div>
     <div class="ui-g-12" style="margin-bottom:30px">
-      	<p-calendar [(ngModel)]="schedule.datetime" [showTime]="true" [inline]="true" (onSelect)="getSeconds($event)"   dateFormat="dd-mm-yy"  hourFormat="24"></p-calendar>
+      <p-calendar [(ngModel)]="schedule.datetime" [showTime]="true" [inline]="true" (onSelect)="getSeconds($event)" dateFormat="dd-mm-yy"
+        hourFormat="24"></p-calendar>
     </div>
   </div>
   <footer>

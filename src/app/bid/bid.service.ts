@@ -2,9 +2,7 @@ import {
   Injectable
 } from '@angular/core';
 import {
-  // Http,
-  Response,
-  // Headers
+  Response
 } from '@angular/http';
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/map';
@@ -17,6 +15,19 @@ import {
 export class BidService {
 
   constructor(public authHttp: AuthHttp) {}
+
+  createBid(address_id = '', service_id = '', phone = '', contact_person = '', description = '') {
+    let bidsUrl = 'http://crm.unicweb.com.ua/api/bids/create',
+      body = '&address_id=' + address_id + '&service_id=' + service_id + '&phone=' + encodeURIComponent(phone) + '&contact_person=' +
+      contact_person + '&description=' + description;
+
+    return this.authHttp.post(bidsUrl, body)
+      .map((res: Response) => {
+        return [{
+          json: res.json()
+        }];
+      });
+  }
 
   getBids(page: number, id: any = '', fio: any = '', phone: any = '') {
     let bidsUrl = 'http://crm.unicweb.com.ua/api/bids/',

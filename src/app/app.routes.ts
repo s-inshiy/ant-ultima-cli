@@ -64,66 +64,95 @@ export const routes: Routes = [{
     component: DashboardComponent,
     canActivate: [AuthGuard],
     data: {
-      roles: ['admin', 'manager']
+      roles: ['admin', 'manager', 'client']
     },
     //  Admin Routes
     children: [{
-        path: '',
-        redirectTo: 'users',
-        pathMatch: 'full'
-      }, {
-        path: 'streets',
-        component: StreetComponent
-      }, {
-        path: 'areas',
-        component: AreaComponent
-      }, {
-        path: 'settlements',
-        component: SettlementComponent
-      }, {
-        path: 'regions',
-        component: RegionComponent
-      }, {
-        path: 'branches',
-        component: BranchComponent
-      }, {
-        path: 'users',
-        component: UserComponent,
-        canActivate: [AuthGuard],
-        data: {
-          roles: ['admin', 'manager']
-        },
-      }, {
-        path: 'managers',
-        component: ManagerComponent,
-        canActivate: [AuthGuard],
-        data: {
-          roles: ['admin']
-        },
-      }, {
-        path: 'companies',
-        component: CompanyComponent
-      }, {
-        path: 'masters',
-        component: MasterComponent
-      }, {
-        path: 'services',
-        component: ServiceComponent
-      }, {
-        path: 'master/:id',
-        component: MasterDetailComponent
-      }, {
-        path: 'bids',
-        component: BidComponent,
-        canActivate: [AuthGuard],
-        data: {
-          roles: ['admin', 'manager']
-        }
-      }, {
-        path: 'settings',
-        component: SettingComponent
+      path: '',
+      redirectTo: 'users',
+      pathMatch: 'full'
+    }, {
+      path: 'streets',
+      component: StreetComponent,
+      data: {
+        roles: ['admin', 'manager']
+      },
+    }, {
+      path: 'areas',
+      component: AreaComponent,
+      data: {
+        roles: ['admin', 'manager']
+      },
+    }, {
+      path: 'settlements',
+      component: SettlementComponent,
+      data: {
+        roles: ['admin', 'manager']
+      },
+    }, {
+      path: 'regions',
+      component: RegionComponent,
+      data: {
+        roles: ['admin', 'manager']
+      },
+    }, {
+      path: 'branches',
+      component: BranchComponent,
+      data: {
+        roles: ['admin', 'manager']
+      },
+    }, {
+      path: 'users',
+      component: UserComponent,
+      canActivate: [AuthGuard],
+      data: {
+        roles: ['admin', 'manager']
+      },
+    }, {
+      path: 'managers',
+      component: ManagerComponent,
+      canActivate: [AuthGuard],
+      data: {
+        roles: ['admin']
+      },
+    }, {
+      path: 'companies',
+      component: CompanyComponent,
+      data: {
+        roles: ['admin', 'manager']
+      },
+    }, {
+      path: 'masters',
+      component: MasterComponent,
+      data: {
+        roles: ['admin', 'manager']
+      },
+    }, {
+      path: 'services',
+      component: ServiceComponent,
+      data: {
+        roles: ['admin', 'manager']
+      },
+    }, {
+      path: 'master/:id',
+      component: MasterDetailComponent,
+      data: {
+        roles: ['admin', 'manager']
+      },
+    }, {
+      path: 'bids',
+      component: BidComponent,
+      canActivate: [AuthGuard],
+      data: {
+        roles: ['admin', 'manager', 'client']
       }
-    ]
+    }, {
+      path: 'settings',
+      component: SettingComponent,
+      data: {
+        roles: ['admin', 'manager', 'client']
+      },
+    }]
   }
   //  Root Routes
   , {

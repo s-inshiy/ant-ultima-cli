@@ -8,7 +8,7 @@
       <p-dataTable [value]="items" selectionMode="single" [(selection)]="area" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
         [responsive]="true" [contextMenu]="forBids">
         <header>Заявки</header>
-        <p-column field="id" header="№, п/п" [filter]="false"></p-column>
+        <!--<p-column field="id" header="№, п/п" [filter]="false"></p-column>-->
         <p-column field="fio" header="ФИО" [filter]="false" [sortable]="false"></p-column>
         <p-column field="address" header="Адрес" [filter]="false" [sortable]="false"></p-column>
         <p-column field="service" header="Тип работ" [filter]="false" [sortable]="false"></p-column>
@@ -30,14 +30,14 @@
 </div>
 <p-contextMenu #forBids [model]="tieredItems" [style]="{'width':'12.5em'}"></p-contextMenu>
 <!-- ------------------------------------
-    Modal Bids
+    Modal Master
 ------------------------------------ -->
 <p-dialog header="Мастер" [(visible)]="dialog" [modal]="true" showEffect="fade" [responsive]="true" width="340" (onBeforeHide)="getBids(pag.curr)">
   <div class="ui-g form-group">
-    <div class="ui-g-12" style="margin-bottom:30px">
+    <div class="ui-g-12" style="margin-bottom:20px">
       <p-dropdown [options]="master.result" [(ngModel)]="master.complete" (onChange)="schedule.id = $event.value" [style]="{'width':'100%'}"></p-dropdown>
     </div>
-    <div class="ui-g-12" style="margin-bottom:30px">
+    <div class="ui-g-12" style="margin-bottom:20px">
       <p-calendar [(ngModel)]="schedule.datetime" [showTime]="true" [inline]="true" (onSelect)="getSeconds($event)" dateFormat="dd-mm-yy"
         hourFormat="24"></p-calendar>
     </div>
@@ -45,6 +45,38 @@
   <footer>
     <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
       <button type="button" pButton (click)="addMaster()" label="Создать" [disabled]="!(schedule.id&&schedule.datetime)"></button>
+      <!--<button type="button" pButton (click)="updateMaster()" label="Обновить" [disabled]="!(user.id&&company.id)"></button>-->
+    </div>
+  </footer>
+</p-dialog>
+<!-- ------------------------------------
+    Modal Bid
+------------------------------------ -->
+<p-dialog header="Заявка" [(visible)]="dialogBid" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getBids(pag.curr)">
+  <div class="ui-g form-group">
+    <div class="ui-g-12" style="margin-bottom:20px">
+      <p-dropdown [options]="address.result" (onChange)="address.id = $event.value" [style]="{'width':'100%'}"></p-dropdown>
+    </div>
+    <div class="ui-g-12" style="margin-bottom:20px">
+      <p-autoComplete [(ngModel)]="work.complete" [suggestions]="work.result" (completeMethod)="searchWork($event)" field="name"
+        [size]="27" placeholder="Поиск работы" [minLength]="3" (onSelect)="work.id = $event.id" required></p-autoComplete>
+    </div>
+    <div class="ui-g-12" style="margin-bottom:20px">
+      <p-dropdown [options]="phone.result" [(ngModel)]="phone.complete" (onChange)="phone.id = $event.value " [style]="{'width':'100%'}"></p-dropdown>
+    </div>
+    <div class="ui-g-12" style="margin-bottom:20px">
+      <span class="md-inputfield">
+                <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="bid.contact">
+                <label>Контактное лицо</label>
+            </span>
+    </div>
+    <div class="ui-g-12" style="margin-bottom:20px">
+      <textarea rows="5" cols="27" pInputTextarea placeholder="Описание" [(ngModel)]="bid.description"></textarea>
+    </div>
+  </div>
+  <footer>
+    <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+      <button type="button" pButton (click)="createBid()" label="Создать" [disabled]="!(address.id&&work.id&&phone.id)"></button>
       <!--<button type="button" pButton (click)="updateMaster()" label="Обновить" [disabled]="!(user.id&&company.id)"></button>-->
     </div>
   </footer>

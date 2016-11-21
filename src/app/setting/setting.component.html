@@ -70,36 +70,36 @@
 ------------------------------------ -->
   <p-dialog header="Профиль" width="340" [(visible)]="dialog" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getProfile()">
     <div class="ui-g form-group">
-      <div class="ui-g-12" style="margin-bottom:30px">
+      <div class="ui-g-12" style="margin-bottom:20px">
         <span class="md-inputfield">
                 <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="profile.secondName">
                 <label>Фамилия</label>
             </span>
       </div>
-      <div class="ui-g-12" style="margin-bottom:30px">
+      <div class="ui-g-12" style="margin-bottom:20px">
         <span class="md-inputfield">
                 <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="profile.firstName">
                 <label>Имя</label>
             </span>
       </div>
-      <div class="ui-g-12" style="margin-bottom:30px">
+      <div class="ui-g-12" style="margin-bottom:20px">
         <span class="md-inputfield">
                 <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="profile.patronymic">
                 <label>Отчество</label>
             </span>
       </div>
-      <div class="ui-g-12" style="margin-bottom:30px">
+      <div class="ui-g-12" style="margin-bottom:20px">
         <span class="md-inputfield">
                    <p-inputMask mask="+380999999999" [size]="27" placeholder="Телефон" [(ngModel)]="profile.phone"></p-inputMask>
             </span>
       </div>
-      <div class="ui-g-12" style="margin-bottom:30px">
+      <div class="ui-g-12" style="margin-bottom:20px">
         <span class="md-inputfield">
                 <input type="text" pInputText  id="skype" [size]="27" [(ngModel)]="profile.skype">
                 <label>Скайп</label>
             </span>
       </div>
-      <div class="ui-g-12" style="margin-bottom:30px">
+      <div class="ui-g-12" style="margin-bottom:20px">
         <span class="md-inputfield">
       <label>Дата рождения</label>  
       <p-calendar [(ngModel)]="profile.birthday" [showTime]="true" [inline]="true" (onSelect)="getSeconds($event)" dateFormat="dd-mm-yy"

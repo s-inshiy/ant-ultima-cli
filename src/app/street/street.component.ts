@@ -15,8 +15,6 @@ import {
   MenuItem
 } from 'primeng/primeng';
 
-// import { JwtHelper } from 'angular2-jwt';
-
 @Component({
   selector: 'app-street',
   providers: [
@@ -31,8 +29,6 @@ export class StreetComponent implements OnInit {
   search: Search = new SearchAreas();
   street: Street = new NewStreet();
   pag: Paginate = new NewPaginate();
-
-  // jwtHelper: JwtHelper = new JwtHelper();
 
   // PrimeNG
   items: any;
@@ -57,19 +53,7 @@ export class StreetComponent implements OnInit {
       command: (event) => this.showDialog()
     }];
 
-    // this.useJwtHelper();
   }
-
-
-// useJwtHelper() {
-//   let token = localStorage.getItem('id_token');
-
-//   console.log(
-//     this.jwtHelper.decodeToken(token),
-//     this.jwtHelper.getTokenExpirationDate(token),
-//     this.jwtHelper.isTokenExpired(token)
-//   );
-// }
 
   getStreets(page: number) {
     this.streetService
@@ -146,7 +130,7 @@ export class StreetComponent implements OnInit {
           // console.log(this.results);
         },
         err => console.error(err),
-        () => console.log(this.search.result)
+        // () => console.log(this.search.result)
       );
   }
 

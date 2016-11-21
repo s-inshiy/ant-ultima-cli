@@ -29,13 +29,13 @@
   <div class="ui-g form-group">
     <div class="ui-g-12">
       <span class="md-inputfield">
-                <input type="text" pInputText  id="name" [size]="30" [(ngModel)]="settlement.name">
+                <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="settlement.name">
                 <label>Имя</label>
             </span>
     </div>
-    <div class="ui-g-12" style="margin-bottom:30px">
+    <div class="ui-g-12" style="margin-bottom:20px">
       <p-autoComplete  [(ngModel)]="search.complete" [suggestions]="search.result" (completeMethod)="searchRegion($event)" field="name"
-        [size]="30" placeholder="Регион" [minLength]="3" (onSelect)="settlement.region = $event.id" required></p-autoComplete>
+        [size]="27" placeholder="Регион" [minLength]="3" (onSelect)="settlement.region = $event.id" required></p-autoComplete>
     </div>
   </div>
   <footer>

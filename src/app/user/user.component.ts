@@ -46,6 +46,10 @@ export class UserComponent implements OnInit {
     this.getUsers(this.pag.curr);
     this.userRoles = [];
     this.userRoles.push({
+      label: 'Выберите роль',
+      value: null
+    });
+    this.userRoles.push({
       label: 'Администратор',
       value: 'admin'
     });
@@ -90,7 +94,6 @@ export class UserComponent implements OnInit {
     this.user.id = event.data.id;
     this.user.secondName = event.data.second_name;
     this.user.role = event.data.role;
-    console.log(this.user);
   }
 
   onRowUnselect($event) {
@@ -175,11 +178,13 @@ export class UserComponent implements OnInit {
         err => console.error(err),
         () => {
           this.getUsers(this.pag.curr);
-          this.dialog = false;
+          this.dialogRole = false;
           this.msgs = [];
           this.msgs.push({
             severity: 'info',
-            summary: 'Роль обновленна'
+            summary: 'Роль обновленна',
+            // detail: this.user.role
+            detail: 'Роль обновленна'
           });
         }
       );

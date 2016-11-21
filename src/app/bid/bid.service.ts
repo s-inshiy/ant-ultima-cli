@@ -16,10 +16,10 @@ export class BidService {
 
   constructor(public authHttp: AuthHttp) {}
 
-  createBid(address_id = '', service_id = '', phone = '', contact_person = '', description = '') {
+  createBid(addressId = '', serviceId = '', phone = '', contact = '', description = '') {
     let bidsUrl = 'http://crm.unicweb.com.ua/api/bids/create',
-      body = '&address_id=' + address_id + '&service_id=' + service_id + '&phone=' + encodeURIComponent(phone) + '&contact_person=' +
-      contact_person + '&description=' + description;
+      body = '&address_id=' + addressId + '&service_id=' + serviceId + '&phone=' + encodeURIComponent(phone) + '&contact_person=' +
+      contact + '&description=' + description;
 
     return this.authHttp.post(bidsUrl, body)
       .map((res: Response) => {
@@ -74,16 +74,48 @@ export class BidService {
       });
   }
 
-  createClientBid(address_id: any, service_id: any) {
-    let createBids = 'http://crm.unicweb.com.ua/api/bids/delete',
-      body = 'address_id=' + address_id + 'service_id=' + service_id;
+  searchWork(query: string) {
+    let baseUrl = 'http://crm.unicweb.com.ua/ajax/search/worktype',
+      queryString = `?q=${query}`;
 
-    return this.authHttp.post(createBids, body)
-      .map((res: Response) => {
-        return [{
-          json: res.json()
-        }];
-      });
+    return this.authHttp.get(baseUrl + queryString).map((res: Response) => {
+      return [{
+        search: res.json()
+      }];
+    });
+  }
+
+  // Modal Bid
+
+  getAddress() {
+    let crmUrl = 'http://crm.unicweb.com.ua/api/addresses';
+
+    return this.authHttp.get(crmUrl).map((res: Response) => {
+      return [{
+        json: res.json()
+      }];
+    });
+  }
+
+  searchStreet(query: string) {
+    let areaUrl = 'http://crm.unicweb.com.ua/ajax/search/streets',
+      areaQuery = `?q=${query}`;
+
+    return this.authHttp.get(areaUrl + areaQuery).map((res: Response) => {
+      return [{
+        search: res.json()
+      }];
+    });
+  }
+
+  getPhone() {
+    let phoneUrl = 'http://crm.unicweb.com.ua/api/phones';
+
+    return this.authHttp.get(phoneUrl).map((res: Response) => {
+      return [{
+        json: res.json()
+      }];
+    });
   }
 
 }

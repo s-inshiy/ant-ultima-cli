@@ -16,6 +16,7 @@
         <p-column field="second_name" header="Фамилия" [filter]="false"></p-column>
         <p-column field="first_name" header="Имя" [filter]="false"></p-column>
         <p-column field="patronymic" header="Отчество" [filter]="false"></p-column>
+        <p-column field="username" header="Логин" [filter]="false"></p-column>
         <p-column field="phone" header="Телефон" [filter]="false"></p-column>
         <p-column field="email" header="Почта" [filter]="false"></p-column>
         <p-column field="status" header="Статус" [filter]="false"></p-column>
@@ -31,25 +32,25 @@
 ------------------------------------ -->
 <p-dialog header="Пользователь" [(visible)]="dialog" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getUsers(pag.curr)">
   <div class="ui-g form-group">
-    <div class="ui-g-12" style="margin-bottom:30px">
+    <div class="ui-g-12" style="margin-bottom:20px">
       <span class="md-inputfield">
                 <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="user.secondName">
                 <label>Фамилия</label>
             </span>
     </div>
-    <div class="ui-g-12" style="margin-bottom:30px">
+    <div class="ui-g-12" style="margin-bottom:20px">
       <span class="md-inputfield">
                 <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="user.firstName">
                 <label>Имя</label>
             </span>
     </div>
-    <div class="ui-g-12" style="margin-bottom:30px">
+    <div class="ui-g-12" style="margin-bottom:20px">
       <span class="md-inputfield">
                 <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="user.patronymic">
                 <label>Отчество</label>
             </span>
     </div>
-    <div class="ui-g-12" style="margin-bottom:30px">
+    <div class="ui-g-12" style="margin-bottom:20px">
       <span class="md-inputfield">
                 <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="user.email">
                 <label>Почта</label>
@@ -60,13 +61,13 @@
                 <p-inputMask mask="+380999999999" [size]="27" [(ngModel)]="user.phone"></p-inputMask>
             </span>
     </div>
-    <div class="ui-g-12" style="margin-bottom:30px">
+    <div class="ui-g-12" style="margin-bottom:20px">
       <span class="md-inputfield">
                 <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="user.userName">
                 <label>Логин</label>
             </span>
     </div>
-    <div class="ui-g-12" style="margin-bottom:30px">
+    <div class="ui-g-12" style="margin-bottom:20px">
       <span class="md-inputfield">
                 <input pPassword type="password" id="password"  [size]="27"  promptLabel="Введите пароль"  [(ngModel)]="user.password">
                 <label>Пароль</label>
@@ -84,9 +85,9 @@
     Modal Chage Role 
 ------------------------------------ -->
 <p-dialog header="Роль" [(visible)]="dialogRole" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getUsers(pag.curr)">
-      <div class="ui-g form-group">
+      <div class="ui-g-12" style="margin-bottom:30px">
         <p-dropdown [options]="userRoles" [(ngModel)]="user.roleChange" [filter]="false"
-           [autoWidth]="false" [style]="{'width':'100%'}" [style]="{'padding-left':'12px'}" scrollHeight="100px"></p-dropdown>
+           [autoWidth]="false" [style]="{'width':'100%'}" [style]="{'padding-left':'12px'}"></p-dropdown>
       </div>
     <footer>
     <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">

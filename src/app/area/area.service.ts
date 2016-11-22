@@ -2,7 +2,6 @@ import {
   Injectable
 } from '@angular/core';
 import {
-  Http,
   Response
 } from '@angular/http';
 import 'rxjs/add/observable/from';
@@ -15,7 +14,7 @@ import {
 @Injectable()
 export class AreaService {
 
-  constructor(private http: Http, public authHttp: AuthHttp) {}
+  constructor( public authHttp: AuthHttp) {}
 
   getAreas(page: number) {
     let areasUrl = 'http://crm.unicweb.com.ua/api/areas',

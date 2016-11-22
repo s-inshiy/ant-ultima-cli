@@ -42,6 +42,8 @@ export class AuthGuard implements CanActivate {
           return true;
         case (roles.indexOf('client') !== -1 && role === 'client'):
           return true;
+        case (roles.indexOf('master') !== -1 && role === 'master'):
+          return true;
         default:
           return false;
       }

@@ -17,7 +17,7 @@
           <li class="profile-item" [hidden]="profileMode!='top'&&layoutMode!='horizontal'">
             <a href="#">
               <div class="profile-image"></div>
-              <span class="topbar-item-name">Sergei Slesarev</span>
+              <!--<span class="topbar-item-name">Sergei Slesarev</span>-->
             </a>
             <ul class="ultima-menu animated">
               <li role="menuitem">
@@ -167,7 +167,7 @@
           <div class="profile" [hidden]="profileMode!='inline'||layoutMode=='horizontal'">
             <div class="profile-image"></div>
             <a id="profile-options" href="#">
-              <span class="profile-name">Sergei Slesarev</span>
+              <!--<span class="profile-name">Sergei Slesarev</span>-->
               <!--<i class="material-icons">keyboard_arrow_down</i>-->
             </a>
           </div>
@@ -201,7 +201,7 @@
             <!-- ------------------------------------
     Menu Items User
 ------------------------------------ -->
-            <li role="menuitem">
+            <li role="menuitem" *ngIf="(role!='client'&&role!='master')">
               <a [routerLink]="['/dashboard/users']" [routerLinkActive]="['active-menulink']" class="ripplelink">
                 <i class="fa ui-icon-person-add"></i><span>Пользователи</span>
               </a>
@@ -209,15 +209,23 @@
             <!-- ------------------------------------
     Menu Item Bid
 ------------------------------------ -->
-            <li role="menuitem">
+            <li role="menuitem" *ngIf="role!='master'">
               <a [routerLink]="['/dashboard/bids']" [routerLinkActive]="['active-menulink']" class="ripplelink">
                 <i class="fa ui-icon ui-icon-record-voice-over"></i><span>Заявки</span>
               </a>
             </li>
             <!-- ------------------------------------
+    Menu Items Tasks
+------------------------------------ -->
+            <li role="menuitem" *ngIf="(role!='client'&&role!='manager')">
+              <a [routerLink]="['/dashboard/tasks']" [routerLinkActive]="['active-menulink']" class="ripplelink">
+                <i class="fa ui-icon-loupe"></i><span>Задания</span>
+              </a>
+            </li>     
+            <!-- ------------------------------------
     Menu Items Address
 ------------------------------------ -->
-            <li role="menuitem">
+            <li role="menuitem" *ngIf="(role!='client'&&role!='master')">
               <a class="ripplelink">
                 <i class="material-icons">streetview</i><span>Адресса</span><i class="material-icons">keyboard_arrow_down</i>
               </a>
@@ -245,7 +253,7 @@
             <!-- ------------------------------------
     Menu Items Branch
 ------------------------------------ -->
-            <li role="menuitem">
+            <li role="menuitem" *ngIf="(role!='client'&&role!='master')">
               <a [routerLink]="['/dashboard/branches']" [routerLinkActive]="['active-menulink']" class="ripplelink">
                 <i class="fa ui-icon-pie-chart"></i><span>Филиалы</span>
               </a>
@@ -253,7 +261,7 @@
             <!-- ------------------------------------
     Menu Services
 ------------------------------------ -->
-            <li role="menuitem">
+            <li role="menuitem" *ngIf="(role!='client'&&role!='master')">
               <a [routerLink]="['/dashboard/services']" [routerLinkActive]="['active-menulink']" class="ripplelink">
                 <i class="fa ui-icon-business-center"></i><span>Услуги</span>
               </a>
@@ -261,7 +269,7 @@
             <!-- ------------------------------------
     Menu Items Partners
 ------------------------------------ -->
-            <li role="menuitem">
+            <li role="menuitem" *ngIf="(role!='client'&&role!='master')">
               <a class="ripplelink">
                 <i class="fa ui-icon-group"></i><span>Партнёры</span><i class="material-icons">keyboard_arrow_down</i>
               </a>
@@ -281,6 +289,7 @@
                 </li>
               </ul>
             </li>
+       
             <!-- ------------------------------------
     Menu Items Settings
 ------------------------------------ -->
@@ -289,6 +298,7 @@
                 <i class="fa ui-icon-settings"></i><span>Настройки</span>
               </a>
             </li>
+
             <!-- ------------------------------------
     Menu Items Logout
 ------------------------------------ -->

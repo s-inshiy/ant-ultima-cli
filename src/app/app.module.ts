@@ -75,7 +75,9 @@ import {
 import {
   ButtonModule
 } from 'primeng/primeng';
-import {CalendarModule} from 'primeng/primeng';
+import {
+  CalendarModule
+} from 'primeng/primeng';
 // import {CarouselModule} from 'primeng/primeng';
 // import {ChartModule} from 'primeng/primeng';
 import {
@@ -92,7 +94,9 @@ import {
   ContextMenuModule
 } from 'primeng/primeng';
 // import { DataGridModule } from 'primeng/primeng';
-import { DataListModule } from 'primeng/primeng';
+import {
+  DataListModule
+} from 'primeng/primeng';
 // import { DataScrollerModule } from 'primeng/primeng';
 import {
   DataTableModule
@@ -219,10 +223,12 @@ import {
 import {
   DashboardComponent
 } from './dashboard';
-import { SettingComponent } from './setting/setting.component';
-// import { ClientBidComponent } from './client-bid/client-bid.component';
-// import { ClientComponent } from './client/client.component';
-
+import {
+  SettingComponent
+} from './setting/setting.component';
+import {
+  MasterTaskComponent
+} from './master-task/master-task.component';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -259,6 +265,7 @@ type StoreType = {
     LoginComponent,
     DashboardComponent,
     SettingComponent,
+    MasterTaskComponent,
     // ClientBidComponent,
     // ClientComponent,
   ],

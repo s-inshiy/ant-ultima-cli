@@ -84,6 +84,18 @@ export class SettingService {
       });
   }
 
+  deletePhone(phoneId: any) {
+    let deleteUrl = 'http://crm.unicweb.com.ua/api/phones/delete',
+      deleteId = '?id=' + phoneId;
+
+    return this.authHttp.post(deleteUrl + deleteId, '')
+      .map((res: Response) => {
+        return [{
+          delete: res.json
+        }];
+      });
+  }
+
   // Account
 
   getAccount() {

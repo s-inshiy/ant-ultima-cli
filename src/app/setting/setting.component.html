@@ -173,7 +173,7 @@
 ------------------------------------ -->
   <div class="ui-g-12">
     <p-panel header="Телефонные номера" [collapsed]="true" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
-      <p-dataTable [value]="phones" selectionMode="single" [(selection)]="selectedBid" scrollHeight="680" (onRowSelect)="$event"
+      <p-dataTable [value]="phones" selectionMode="single" [(selection)]="selectedBid" scrollHeight="680" (onRowSelect)="onRowPhone($event)"
         [responsive]="true" [stacked]="stacked" [contextMenu]="forPhone">
         <header>Телефоны</header>
         <p-column field="id" header="№, п/п" [filter]="false" [sortable]="false"></p-column>
@@ -186,7 +186,7 @@
       </p-dataTable>
     </p-panel>
   </div>
-  <p-contextMenu #forPhone [model]="tieredAddress" [style]="{'width':'12.5em'}"></p-contextMenu>
+  <p-contextMenu #forPhone [model]="tieredPhone" [style]="{'width':'12.5em'}"></p-contextMenu>
   <!-- ------------------------------------
     Modal Phones
 ------------------------------------ -->
@@ -194,7 +194,7 @@
     <div class="ui-g form-group">
       <div class="ui-g-12" style="margin-bottom:30px">
         <span class="md-inputfield">
-                   <p-inputMask mask="+380999999999" [size]="27" placeholder="Телефон" [(ngModel)]="phone"></p-inputMask>
+                   <p-inputMask mask="+380999999999" [size]="27" placeholder="Телефон" [(ngModel)]="phone.complete"></p-inputMask>
             </span>
       </div>
     </div>
@@ -207,9 +207,9 @@
   <!-- ------------------------------------
     Table Address
 ------------------------------------ -->
-  <div class="ui-g-12">
-    <p-panel header="Адреса" [collapsed]="true" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
-      <p-dataTable [value]="addresses" selectionMode="single" [(selection)]="selectedBid" scrollHeight="680" (onRowSelect)="$event"
+  <div class="ui-g-12" *ngIf="role!='master'">
+    <p-panel header="Адреса" [collapsed]="false" [toggleable]="true" [style]="{'margin-bottom':'20px'}">
+      <p-dataTable [value]="addresses" selectionMode="single" [(selection)]="selectedBid" scrollHeight="680" (onRowSelect)="onRowSelect($event)"
         [responsive]="true" [stacked]="stacked" [contextMenu]="forAddress">
         <header>Профиль</header>
         <p-column field="area" header="Город" [filter]="false" [sortable]="false"></p-column>
@@ -230,26 +230,26 @@
 ------------------------------------ -->
   <p-dialog header="Адрес" [(visible)]="dialogAddress" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getAddress()">
     <div class="ui-g form-group">
-      <div class="ui-g-12" style="margin-bottom:30px">
+      <div class="ui-g-12" style="margin-bottom:20px">
         <p-autoComplete [(ngModel)]="street.complete" [suggestions]="street.result" (completeMethod)="searchStreet($event)" field="name"
           [size]="27" placeholder="Поиск улицы" [minLength]="3" (onSelect)="street.id = $event.id" required></p-autoComplete>
       </div>
-      <div class="ui-g-12" style="margin-bottom:30px">
+      <div class="ui-g-12" style="margin-bottom:20px">
         <span class="md-inputfield">
-                <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="street.house">
+                <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="address.house">
                 <label>Дом</label>
             </span>
       </div>
       <div class="ui-g-12" style="margin-bottom:30px">
-        <p-checkbox [(ngModel)]="street.isDefault" binary="true" label="По умолчанию"></p-checkbox>
+        <p-checkbox [(ngModel)]="address.isDefault" binary="true" label="По умолчанию"></p-checkbox>
       </div>
       <div class="ui-g-12" style="margin-bottom:30px">
-        <textarea rows="5" cols="27" pInputTextarea placeholder="Описание" [(ngModel)]="street.description"></textarea>
+        <textarea rows="5" cols="27" pInputTextarea placeholder="Описание" [(ngModel)]="address.description"></textarea>
       </div>
     </div>
     <footer>
       <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-        <button type="button" pButton (click)="createAddress()" label="Создать" [disabled]="!(street.id&&street.house)"></button>
+        <button type="button" pButton (click)="createAddress()" label="Создать" [disabled]="!(street.id&&address.house)"></button>
         <!--<button type="button" pButton (click)="updateArea()" label="Обновить" [disabled]="!(street.id)"></button>-->
       </div>
     </footer>

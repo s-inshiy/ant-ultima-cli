@@ -52,7 +52,7 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.user.login, this.user.password)
       .subscribe(result => {
         if (result === true) {
-          this.router.navigate(['/dashboard/bids']);
+          this.router.navigate(['/dashboard/settings']);
         } else {
           this.loading = false;
           this.msgs = [];
@@ -64,12 +64,6 @@ export class LoginComponent implements OnInit {
         }
       });
   }
-
-  // keyDownFunction(event) {
-  //   if (event.keyCode == 13) {
-  //     alert('you just clicked enter');
-  //   }
-  // }
 
 }
 

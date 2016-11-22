@@ -110,7 +110,10 @@ export class BidComponent implements OnInit {
         },
         err => console.error(err),
         () => {
-          this.master.result.unshift({ id: null , label: 'Выберите мастера' });
+          this.master.result.unshift({
+            id: null,
+            label: 'Выберите мастера'
+          });
         }
       );
   }
@@ -183,7 +186,7 @@ export class BidComponent implements OnInit {
     this.bid = new NewBid();
   }
 
-  createBid(addressId: string, workId: string, phone: string, contact ?: string, description ?: string) {
+  createBid(addressId: string, workId: string, phone: string, contact ? : string, description ? : string) {
     this.bidService
       .createBid(this.address.id, this.work.id, this.phone.id, this.bid.contact, this.bid.description)
       .subscribe(
@@ -204,6 +207,36 @@ export class BidComponent implements OnInit {
       );
   }
 
+  // setDone(id: number) {
+  //   this.bidService
+  //     .setDone(this.bid.id)
+  //     .subscribe(
+  //       data => {
+  //         this.resCRUD = data[0].json.data;
+  //         // this.pag.count = data[0].json['total-count'];
+  //       },
+  //       err => console.log(err),
+  //       () => {
+  //         this.msgs = [];
+  //         // if (this.resCRUD.errors.length < 1) {
+  //         this.getBids(this.pag.curr);
+  //         this.msgs.push({
+  //           severity: 'info',
+  //           summary: 'Задание выполнено',
+  //           detail: 'Задание выполнено'
+  //         });
+  //         // }
+  //         // for (let i = 0; i < this.resCRUD.errors.length; i++) {
+  //         //   this.msgs.push({
+  //         //     severity: 'error',
+  //         //     summary: 'Ошибка',
+  //         //     detail: this.resCRUD.errors[i]
+  //         //   });
+  //         // }
+  //       }
+  //     );
+  // }
+
   getAddress() {
     this.bidService
       .getAddress()
@@ -213,7 +246,10 @@ export class BidComponent implements OnInit {
         },
         err => console.error(err),
         () => {
-          this.address.result.unshift({ id: null , label: 'Выберите адрес' });
+          this.address.result.unshift({
+            id: null,
+            label: 'Выберите адрес'
+          });
         }
       );
   }
@@ -239,7 +275,10 @@ export class BidComponent implements OnInit {
         },
         err => console.error(err),
         () => {
-          this.phone.result.unshift({ id: null , label: 'Выберите телефон' });
+          this.phone.result.unshift({
+            id: null,
+            label: 'Выберите телефон'
+          });
         }
       );
   }

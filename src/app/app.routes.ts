@@ -58,46 +58,54 @@ import {
 import {
   SettingComponent
 } from './setting';
+import {
+  MasterTaskComponent
+} from './master-task';
 
 export const routes: Routes = [{
     path: 'dashboard',
     component: DashboardComponent,
     canActivate: [AuthGuard],
     data: {
-      roles: ['admin', 'manager', 'client']
+      roles: ['admin', 'manager', 'client', 'master']
     },
     //  Admin Routes
     children: [{
       path: '',
-      redirectTo: 'users',
+      redirectTo: 'bids',
       pathMatch: 'full'
     }, {
       path: 'streets',
       component: StreetComponent,
+      canActivate: [AuthGuard],
       data: {
         roles: ['admin', 'manager']
       },
     }, {
       path: 'areas',
       component: AreaComponent,
+      canActivate: [AuthGuard],
       data: {
         roles: ['admin', 'manager']
       },
     }, {
       path: 'settlements',
       component: SettlementComponent,
+      canActivate: [AuthGuard],
       data: {
         roles: ['admin', 'manager']
       },
     }, {
       path: 'regions',
       component: RegionComponent,
+      canActivate: [AuthGuard],
       data: {
         roles: ['admin', 'manager']
       },
     }, {
       path: 'branches',
       component: BranchComponent,
+      canActivate: [AuthGuard],
       data: {
         roles: ['admin', 'manager']
       },
@@ -117,6 +125,7 @@ export const routes: Routes = [{
       },
     }, {
       path: 'companies',
+      canActivate: [AuthGuard],
       component: CompanyComponent,
       data: {
         roles: ['admin', 'manager']
@@ -124,18 +133,21 @@ export const routes: Routes = [{
     }, {
       path: 'masters',
       component: MasterComponent,
+      canActivate: [AuthGuard],
       data: {
         roles: ['admin', 'manager']
       },
     }, {
       path: 'services',
       component: ServiceComponent,
+      canActivate: [AuthGuard],
       data: {
         roles: ['admin', 'manager']
       },
     }, {
       path: 'master/:id',
       component: MasterDetailComponent,
+      canActivate: [AuthGuard],
       data: {
         roles: ['admin', 'manager']
       },
@@ -149,9 +161,17 @@ export const routes: Routes = [{
     }, {
       path: 'settings',
       component: SettingComponent,
+      canActivate: [AuthGuard],
       data: {
-        roles: ['admin', 'manager', 'client']
-      },
+        roles: ['admin', 'manager', 'client', 'master']
+      }
+    }, {
+      path: 'tasks',
+      component: MasterTaskComponent,
+      canActivate: [AuthGuard],
+      data: {
+        roles: ['admin', 'master']
+      }
     }]
   }
   //  Root Routes

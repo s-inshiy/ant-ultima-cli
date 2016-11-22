@@ -12,6 +12,10 @@ import {
   MenuItem,
 } from 'primeng/primeng';
 
+import {
+  JwtHelper
+} from 'angular2-jwt';
+
 @Component({
   selector: 'app-setting',
   templateUrl: './setting.component.html',
@@ -28,6 +32,8 @@ export class SettingComponent implements OnInit {
   phones: any[];
   addresses: any[];
 
+  jwtHelper: JwtHelper = new JwtHelper();
+
   ru: any;
 
   // Context Menu
@@ -42,8 +48,7 @@ export class SettingComponent implements OnInit {
   profile: Profile = new NewProfile();
   street: Search = new SearchStreet();
   schedule: Schedule = new NewSсhedule();
-
-  phone: any;
+  phone: Search = new SearchStreet();
 
   dialog: boolean;
   dialogAccount: boolean;
@@ -51,13 +56,19 @@ export class SettingComponent implements OnInit {
   dialogAddress: boolean;
   resCRUD: any;
 
+  token: string;
+  role: string;
+
   constructor(private settingService: SettingService) {}
 
   ngOnInit() {
     this.getProfile();
     this.getAccount();
     this.getPhones();
-    this.getAddress();
+    this.getToken();
+    if (this.role !== 'master') {
+      this.getAddress();
+    }
     // Context Menu
     this.tieredAddress = [{
       label: 'Удалить',
@@ -71,7 +82,7 @@ export class SettingComponent implements OnInit {
     this.tieredPhone = [{
       label: 'Удалить',
       icon: 'fa ui-icon-delete-forever',
-      // command: (event) => this.deletePhone(this.address.id, this.address.street)
+      command: (event) => this.deletePhone(this.phone.id)
     }, {
       label: 'Редактировать',
       icon: 'fa ui-icon-edit',
@@ -96,6 +107,11 @@ export class SettingComponent implements OnInit {
     };
   }
 
+  getToken() {
+    this.token = localStorage.getItem('id_token');
+    this.role = this.jwtHelper.decodeToken(this.token).rol;
+  }
+
   // Pfofile
 
   getProfile() {
@@ -113,10 +129,11 @@ export class SettingComponent implements OnInit {
   }
 
   updateProfile(firstName ? : string, secondName ? : string, patronymic ?
-   : string, phone ? : string, skype ? : string, birthday ?: string) {
+    :
+    string, phone ? : string, skype ? : string, birthday ? : string) {
     this.settingService
-      .updateProfile(this.profile.firstName, this.profile.secondName, 
-      this.profile.patronymic, this.profile.phone, this.profile.skype, this.schedule.milisec)
+      .updateProfile(this.profile.firstName, this.profile.secondName,
+        this.profile.patronymic, this.profile.phone, this.profile.skype, this.schedule.milisec)
       .subscribe(
         data => {
           this.resCRUD = data[0].json[0];
@@ -208,9 +225,15 @@ export class SettingComponent implements OnInit {
       );
   }
 
+  onRowPhone(event) {
+    this.phone.id = event.data.id;
+    this.phone.result = event.data.label;
+    console.log(event);
+  }
+
   createPhone() {
     this.settingService
-      .createPhone(this.phone)
+      .createPhone(this.phone.complete)
       .subscribe(
         data => {
           this.resCRUD = data[0].json;
@@ -229,11 +252,32 @@ export class SettingComponent implements OnInit {
       );
   }
 
+  deletePhone(id: number) {
+    this.settingService
+      .deletePhone(this.phone.id)
+      .subscribe(
+        data => {
+          this.resCRUD = data[0].delete;
+        },
+        err => console.error(err),
+        () => {
+          this.getPhones();
+          this.msgs = [];
+          this.msgs.push({
+            severity: 'info',
+            summary: 'Адрес удалён',
+            detail: this.phone.result
+          });
+        }
+      );
+  }
+
   //  Address
 
-  onRowSelect(event) {
-    this.address.id = event.id;
-    this.address.street = event.street;
+  onRowSelect(event: any) {
+    this.address.id = event.data.id;
+    this.address.street = event.data.label;
+    console.log(event);
   }
 
   showAddress() {
@@ -279,7 +323,7 @@ export class SettingComponent implements OnInit {
           this.msgs.push({
             severity: 'info',
             summary: 'Адрес добавлен',
-            // detail: this.oneAddress.description
+            detail: 'Адрес добавлен'
           });
           for (let i = 0; i < this.resCRUD.errors.length; i++) {
             this.msgs.push({
@@ -301,6 +345,7 @@ export class SettingComponent implements OnInit {
         },
         err => console.error(err),
         () => {
+          this.getAddress();
           this.msgs = [];
           this.msgs.push({
             severity: 'info',
@@ -354,13 +399,13 @@ class NewAddress implements Address {
 }
 
 export interface Search {
-  id ? : string;
-  complete ? : string;
-  result ? : string[];
+  id ? : any;
+  complete ? : any;
+  result ? : any;
 }
 
 class SearchStreet implements Search {
-  constructor(public id ? : string, public complete ? : string, public result ? : string[]) {}
+  constructor(public id ? : string, public complete ? : string, public result ? : string) {}
 }
 
 export interface Schedule {

@@ -3,7 +3,9 @@ import {
   OnInit
 } from '@angular/core';
 
-import {PageScrollConfig} from 'ng2-page-scroll';
+import {
+  PageScrollConfig
+} from 'ng2-page-scroll';
 
 declare var $: any;
 
@@ -68,7 +70,35 @@ export class LandingComponent implements OnInit {
       slidesToShow: 5,
       slidesToScroll: 1,
       adaptiveHeight: true,
-      autoplay: true
+      autoplay: true,
+      responsive: [{
+        breakpoint: 992,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: false,
+          arrows: false
+        }
+      }, {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: false,
+          arrows: false
+        }
+      }, {
+        breakpoint: 540,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: false,
+          arrows: false
+        }
+      }]
     });
     // ng2PageScroll
     PageScrollConfig.defaultScrollOffset = 100;

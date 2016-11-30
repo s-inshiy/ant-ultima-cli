@@ -17,14 +17,24 @@
   outline: none;
 }
 
-// Colors
+body {
+  min-width: 320px;
+}
+
+/* ------------------------------------
+    UI Colors
+------------------------------------- */
+
 $ant-white: #e6e6e6;
 $ant-green: #8ab71b;
 $ant-grey: #313b4d;
 $ant-blue: #2aa1d3;
 $ant-light-grey: #707a8c;
 
-// UI 
+/* ------------------------------------
+    UI Styles
+------------------------------------- */
+
 .ui-ant-button {
   background-color: $ant-green;
   font-family: 'Roboto-Bold', sans-serif;
@@ -35,7 +45,9 @@ $ant-light-grey: #707a8c;
   cursor: pointer;
   transition: all .3s ease;
   border: 2px solid $ant-green;
-  &:focus, &:hover, &:active {
+  &:focus,
+  &:hover,
+  &:active {
     box-shadow: none;
     background-color: #9bce1c;
     border: 2px solid transparent;
@@ -89,9 +101,9 @@ $ant-light-grey: #707a8c;
     display: block;
     width: 360px;
     padding: 16px;
-    letter-spacing: 1,4px;
+    letter-spacing: 1.4px;
     margin-bottom: 24px;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto-Regular', sans-serif;
     font-size: 16px;
     background-color: #fff;
     color: #555;
@@ -114,7 +126,7 @@ $ant-light-grey: #707a8c;
   width: 44px;
   transition: all .3s ease;
   &:hover {
-      color: $ant-green;
+    color: $ant-green;
   }
   &:before {
     content: '';
@@ -156,46 +168,9 @@ $ant-light-grey: #707a8c;
   }
 }
 
-
 /* ------------------------------------
     Header Styles
 ------------------------------------- */
-
-// .header {
-//   text-align: center;
-//   min-height: 90px;
-//   position: fixed;
-//   background-color: $ant-grey;
-//   width: 100%;
-//   top: 0;
-//   z-index: 10;
-//   &__info {
-//     position: relative;
-//     &:before {
-//       content: '';
-//       position: absolute;
-//       background: url("../assets/images/phone_icon.svg") no-repeat center;
-//       top: 14px;
-//       left: -30px;
-//       height: 17px;
-//       width: 17px;
-//     }
-//   }
-//   &__tel {
-//     font-family: 'Roboto', sans-serif;
-//     font-weight: bold;
-//     display: block;
-//     color: $ant-white;
-//     font-size: 16px;
-//     transition: all .3s ease;
-//     &:hover,
-//     &:active,
-//     &:focus {
-//       text-decoration: none;
-//       color: $ant-green;
-//     }
-//   }
-// }
 
 .logo {
   width: 146px;
@@ -252,7 +227,6 @@ $ant-light-grey: #707a8c;
   }
 }
 
-
 /* ------------------------------------
     Greeting Styles
 ------------------------------------- */
@@ -287,7 +261,6 @@ $ant-light-grey: #707a8c;
   min-height: 2794px;
   padding-top: 20px;
 }
-
 
 /* ------------------------------------
     Work Styles
@@ -338,7 +311,6 @@ $ant-light-grey: #707a8c;
 
 .service {
   min-height: 1040px;
-  // background-color: $ant-grey;
   &__card {
     height: 360px;
   }
@@ -626,8 +598,7 @@ $ant-light-grey: #707a8c;
     letter-spacing: 1.4px;
     margin-bottom: 30px;
     height: 52px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: bold;
+    font-family: 'Roboto-Bold', sans-serif;
     overflow: hidden;
   }
   &__control-container {
@@ -927,17 +898,18 @@ $ant-light-grey: #707a8c;
   background-color: $ant-grey;
   margin-bottom: 20px;
   margin-top: 20px;
-  img {
-    margin-right: -15px;
-    margin-left: -15px;
-    // width: 100%;
+  &__image {
+    height: 405px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
   }
   &__info {
     padding: 66px;
   }
   &__desc {
     font-size: 16px;
-    font-family: 'Roboto-Regular',sans-serif;
+    font-family: 'Roboto-Regular', sans-serif;
     line-height: 1.6;
     color: $ant-white;
   }
@@ -970,9 +942,11 @@ $ant-light-grey: #707a8c;
   background-color: $ant-grey;
   min-height: 426px;
   margin-bottom: 100px;
-  img {
-    margin-right: -15px;
-    margin-left: -15px;
+  &__img {
+    height: 426px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
   }
   &__info {
     padding-top: 44px;
@@ -1012,23 +986,192 @@ $ant-light-grey: #707a8c;
   }
   &__copy {
     border-top: 1px solid $ant-light-grey;
+    text-align: center;
   }
 }
+
+
+/* ------------------------------------
+    Media Styles
+------------------------------------- */
 
 @media (max-width: 1024px) {
   .header__info {
     display: none;
-  }
-  .service__card {
-        margin-bottom: 40px;
-  }
-  .card {
-    width: 80%;
   }
 }
 
 @media (max-width: 1180px) {
   .ui-ant-button--small {
     display: none;
+  }
+  .about {
+    &__info {
+      padding: 50px;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .service {
+    &__card {
+      margin-bottom: 60px;
+    }
+  }
+  .partner {
+    width: 80%;
+    margin: 0 auto 60px;
+  }
+  .card {
+    width: 80%;
+    border-right: none;
+  }
+  .work {
+    background-color: transparent;
+    &__wrapper {
+      width: 84%;
+      margin: auto;
+      background: #313b4d;
+      padding: 40px 0;
+      margin-bottom: 60px;
+    }
+  }
+  .menu {
+    &--footer {
+      display: none;
+    }
+  }
+  .about {
+    width: 80%;
+    margin: 0 auto 60px;
+    img {
+      width: 100%;
+    }
+  }
+  .contact {
+    width: 80%;
+    margin: 0 auto 60px;
+    &__img {
+      display: none;
+    }
+    &__info {
+      padding: 40px 0 60px;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .ui-ant-title {
+    font-size: 26px;
+    &--contact {
+      margin-top: 0;
+      font-size: 26px;
+    }
+    &--about {
+      font-size: 26px;
+    }
+    &--greeting {
+      margin: 40px 0 50px;
+    }
+  }
+  .ui-ant-button {
+    &--right {
+      display: block;
+      margin: 30px 0 50px;
+      font-size: 14px;
+    }
+    &--form {
+      font-size: 14px;
+      padding: 20px 14px;
+    }
+    &--large {
+      margin-right: 0;
+      font-size: 14px;
+    }
+  }
+  .ui-ant-form {
+    width: 100%;
+    input {
+      width: 100%;
+      padding: 14px;
+      letter-spacing: initial;
+      font-size: 12px;
+    }
+  }
+  .ui-ant-icon {
+    margin-right: 0;
+    margin-top: 20px;
+  }
+  .greeting {
+    &__title {
+      font-size: 48px;
+      margin-top: 60px;
+    }
+    &__subtitle {
+      font-size: 16px;
+      margin-bottom: 30px;
+      line-height: 1.4;
+    }
+  }
+  .about {
+    margin: 0 auto 50px;
+    &__info {
+      padding: 36px 20px;
+      font-size: 24px;
+    }
+    &__desc {
+      font-size: 14px;
+    }
+  }
+  .contact {
+    min-height: 380px;
+    &__info {
+      padding: 30px 20px 40px;
+      width: 100%;
+    }
+  }
+  .work {
+    &__wrapper {
+      margin-bottom: 40px;
+      width: 88%;
+    }
+    &__title {
+      font-size: 16px;
+    }
+  }
+  .card {
+    &__title {
+      font-size: 14px;
+    }
+    &__list {
+      font-size: 14px;
+    }
+  }
+  .partner {
+    margin: 0 auto 50px;
+  }
+  .card--active .card__title {
+    letter-spacing: 1px;
+  }
+  .footer {
+    padding-top: 40px;
+    &__copy {
+      padding: 0 0 40px;
+      letter-spacing: initial;
+      font-size: 14px;
+      border-top: none;
+      letter-spacing: initial;
+    }
+    &__prod {
+      padding-top: 0;
+      font-size: 14px;
+      letter-spacing: initial;
+    }
+    &__logo {
+      text-align: center;
+    }
+    &__social {
+      text-align: center;
+    }
   }
 }

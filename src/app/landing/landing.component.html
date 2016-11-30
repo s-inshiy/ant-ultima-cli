@@ -11,7 +11,7 @@
         </a>
         <ul id="menu" class="animated text-left">
           <li class="menu__item">
-            <a  pageScroll href="#home" class="menu__link menu__link--active">Главная</a>
+            <a pageScroll href="#home" class="menu__link menu__link--active">Главная</a>
           </li>
           <li class="menu__item">
             <a pageScroll href="#services" class="menu__link">Наши услуги</a>
@@ -71,42 +71,48 @@ Work
               </div>
             </div>
             <div class="col-md-3  text-center">
-              <div class="work__step">
-                <img src="assets/images/dialog.svg" alt="step">
-              </div>
-              <div class="work__info">
-                <h3 class="work__title">
-                  Звонок оператора
-                </h3>
-                <p class="work__desc">
-                  Наш оператор свяжется с вами в течении 30 секунд
-                </p>
-              </div>
-            </div>
-            <div class="col-md-3  text-center">
-              <div class="work__step">
-                <img src="assets/images/target.svg" alt="step">
-              </div>
-              <div class="work__info">
-                <h3 class="work__title">
-                  Подбор услуг
-                </h3>
-                <p class="work__desc">
-                  Подберет вам качественный сервис по приемлевой для вас цене
-                </p>
+              <div class="work__wrapper">
+                <div class="work__step">
+                  <img src="assets/images/dialog.svg" alt="step">
+                </div>
+                <div class="work__info">
+                  <h3 class="work__title">
+                    Звонок оператора
+                  </h3>
+                  <p class="work__desc">
+                    Наш оператор свяжется с вами в течении 30 секунд
+                  </p>
+                </div>
               </div>
             </div>
             <div class="col-md-3  text-center">
-              <div class="work__step">
-                <img src="assets/images/like.svg" alt="step">
+              <div class="work__wrapper">
+                <div class="work__step">
+                  <img src="assets/images/target.svg" alt="step">
+                </div>
+                <div class="work__info">
+                  <h3 class="work__title">
+                    Подбор услуг
+                  </h3>
+                  <p class="work__desc">
+                    Подберет вам качественный сервис по приемлевой для вас цене
+                  </p>
+                </div>
               </div>
-              <div class="work__info">
-                <h3 class="work__title">
-                  Выполнение и оплата
-                </h3>
-                <p class="work__desc">
-                  Получите услугу, оплатите выполнению роботу оставте отзыв
-                </p>
+            </div>
+            <div class="col-md-3  text-center">
+              <div class="work__wrapper">
+                <div class="work__step">
+                  <img src="assets/images/like.svg" alt="step">
+                </div>
+                <div class="work__info">
+                  <h3 class="work__title">
+                    Выполнение и оплата
+                  </h3>
+                  <p class="work__desc">
+                    Получите услугу, оплатите выполнению роботу оставте отзыв
+                  </p>
+                </div>
               </div>
             </div>
           </section>
@@ -694,8 +700,7 @@ About
       <div class="container">
         <div class="row">
           <section class="about" id="about">
-            <div class="col-md-6">
-              <img src="assets/images/bg--video.jpg" alt="image">
+            <div class="col-md-6 about__image" style="background-image: url(assets/images/bg--video.jpg)">
             </div>
             <div class="col-md-6">
               <div class="about__info">
@@ -718,12 +723,12 @@ Partner
         <div class="row">
           <section class="partner">
             <div class="partner__slider">
-                <div class="partner__img" style="background-image:url(assets/images/misto.png)"></div>
-                <div class="partner__img" style="background-image:url(assets/images/ekvator.png)"></div>
-                <div class="partner__img" style="background-image:url(assets/images/kiev.png)"></div>
-                <div class="partner__img" style="background-image:url(assets/images/palazzo.png)"></div>
-                <div class="partner__img" style="background-image:url(assets/images/misto.png)"></div>
-                <div class="partner__img" style="background-image:url(assets/images/vels.png)"></div>
+              <div class="partner__img" style="background-image:url(assets/images/misto.png)"></div>
+              <div class="partner__img" style="background-image:url(assets/images/ekvator.png)"></div>
+              <div class="partner__img" style="background-image:url(assets/images/kiev.png)"></div>
+              <div class="partner__img" style="background-image:url(assets/images/palazzo.png)"></div>
+              <div class="partner__img" style="background-image:url(assets/images/misto.png)"></div>
+              <div class="partner__img" style="background-image:url(assets/images/vels.png)"></div>
             </div>
           </section>
         </div>
@@ -734,9 +739,7 @@ Contact
       <div class="container">
         <div class="row">
           <section class="contact">
-            <div class="col-md-6">
-              <img src="assets/images/bg--contact.jpg" alt="image">
-            </div>
+            <div class="col-md-6 contact__img" style="background-image: url(assets/images/bg--contact.jpg)"></div>
             <div class="col-md-6">
               <div class="contact__info" id="contact">
                 <h3 class="ui-ant-title ui-ant-title--contact">Оставьте заявку</h3>
@@ -754,7 +757,7 @@ Contact
     <footer class="footer">
       <div class="container">
         <div class="row">
-          <div class="col-md-2">
+          <div class="col-md-2 col-sm-4 footer__logo">
             <img src="assets/images/logo.svg" class="logo" alt="logo">
           </div>
           <div class="col-md-6 text-center">
@@ -783,7 +786,7 @@ Contact
               </ul>
             </nav>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4 col-sm-8">
             <div class="footer__social">
               <a href="vk.com" class="ui-ant-icon ui-ant-icon--vk"></a>
               <a href="facebook.com" class="ui-ant-icon ui-ant-icon--fb"></a>
@@ -794,9 +797,9 @@ Contact
             </div>
           </div>
         </div>
-        <div class="row  footer__copy">
-          <div class="col-md-12 text-center">
-            Разработка сайта - <a href="http://reactlogic.com.ua" class="footer__prod" title="React Logic Agency" target="_blank">React Logic Agency</a>
+        <div class="row">
+          <div class="col-md-12   footer__copy">
+            Разработка сайта - <a href="http://reactlogic.com.ua" class="footer__prod" title="Slesarev S" target="_blank">React Logic Agency</a>
           </div>
         </div>
       </div>

@@ -19,7 +19,7 @@ $ant-light-grey: #707a8c;
   }
   &--small {
     margin-left: 90px;
-    padding:14px;
+    padding: 14px;
     border: 2px solid $ant-green;
     float: right;
     letter-spacing: 1.6px;
@@ -340,7 +340,6 @@ $ant-light-grey: #707a8c;
   }
 }
 
-
 @media (max-width: 1024px) {
   .landing-wrapper {
     #header {
@@ -483,5 +482,16 @@ $ant-light-grey: #707a8c;
         }
       }
     }
+  }
+}
+
+@media (max-width: 640px) {
+  .landing-wrapper #header .header-top #menu li a {
+    padding: 14px;
+    font-size: 12px;
+    letter-spacing: initial;
+  }
+  .landing-wrapper #header .header-top #menu {
+    width: 180px;
   }
 }

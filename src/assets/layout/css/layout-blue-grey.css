@@ -805,6 +805,14 @@
   .landing-wrapper .header .header-top .logo {
     background: url("../images/logo2x.png") top left no-repeat;
     background-size: 200px 30px; } }
+@media (max-width: 640px) {
+  .landing-wrapper #header .header-top #menu li a {
+    padding: 14px;
+    font-size: 12px;
+    letter-spacing: initial; }
+
+  .landing-wrapper #header .header-top #menu {
+    width: 180px; } }
 html {
   height: 100%; }
 

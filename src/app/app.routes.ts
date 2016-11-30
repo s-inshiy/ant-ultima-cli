@@ -62,6 +62,10 @@ import {
   MasterTaskComponent
 } from './master-task';
 
+import {
+  LandingComponent
+} from './landing';
+
 export const routes: Routes = [{
     path: 'dashboard',
     component: DashboardComponent,
@@ -176,8 +180,11 @@ export const routes: Routes = [{
   }
   //  Root Routes
   , {
-    path: '',
+    path: 'login',
     component: LoginComponent,
+  },{
+    path: '',
+    component: LandingComponent,
   }, {
     path: '**',
     component: NoContentComponent

@@ -64,6 +64,11 @@ import {
   AuthGuard
 } from './guard';
 
+// ng2Scroll
+import {
+  Ng2PageScrollModule
+} from 'ng2-page-scroll';
+
 // PrimeNG
 import {
   AccordionModule
@@ -166,6 +171,9 @@ import {
 // import {ToggleButtonModule} from 'primeng/primeng';
 // import {ToolbarModule} from 'primeng/primeng';
 // import {TooltipModule} from 'primeng/primeng';
+// import {
+//   CarouselModule
+// } from 'primeng/primeng';
 import {
   TreeModule
 } from 'primeng/primeng';
@@ -173,6 +181,7 @@ import {
   TreeTableModule
 } from 'primeng/primeng';
 
+// Angular JWT 
 import {
   provideAuth
 } from 'angular2-jwt';
@@ -229,6 +238,9 @@ import {
 import {
   MasterTaskComponent
 } from './master-task/master-task.component';
+import {
+  LandingComponent
+} from './landing/landing.component';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -266,6 +278,7 @@ type StoreType = {
     DashboardComponent,
     SettingComponent,
     MasterTaskComponent,
+    LandingComponent,
     // ClientBidComponent,
     // ClientComponent,
   ],
@@ -342,6 +355,7 @@ type StoreType = {
     RouterModule.forRoot(routes, {
       useHash: true
     }),
+    Ng2PageScrollModule.forRoot(),
   ],
   providers: [
     APP_PROVIDERS,

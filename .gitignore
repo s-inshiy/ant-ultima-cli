@@ -17,6 +17,7 @@
 .settings/
 
 # misc
+/src/.sass-cache
 /.sass-cache
 /connect.lock
 /coverage/*

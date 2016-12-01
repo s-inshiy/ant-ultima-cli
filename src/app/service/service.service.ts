@@ -2,7 +2,6 @@ import {
   Injectable
 } from '@angular/core';
 import {
-  Http,
   Response,
   Headers
 } from '@angular/http';
@@ -16,7 +15,7 @@ import {
 @Injectable()
 export class ServiceService {
 
-  constructor(private http: Http, public authHttp: AuthHttp) {}
+  constructor( public authHttp: AuthHttp) {}
 
   getServices() {
     let crmUrl = 'http://crm.unicweb.com.ua/api/worktypes-categories/tree';

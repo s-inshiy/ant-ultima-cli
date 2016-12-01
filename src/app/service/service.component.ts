@@ -29,11 +29,10 @@ export class ServiceComponent implements OnInit {
   // PrimeNG
   items: TreeNode[];
   msgs: Message[];
-  // tieredItems: MenuItem[];
 
   dialog: boolean;
   resCRUD: any;
-  checked: boolean;
+  checked: boolean = true;
 
   constructor(private serviceService: ServiceService) {}
 
@@ -64,7 +63,7 @@ export class ServiceComponent implements OnInit {
       );
   }
 
-  searchService(event: any ) {
+  searchService(event: any) {
     this.serviceService
       .searchService(event.query)
       .subscribe(
@@ -126,7 +125,7 @@ export class ServiceComponent implements OnInit {
             this.dialog = false;
             this.msgs.push({
               severity: 'info',
-              summary: 'Работа создана',
+              summary: 'Услуга добавлена',
               detail: this.service.name
             });
             this.service = new NewService();
@@ -182,7 +181,7 @@ export class ServiceComponent implements OnInit {
           this.msgs = [];
           this.msgs.push({
             severity: 'info',
-            summary: 'Работа  удалена',
+            summary: 'Услуга  удалена',
             detail: this.service.name
           });
           this.service = new NewService();
@@ -193,8 +192,17 @@ export class ServiceComponent implements OnInit {
   }
 
   deleteService(type: string, id: number) {
-    type === 'Категория' ? this.deleteCategory(id) : this.deleteWork(id);
-    console.log(type, id);
+    // type === 'Категория' ? this.deleteCategory(id) : this.deleteWork(id);
+    if (type === 'Тип работ') {
+      this.deleteWork(id);
+    } else {
+      this.msgs = [];
+      this.msgs.push({
+        severity: 'error',
+        summary: 'Ошибка',
+        detail: 'Невозможно удалить родительскую категорию'
+      });
+    }
   }
 
   updateWork(id: number, name: string, description: string) {
@@ -212,11 +220,11 @@ export class ServiceComponent implements OnInit {
             this.dialog = false;
             this.msgs.push({
               severity: 'info',
-              summary: 'Работа обновленна',
+              summary: 'Услуга обновленна',
               detail: this.service.name
             });
-          this.service = new NewService();
-          this.parent = new SearchService();
+            this.service = new NewService();
+            this.parent = new SearchService();
           }
           for (let i = 0; i < this.resCRUD.errors.length; i++) {
             this.msgs.push({
@@ -263,8 +271,17 @@ export class ServiceComponent implements OnInit {
   }
 
   updateService(id: number, name: string, description: string, type: string) {
-    console.log(type);
-    type === 'Категория' ? this.updateCategory(id, name, description) : this.updateWork(id, name, description);
+    // type === 'Категория' ? this.updateCategory(id, name, description) : this.updateWork(id, name, description);
+    if (type === 'Тип работ') {
+      this.updateWork(id, name, description);
+    } else {
+      this.msgs = [];
+      this.msgs.push({
+        severity: 'error',
+        summary: 'Ошибка',
+        detail: 'Невозможно редактироватьы родительскую категорию'
+      });
+    }
   }
 
 }

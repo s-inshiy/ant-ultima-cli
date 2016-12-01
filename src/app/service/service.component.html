@@ -9,7 +9,7 @@
         <header>Услуги</header>
         <p-column field="name" header="Имя"></p-column>
         <p-column field="description" header="Описание"></p-column>
-        <p-column field="type" header="Тип" [style]="{'text-align':'center'}"></p-column>
+        <!--<p-column field="type" header="Тип" [style]="{'text-align':'center'}"></p-column>-->
         <footer>
           <div class="ui-helper-clearfix" style="width:100%; margin: 8px 0">
             <button type="button"  pButton style="float:left"  *ngIf="service"  (click)="deleteService(service.type, service.id)"  label="Удалить"></button>
@@ -25,7 +25,7 @@
     Modal Street
 ------------------------------------ -->
 <p-dialog header="Услуга" [(visible)]="dialog" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getServices()">
-  <div class="ui-g form-group" *ngIf="service">
+  <div class="ui-g form-group" *ngIf="service" style="margin-bottom:30px">
     <div class="ui-g-12" style="margin-bottom:30px">
       <span class="md-inputfield">
                 <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="service.name">
@@ -36,9 +36,9 @@
       <p-autoComplete id="acSimple" [(ngModel)]="parent.complete" [suggestions]="parent.result" (completeMethod)="searchService($event)" field="name"
         [size]="27" placeholder="Родительская категория" [minLength]="3" (onSelect)="parent.id = $event.id" required></p-autoComplete>
     </div>
-    <div class="ui-g-12" style="margin-bottom:30px">
+    <!--<div class="ui-g-12" style="margin-bottom:30px">
       <p-checkbox [(ngModel)]="checked" binary="true" label="Работа"></p-checkbox>
-    </div>
+    </div>-->
     <div class="ui-g-12">
       <textarea rows="5" cols="27" pInputTextarea placeholder="Описание" [(ngModel)]="service.description"></textarea>
     </div>

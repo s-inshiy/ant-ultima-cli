@@ -40,8 +40,8 @@ Greeting
           <div class="col-md-8 end">
             <h1 class="greeting__title">Агентство нового типа</h1>
             <h3 class="greeting__subtitle">Самый полный перечень услуг для бизнеса и частных лиц</h3>
-            <a class="ui-ant-button ui-ant-button--large" pageScroll href="#services" >Смотреть все услуги</a>
-            <button type="button" class="ui-ant-button ui-ant-button--right">Как это работает</button>
+            <a class="ui-ant-button ui-ant-button--large" pageScroll href="#services">Смотреть все услуги</a>
+            <a type="button" class="ui-ant-button ui-ant-button--right" [routerLink]="['/login']" >Зарегистрироваться</a>
           </div>
         </div>
       </div>
@@ -125,29 +125,31 @@ Service
       <div class="container">
         <div class="row">
           <section class="service" id="services">
+
             <div class="col-md-12 text-center">
               <h3 class="ui-ant-title ui-ant-title--greeting">Наши услуги</h3>
             </div>
-            <div class="col-md-3">
+
+            <div class="col-md-3" *ngFor="let title of titles; let i = index;">
               <div class="service__card">
-                <div class="card">
+                <div class="card"  [ngClass]="{'card--active': title.show}">
                   <div class="card__icon-container">
                     <div class="card__cell">
-                      <img src="assets/images/1.svg" alt="" class="card__icon card__icon--stretched">
+                      <img src="assets/images/{{title.img}}.svg" alt="img" class="card__icon card__icon--stretched">
                     </div>
                   </div>
                   <div class="card__content">
                     <div class="card__head">
                       <div class="card__title">
-                        Столярные изделия деревообработка
+                        {{title.name}}
                       </div>
                       <div class="card__read-more">
-                        <button type="button" class="button-read-more">
+                        <button type="button" class="button-read-more" (click)="isActive(i)">
                           <img src="assets/images/plus.svg" alt="plus">
                        </button>
                       </div>
                       <div class="card__control-container">
-                        <button class="button-close-card">
+                        <button class="button-close-card" (click)="title.show = !title.show;">
                             <img src="assets/images/close.svg" alt="plus">
                       </button>
                       </div>
@@ -158,15 +160,7 @@ Service
                       <div class="card__tabs-content">
                         <div class="card-tab-content__description">
                           <ul class="card__list">
-                            <li>
-                              Регистрация предприятий
-                            </li>
-                            <li>Бухгалтерские услуги</li>
-                            <li>Услуги адвоката</li>
-                            <li>Кадровые агенства</li>
-                            <li>Ценные бумаги</li>
-                            <li>Ценные бумаги</li>
-                            <li>Ценные бумаги</li>
+                            <li *ngFor="let work of title.works">{{work.name}}</li>
                           </ul>
                         </div>
                       </div>
@@ -175,6 +169,10 @@ Service
                 </div>
               </div>
             </div>
+
+
+
+<!--            
             <div class="col-md-3">
               <div class="service__card">
                 <div class="card">
@@ -222,6 +220,7 @@ Service
                 </div>
               </div>
             </div>
+
             <div class="col-md-3">
               <div class="service__card">
                 <div class="card">
@@ -691,7 +690,7 @@ Service
                   </div>
                 </div>
               </div>
-            </div>
+            </div>-->
           </section>
         </div>
       </div>

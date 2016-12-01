@@ -1,6 +1,5 @@
 /* Compact */
 /* roboto-300 - latin */
-@import url("https://fonts.googleapis.com/css?family=Roboto:100,400,700");
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
@@ -581,24 +580,33 @@
   .exception-body .exception-panel {
     width: 250px;
     margin-top: -15px; } }
+/* ------------------------------------
+    UI Colors
+------------------------------------- */
+/* ------------------------------------
+    UI Styles
+------------------------------------- */
 .ui-ant-button {
   background-color: #8ab71b;
   font-family: 'Roboto-Bold', sans-serif;
   text-transform: uppercase;
   display: block;
-  font-size: 13px;
+  font-size: 14px;
   color: #fff;
   cursor: pointer; }
   .ui-ant-button:focus {
     border: none;
     box-shadow: none; }
   .ui-ant-button--small {
-    margin-left: 90px;
-    padding: 14px;
+    margin-left: 48px;
+    padding: 21px;
     border: 2px solid #8ab71b;
     float: right;
     letter-spacing: 1.6px; }
 
+/* ------------------------------------
+    Header Styles
+------------------------------------- */
 .header {
   text-align: center;
   min-height: 90px;
@@ -614,7 +622,7 @@
       content: '';
       position: absolute;
       background: url("../images/phone_icon.svg") no-repeat center;
-      top: 14px;
+      top: 24px;
       left: -34px;
       height: 17px;
       width: 17px; }
@@ -624,7 +632,7 @@
     display: block;
     color: #e6e6e6;
     font-size: 16px;
-    margin-bottom: 4px;
+    margin-bottom: 1px;
     transition: all .3s ease; }
     .header__tel:hover, .header__tel:active, .header__tel:focus {
       text-decoration: none;
@@ -632,6 +640,9 @@
     .header__tel:last-child {
       margin-bottom: 0; }
 
+/* ------------------------------------
+    Uitima Styles
+------------------------------------- */
 .landing-wrapper .ui-button {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
@@ -650,16 +661,16 @@
     padding: 20px 0px; }
     .landing-wrapper #header .header-top .logo {
       float: left;
-      margin-right: 20px;
-      width: 146px;
-      height: 50px;
+      margin-right: 6px;
+      width: 200px;
+      height: 70px;
       background: url("../images/logo.svg") top left no-repeat; }
     .landing-wrapper #header .header-top #menu {
       float: left;
       list-style: none;
       margin: 0 20px;
       padding: 0;
-      padding-top: 14px; }
+      padding-top: 24px; }
       .landing-wrapper #header .header-top #menu li {
         float: left;
         display: block;

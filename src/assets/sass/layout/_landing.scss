@@ -1,16 +1,23 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:100,400,700');
-// Colors
+/* ------------------------------------
+    UI Colors
+------------------------------------- */
+
 $ant-white: #e6e6e6;
 $ant-green: #8ab71b;
 $ant-grey: #313b4d;
 $ant-blue: #2aa1d3;
 $ant-light-grey: #707a8c;
+
+/* ------------------------------------
+    UI Styles
+------------------------------------- */
+
 .ui-ant-button {
   background-color: $ant-green;
   font-family: 'Roboto-Bold', sans-serif;
   text-transform: uppercase;
   display: block;
-  font-size: 13px;
+  font-size: 14px;
   color: #fff;
   cursor: pointer;
   &:focus {
@@ -18,13 +25,18 @@ $ant-light-grey: #707a8c;
     box-shadow: none;
   }
   &--small {
-    margin-left: 90px;
-    padding: 14px;
+    margin-left: 48px;
+    padding: 21px;
     border: 2px solid $ant-green;
     float: right;
     letter-spacing: 1.6px;
   }
 }
+
+
+/* ------------------------------------
+    Header Styles
+------------------------------------- */
 
 .header {
   text-align: center;
@@ -41,7 +53,7 @@ $ant-light-grey: #707a8c;
       content: '';
       position: absolute;
       background: url("../images/phone_icon.svg") no-repeat center;
-      top: 14px;
+      top: 24px;
       left: -34px;
       height: 17px;
       width: 17px;
@@ -53,7 +65,7 @@ $ant-light-grey: #707a8c;
     display: block;
     color: $ant-white;
     font-size: 16px;
-    margin-bottom: 4px;
+    margin-bottom: 1px;
     transition: all .3s ease;
     &:hover,
     &:active,
@@ -66,6 +78,11 @@ $ant-light-grey: #707a8c;
     }
   }
 }
+
+
+/* ------------------------------------
+    Uitima Styles
+------------------------------------- */
 
 .landing-wrapper {
   .ui-button {
@@ -86,9 +103,9 @@ $ant-light-grey: #707a8c;
       padding: 20px 0px;
       .logo {
         float: left;
-        margin-right: 20px;
-        width: 146px;
-        height: 50px;
+        margin-right: 6px;
+        width: 200px;
+        height: 70px;
         background: url("../images/logo.svg") top left no-repeat;
       }
       #menu {
@@ -96,7 +113,7 @@ $ant-light-grey: #707a8c;
         list-style: none;
         margin: 0 20px;
         padding: 0;
-        padding-top: 14px;
+        padding-top: 24px;
         li {
           float: left;
           display: block;

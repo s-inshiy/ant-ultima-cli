@@ -40,15 +40,23 @@ export class LandingComponent implements OnInit {
     // Toggle Card
     $(function () {
       let card,
-        cardActive;
-      if (card) {
-        card.clickOutsideThisElement(function () {
-          if (cardActive) {
-            cardActive.removeClass('card--active');
-          }
-        });
-      }
-      $('.button-read-more').click(function () {
+        cardActive,
+        btnMore = $('.button-read-more');
+
+      // if (card) {
+      //   card.clickOutsideThisElement(function () {
+      //     if (cardActive) {
+      //       cardActive.removeClass('card--active');
+      //     }
+      //   });
+      // }
+
+      btnMore.hover(function(){
+        card = $(this).parent().parent().parent().parent();
+        card.toggleClass('card--shadow');
+      });
+
+      btnMore.click(function () {
         cardActive = $('#services').find('.card--active');
         card = $(this).parent().parent().parent().parent();
         if (cardActive) {
@@ -60,6 +68,7 @@ export class LandingComponent implements OnInit {
       $('.button-close-card').click(function () {
         $(this).parent().parent().parent().parent().toggleClass('card--active');
       });
+
     });
     // Slick Slider
     $('.partner__slider').slick({

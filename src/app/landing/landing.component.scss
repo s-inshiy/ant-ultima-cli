@@ -21,6 +21,7 @@ body {
   min-width: 320px;
 }
 
+
 /* ------------------------------------
     UI Colors
 ------------------------------------- */
@@ -40,7 +41,7 @@ $ant-light-grey: #707a8c;
   font-family: 'Roboto-Bold', sans-serif;
   text-transform: uppercase;
   display: block;
-  font-size: 13px;
+  font-size: 14px;
   color: #fff;
   cursor: pointer;
   transition: all .3s ease;
@@ -51,6 +52,7 @@ $ant-light-grey: #707a8c;
     box-shadow: none;
     background-color: #9bce1c;
     border: 2px solid transparent;
+    text-decoration: none;
   }
   &--large {
     padding: 20px 34px;
@@ -168,6 +170,7 @@ $ant-light-grey: #707a8c;
   }
 }
 
+
 /* ------------------------------------
     Header Styles
 ------------------------------------- */
@@ -227,6 +230,7 @@ $ant-light-grey: #707a8c;
   }
 }
 
+
 /* ------------------------------------
     Greeting Styles
 ------------------------------------- */
@@ -235,7 +239,7 @@ $ant-light-grey: #707a8c;
   background: url("../assets/images/bg--preview.jpg") no-repeat center;
   background-size: cover;
   min-height: 482px;
-  margin-top: 90px;
+  margin-top: 110px;
   &__title {
     margin-top: 80px;
     margin-bottom: 28px;
@@ -261,6 +265,7 @@ $ant-light-grey: #707a8c;
   min-height: 2794px;
   padding-top: 20px;
 }
+
 
 /* ------------------------------------
     Work Styles
@@ -538,7 +543,7 @@ $ant-light-grey: #707a8c;
 }
 
 .card {
-  height: 100%;
+  height: 99%;
   width: 99%;
   position: absolute;
   top: -100%;
@@ -561,6 +566,11 @@ $ant-light-grey: #707a8c;
   box-shadow: 0 0 0 transparent;
   padding: 0;
   border-right: 1px solid #434a59;
+  &--shadow {
+    // box-shadow: 0px 0px 64px 0px rgba(32,52,70,1);
+    z-index: 10;
+    box-shadow: 0px 0px 40px 0px #6ca3d6;
+  }
   &::before {
     position: absolute;
     right: 5px;
@@ -998,6 +1008,9 @@ $ant-light-grey: #707a8c;
 @media (max-width: 1024px) {
   .header__info {
     display: none;
+  }
+    .greeting {
+    margin-top: 90px;
   }
 }
 

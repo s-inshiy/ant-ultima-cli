@@ -33,6 +33,11 @@ $ant-light-grey: #707a8c;
   }
 }
 
+body .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon {
+  &:hover, &:focus, &:active {
+    text-decoration: none;
+  }
+}
 
 /* ------------------------------------
     Header Styles

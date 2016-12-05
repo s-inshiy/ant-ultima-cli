@@ -1,9 +1,6 @@
 import {
   Component,
-  OnInit,
-  // AfterViewChecked
-  // AfterContentChecked
-  // AfterViewInit
+  OnInit
 } from '@angular/core';
 
 import {
@@ -13,6 +10,10 @@ import {
 import {
   LandingService
 } from './landing.service';
+
+import {
+  Message
+} from 'primeng/primeng';
 
 declare var $: any;
 
@@ -24,6 +25,7 @@ declare var $: any;
     LandingService
   ]
 })
+
 export class LandingComponent implements OnInit {
 
   partners: any;
@@ -31,6 +33,15 @@ export class LandingComponent implements OnInit {
 
   titles: any[] = [];
   lists: any[] = [];
+
+  registration: Registration = new NewRegistration();
+  request: Request = new NewRequest();
+
+  dialogReg: boolean;
+  dialogReq: boolean;
+
+  resCRUD: any;
+  msgs: Message[];
 
   constructor(private landingService: LandingService) {}
 
@@ -96,6 +107,50 @@ export class LandingComponent implements OnInit {
     this.getServices();
   }
 
+  // Active Card
+  isActive(index) {
+    for (let i = 0; i < this.titles.length; i++) {
+      this.titles[i].show = false;
+    }
+    this.titles[index].show = !this.titles[index].show;
+  }
+
+  getCall(e: MouseEvent, i: any, work: any) {
+    this.request.service = work[i].name;
+    this.dialogReq = true;
+    // console.log(this.request);
+  }
+
+  setCall(service: string, phone: string) {
+    this.landingService
+      .setCall(this.request.service, this.request.phone)
+      .subscribe(
+        data => {
+          this.resCRUD = data[0].json;
+        },
+        err => console.error(err),
+        () => {
+          this.msgs = [];
+          if (this.resCRUD.errors.length < 1) {
+            this.dialogReq = false;
+            this.msgs.push({
+              severity: 'info',
+              summary: 'Звонок заказан успешно',
+              detail: this.request.phone
+            });
+            this.request = new NewRequest();
+          }
+          for (let i = 0; i < this.resCRUD.errors.length; i++) {
+            this.msgs.push({
+              severity: 'error',
+              summary: 'Ошибка',
+              detail: this.resCRUD.errors[i]
+            });
+          }
+        }
+      );
+  }
+
   getServices() {
     this.landingService
       .getServices()
@@ -120,7 +175,7 @@ export class LandingComponent implements OnInit {
               name: this.services[i].data.name,
               img: i + 1,
               works: this.lists,
-              show: false
+              show: false,
             });
             this.lists = [];
           }
@@ -128,11 +183,66 @@ export class LandingComponent implements OnInit {
       );
   }
 
-  isActive(index) {
-    for (let i = 0; i < this.titles.length; i++) {
-      this.titles[i].show = false;
-    }
-    this.titles[index].show = !this.titles[index].show;
+  showReg() {
+    this.dialogReg = true;
   }
 
+  setRegistration(username: string, password: string, email: string, firstName: string,
+    secondName: string, patronymic: string, phone: string) {
+    this.landingService
+      .setRegistration(this.registration.username, this.registration.password,
+        this.registration.email, this.registration.firstName, this.registration.secondName,
+        this.registration.patronymic, this.registration.phone)
+      .subscribe(
+        data => {
+          this.resCRUD = data[0].json;
+        },
+        err => console.error(err),
+        () => {
+          this.msgs = [];
+          if (this.resCRUD.errors.length < 1) {
+            this.dialogReg = false;
+            this.msgs.push({
+              severity: 'info',
+              summary: 'Регистрация прошла успешно',
+              detail: this.registration.username
+            });
+            this.registration = new NewRegistration();
+          }
+          for (let i = 0; i < this.resCRUD.errors.length; i++) {
+            this.msgs.push({
+              severity: 'error',
+              summary: 'Ошибка',
+              detail: this.resCRUD.errors[i]
+            });
+          }
+        }
+      );
+  }
+
+}
+
+export interface Registration {
+  username ? : any;
+  password ? : any;
+  email ? : any;
+  firstName ? : any;
+  secondName ? : any;
+  patronymic ? : any;
+  phone ? : any;
+}
+
+class NewRegistration implements Registration {
+  constructor(public username ? : any, public password ? : any,
+    public email ? : any, public firstName ? : any,
+    public secondName ? : any, public patronymic ? : any, public phone ? : any) {}
+}
+
+export interface Request {
+  service ? : any;
+  phone ? : any;
+}
+
+class NewRequest implements Request {
+  constructor(public service ? : any, public phone ? : any) {}
 }

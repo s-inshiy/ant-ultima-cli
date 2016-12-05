@@ -1,4 +1,5 @@
 <body class="landing-body">
+  <p-growl [value]="msgs"></p-growl>
   <div class="landing-wrapper">
     <!-- ------------------------------------
     Header
@@ -41,7 +42,7 @@ Greeting
             <h1 class="greeting__title">Агентство нового типа</h1>
             <h3 class="greeting__subtitle">Самый полный перечень услуг для бизнеса и частных лиц</h3>
             <a class="ui-ant-button ui-ant-button--large" pageScroll href="#services">Смотреть все услуги</a>
-            <a type="button" class="ui-ant-button ui-ant-button--right" [routerLink]="['/login']" >Зарегистрироваться</a>
+            <a type="button" class="ui-ant-button ui-ant-button--right" (click)="showReg()">Зарегистрироваться</a>
           </div>
         </div>
       </div>
@@ -125,14 +126,12 @@ Service
       <div class="container">
         <div class="row">
           <section class="service" id="services">
-
             <div class="col-md-12 text-center">
               <h3 class="ui-ant-title ui-ant-title--greeting">Наши услуги</h3>
             </div>
-
             <div class="col-md-3" *ngFor="let title of titles; let i = index;">
               <div class="service__card">
-                <div class="card"  [ngClass]="{'card--active': title.show}">
+                <div class="card" [ngClass]="{'card--active': title.show}">
                   <div class="card__icon-container">
                     <div class="card__cell">
                       <img src="assets/images/{{title.img}}.svg" alt="img" class="card__icon card__icon--stretched">
@@ -160,7 +159,9 @@ Service
                       <div class="card__tabs-content">
                         <div class="card-tab-content__description">
                           <ul class="card__list">
-                            <li *ngFor="let work of title.works">{{work.name}}</li>
+                            <li *ngFor="let work of title.works;  let i = index;" (click)="getCall($event, i, title.works)">
+                              {{work.name}}
+                            </li>
                           </ul>
                         </div>
                       </div>
@@ -169,528 +170,6 @@ Service
                 </div>
               </div>
             </div>
-
-
-
-<!--            
-            <div class="col-md-3">
-              <div class="service__card">
-                <div class="card">
-                  <div class="card__icon-container">
-                    <div class="card__cell">
-                      <img src="assets/images/2.svg" alt="" class="card__icon card__icon--stretched">
-                    </div>
-                  </div>
-                  <div class="card__content">
-                    <div class="card__head">
-                      <div class="card__title">
-                        Автомир, услуги транспорта
-                      </div>
-                      <div class="card__read-more">
-                        <button type="button" class="button-read-more">
-                          <img src="assets/images/plus.svg" alt="plus">
-                       </button>
-                      </div>
-                      <div class="card__control-container">
-                        <button class="button-close-card">
-                            <img src="assets/images/close.svg" alt="plus">
-                      </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card__tabs">
-                    <div class="card__tabs-content-wrapper">
-                      <div class="card__tabs-content">
-                        <div class="card-tab-content__description">
-                          <ul class="card__list">
-                            <li>
-                              Регистрация предприятий
-                            </li>
-                            <li>Бухгалтерские услуги</li>
-                            <li>Услуги адвоката</li>
-                            <li>Кадровые агенства</li>
-                            <li>Ценные бумаги</li>
-                            <li>Ценные бумаги</li>
-                            <li>Ценные бумаги</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-3">
-              <div class="service__card">
-                <div class="card">
-                  <div class="card__icon-container">
-                    <div class="card__cell">
-                      <img src="assets/images/3.svg" alt="" class="card__icon card__icon--stretched">
-                    </div>
-                  </div>
-                  <div class="card__content">
-                    <div class="card__head">
-                      <div class="card__title">
-                        Безопасность и охрана
-                      </div>
-                      <div class="card__read-more">
-                        <button type="button" class="button-read-more">
-                          <img src="assets/images/plus.svg" alt="plus">
-                       </button>
-                      </div>
-                      <div class="card__control-container">
-                        <button class="button-close-card">
-                            <img src="assets/images/close.svg" alt="plus">
-                      </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card__tabs">
-                    <div class="card__tabs-content-wrapper">
-                      <div class="card__tabs-content">
-                        <div class="card-tab-content__description">
-                          <ul class="card__list">
-                            <li>
-                              Регистрация предприятий
-                            </li>
-                            <li>Бухгалтерские услуги</li>
-                            <li>Услуги адвоката</li>
-                            <li>Кадровые агенства</li>
-                            <li>Ценные бумаги</li>
-                            <li>Ценные бумаги</li>
-                            <li>Ценные бумаги</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="service__card">
-                <div class="card">
-                  <div class="card__icon-container">
-                    <div class="card__cell">
-                      <img src="assets/images/4.svg" alt="" class="card__icon card__icon--stretched">
-                    </div>
-                  </div>
-                  <div class="card__content">
-                    <div class="card__head">
-                      <div class="card__title">
-                        Бизнес-сфера, услуги
-                      </div>
-                      <div class="card__read-more">
-                        <button type="button" class="button-read-more">
-                          <img src="assets/images/plus.svg" alt="plus">
-                       </button>
-                      </div>
-                      <div class="card__control-container">
-                        <button class="button-close-card">
-                            <img src="assets/images/close.svg" alt="plus">
-                      </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card__tabs">
-                    <div class="card__tabs-content-wrapper">
-                      <div class="card__tabs-content">
-                        <div class="card-tab-content__description">
-                          <ul class="card__list">
-                            <li>
-                              Регистрация предприятий
-                            </li>
-                            <li>Бухгалтерские услуги</li>
-                            <li>Услуги адвоката</li>
-                            <li>Кадровые агенства</li>
-                            <li>Ценные бумаги</li>
-                            <li>Ценные бумаги</li>
-                            <li>Ценные бумаги</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="service__card">
-                <div class="card">
-                  <div class="card__icon-container">
-                    <div class="card__cell">
-                      <img src="assets/images/5.svg" alt="" class="card__icon card__icon--stretched">
-                    </div>
-                  </div>
-                  <div class="card__content">
-                    <div class="card__head">
-                      <div class="card__title">
-                        Компьютеры, оргтехника, телефоны
-                      </div>
-                      <div class="card__read-more">
-                        <button type="button" class="button-read-more">
-                          <img src="assets/images/plus.svg" alt="plus">
-                       </button>
-                      </div>
-                      <div class="card__control-container">
-                        <button class="button-close-card">
-                            <img src="assets/images/close.svg" alt="plus">
-                      </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card__tabs">
-                    <div class="card__tabs-content-wrapper">
-                      <div class="card__tabs-content">
-                        <div class="card-tab-content__description">
-                          <ul class="card__list">
-                            <li>
-                              Регистрация предприятий
-                            </li>
-                            <li>Бухгалтерские услуги</li>
-                            <li>Услуги адвоката</li>
-                            <li>Кадровые агенства</li>
-                            <li>Ценные бумаги</li>
-                            <li>Ценные бумаги</li>
-                            <li>Ценные бумаги</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="service__card">
-                <div class="card">
-                  <div class="card__icon-container">
-                    <div class="card__cell">
-                      <img src="assets/images/6.svg" alt="" class="card__icon card__icon--stretched">
-                    </div>
-                  </div>
-                  <div class="card__content">
-                    <div class="card__head">
-                      <div class="card__title">
-                        Медицына, красота, здоровье
-                      </div>
-                      <div class="card__read-more">
-                        <button type="button" class="button-read-more">
-                          <img src="assets/images/plus.svg" alt="plus">
-                       </button>
-                      </div>
-                      <div class="card__control-container">
-                        <button class="button-close-card">
-                            <img src="assets/images/close.svg" alt="plus">
-                      </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card__tabs">
-                    <div class="card__tabs-content-wrapper">
-                      <div class="card__tabs-content">
-                        <div class="card-tab-content__description">
-                          <ul class="card__list">
-                            <li>
-                              Регистрация предприятий
-                            </li>
-                            <li>Бухгалтерские услуги</li>
-                            <li>Услуги адвоката</li>
-                            <li>Кадровые агенства</li>
-                            <li>Ценные бумаги</li>
-                            <li>Ценные бумаги</li>
-                            <li>Ценные бумаги</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="service__card">
-                <div class="card">
-                  <div class="card__icon-container">
-                    <div class="card__cell">
-                      <img src="assets/images/7.svg" alt="" class="card__icon card__icon--stretched">
-                    </div>
-                  </div>
-                  <div class="card__content">
-                    <div class="card__head">
-                      <div class="card__title">
-                        Бизнес-сфера
-                      </div>
-                      <div class="card__read-more">
-                        <button type="button" class="button-read-more">
-                          <img src="assets/images/plus.svg" alt="plus">
-                       </button>
-                      </div>
-                      <div class="card__control-container">
-                        <button class="button-close-card">
-                            <img src="assets/images/close.svg" alt="plus">
-                      </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card__tabs">
-                    <div class="card__tabs-content-wrapper">
-                      <div class="card__tabs-content">
-                        <div class="card-tab-content__description">
-                          <ul class="card__list">
-                            <li>
-                              Регистрация предприятий
-                            </li>
-                            <li>Бухгалтерские услуги</li>
-                            <li>Услуги адвоката</li>
-                            <li>Кадровые агенства</li>
-                            <li>Ценные бумаги</li>
-                            <li>Ценные бумаги</li>
-                            <li>Ценные бумаги</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="service__card">
-                <div class="card">
-                  <div class="card__icon-container">
-                    <div class="card__cell">
-                      <img src="assets/images/8.svg" alt="" class="card__icon card__icon--stretched">
-                    </div>
-                  </div>
-                  <div class="card__content">
-                    <div class="card__head">
-                      <div class="card__title">
-                        Наука, образование и воспитание
-                      </div>
-                      <div class="card__read-more">
-                        <button type="button" class="button-read-more">
-                          <img src="assets/images/plus.svg" alt="plus">
-                       </button>
-                      </div>
-                      <div class="card__control-container">
-                        <button class="button-close-card">
-                            <img src="assets/images/close.svg" alt="plus">
-                      </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card__tabs">
-                    <div class="card__tabs-content-wrapper">
-                      <div class="card__tabs-content">
-                        <div class="card-tab-content__description">
-                          <ul class="card__list">
-                            <li>
-                              Регистрация предприятий
-                            </li>
-                            <li>Бухгалтерские услуги</li>
-                            <li>Услуги адвоката</li>
-                            <li>Кадровые агенства</li>
-                            <li>Ценные бумаги</li>
-                            <li>Ценные бумаги</li>
-                            <li>Ценные бумаги</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="service__card">
-                <div class="card">
-                  <div class="card__icon-container">
-                    <div class="card__cell">
-                      <img src="assets/images/9.svg" alt="" class="card__icon card__icon--stretched">
-                    </div>
-                  </div>
-                  <div class="card__content">
-                    <div class="card__head">
-                      <div class="card__title">
-                        Бытовые и клининговые услуги
-                      </div>
-                      <div class="card__read-more">
-                        <button type="button" class="button-read-more">
-                          <img src="assets/images/plus.svg" alt="plus">
-                       </button>
-                      </div>
-                      <div class="card__control-container">
-                        <button class="button-close-card">
-                            <img src="assets/images/close.svg" alt="plus">
-                      </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card__tabs">
-                    <div class="card__tabs-content-wrapper">
-                      <div class="card__tabs-content">
-                        <div class="card-tab-content__description">
-                          <ul class="card__list">
-                            <li>
-                              Регистрация предприятий
-                            </li>
-                            <li>Бухгалтерские услуги</li>
-                            <li>Услуги адвоката</li>
-                            <li>Кадровые агенства</li>
-                            <li>Ценные бумаги</li>
-                            <li>Ценные бумаги</li>
-                            <li>Ценные бумаги</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="service__card">
-                <div class="card">
-                  <div class="card__icon-container">
-                    <div class="card__cell">
-                      <img src="assets/images/10.svg" alt="" class="card__icon card__icon--stretched">
-                    </div>
-                  </div>
-                  <div class="card__content">
-                    <div class="card__head">
-                      <div class="card__title">
-                        Зоомир аграрный комплекс
-                      </div>
-                      <div class="card__read-more">
-                        <button type="button" class="button-read-more">
-                          <img src="assets/images/plus.svg" alt="plus">
-                       </button>
-                      </div>
-                      <div class="card__control-container">
-                        <button class="button-close-card">
-                            <img src="assets/images/close.svg" alt="plus">
-                      </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card__tabs">
-                    <div class="card__tabs-content-wrapper">
-                      <div class="card__tabs-content">
-                        <div class="card-tab-content__description">
-                          <ul class="card__list">
-                            <li>
-                              Регистрация предприятий
-                            </li>
-                            <li>Бухгалтерские услуги</li>
-                            <li>Услуги адвоката</li>
-                            <li>Кадровые агенства</li>
-                            <li>Ценные бумаги</li>
-                            <li>Ценные бумаги</li>
-                            <li>Ценные бумаги</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="service__card">
-                <div class="card">
-                  <div class="card__icon-container">
-                    <div class="card__cell">
-                      <img src="assets/images/11.svg" alt="" class="card__icon card__icon--stretched">
-                    </div>
-                  </div>
-                  <div class="card__content">
-                    <div class="card__head">
-                      <div class="card__title">
-                        Сервис и ремонт техники
-                      </div>
-                      <div class="card__read-more">
-                        <button type="button" class="button-read-more">
-                          <img src="assets/images/plus.svg" alt="plus">
-                       </button>
-                      </div>
-                      <div class="card__control-container">
-                        <button class="button-close-card">
-                            <img src="assets/images/close.svg" alt="plus">
-                      </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card__tabs">
-                    <div class="card__tabs-content-wrapper">
-                      <div class="card__tabs-content">
-                        <div class="card-tab-content__description">
-                          <ul class="card__list">
-                            <li>
-                              Регистрация предприятий
-                            </li>
-                            <li>Бухгалтерские услуги</li>
-                            <li>Услуги адвоката</li>
-                            <li>Кадровые агенства</li>
-                            <li>Ценные бумаги</li>
-                            <li>Ценные бумаги</li>
-                            <li>Ценные бумаги</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-3">
-              <div class="service__card">
-                <div class="card">
-                  <div class="card__icon-container">
-                    <div class="card__cell">
-                      <img src="assets/images/12.svg" alt="" class="card__icon card__icon--stretched">
-                    </div>
-                  </div>
-                  <div class="card__content">
-                    <div class="card__head">
-                      <div class="card__title">
-                        Строительство и архитектура
-                      </div>
-                      <div class="card__read-more">
-                        <button type="button" class="button-read-more">
-                          <img src="assets/images/plus.svg" alt="plus">
-                       </button>
-                      </div>
-                      <div class="card__control-container">
-                        <button class="button-close-card">
-                            <img src="assets/images/close.svg" alt="plus">
-                      </button>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card__tabs">
-                    <div class="card__tabs-content-wrapper">
-                      <div class="card__tabs-content">
-                        <div class="card-tab-content__description">
-                          <ul class="card__list">
-                            <li>
-                              Регистрация предприятий
-                            </li>
-                            <li>Бухгалтерские услуги</li>
-                            <li>Услуги адвоката</li>
-                            <li>Кадровые агенства</li>
-                            <li>Ценные бумаги</li>
-                            <li>Ценные бумаги</li>
-                            <li>Ценные бумаги</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>-->
           </section>
         </div>
       </div>
@@ -805,4 +284,82 @@ Contact
       </div>
     </footer>
   </div>
+  <!-- ------------------------------------
+Registration Modal
+------------------------------------ -->
+  <p-dialog header="Регистрация" [(visible)]="dialogReg" [modal]="true" showEffect="fade" [responsive]="true" [draggable]="false"
+    [resizable]="false">
+    <div class="ui-g form-group">
+      <div class="ui-g-12" style="margin-bottom:20px">
+        <span class="md-inputfield">
+                <input type="text" pInputText  id="name" [(ngModel)]="registration.secondName">
+                <label>Фамилия</label>
+            </span>
+      </div>
+      <div class="ui-g-12" style="margin-bottom:20px">
+        <span class="md-inputfield">
+                <input type="text" pInputText  id="name"  [(ngModel)]="registration.firstName">
+                <label>Имя</label>
+            </span>
+      </div>
+      <div class="ui-g-12" style="margin-bottom:20px">
+        <span class="md-inputfield">
+                <input type="text" pInputText  id="name"  [(ngModel)]="registration.patronymic">
+                <label>Отчество</label>
+            </span>
+      </div>
+      <div class="ui-g-12" style="margin-bottom:20px">
+        <span class="md-inputfield">
+                <input type="text" pInputText  id="name"  [(ngModel)]="registration.username">
+                <label>Логин</label>
+            </span>
+      </div>
+      <div class="ui-g-12" style="margin-bottom:20px">
+        <span class="md-inputfield">
+                   <p-inputMask mask="+380999999999" placeholder="Телефон" [(ngModel)]="registration.phone"></p-inputMask>
+            </span>
+      </div>
+      <div class="ui-g-12" style="margin-bottom:20px">
+        <span class="md-inputfield">
+                <input type="text" pInputText  id="name" [(ngModel)]="registration.email">
+                <label>Електронная почта</label>
+            </span>
+      </div>
+      <div class="ui-g-12" style="margin-bottom:20px">
+        <span class="md-inputfield">
+                <input type="password"  pInputText autocomplete="off" [(ngModel)]="registration.password">
+                <label>Пароль</label>
+            </span>
+      </div>
+    </div>
+    <footer>
+      <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+        <button type="button" pButton (click)="setRegistration()" label="Отправить" [disabled]="!(registration.secondName&&registration.firstName)"></button>
+      </div>
+    </footer>
+  </p-dialog>
+  <!-- ------------------------------------
+Request Modal
+------------------------------------ -->
+  <p-dialog header="Заказать звонок" [(visible)]="dialogReq" [modal]="true" showEffect="fade" [responsive]="true" [draggable]="false"
+    [resizable]="false">
+    <div class="ui-g form-group">
+      <div class="ui-g-12" style="margin-bottom:20px">
+        <span class="md-inputfield">
+                <input type="text" pInputText  id="name" [(ngModel)]="request.service">
+                <label>Услуга</label>
+            </span>
+      </div>
+      <div class="ui-g-12" style="margin-bottom:20px">
+        <span class="md-inputfield">
+                <p-inputMask mask="+380999999999" placeholder="Телефон" [(ngModel)]="request.phone"></p-inputMask>
+          </span>
+      </div>
+    </div>
+    <footer>
+      <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
+        <button type="button" pButton (click)="setCall()" label="Отправить" [disabled]="!(request.service&&request.phone)"></button>
+      </div>
+    </footer>
+  </p-dialog>
 </body>

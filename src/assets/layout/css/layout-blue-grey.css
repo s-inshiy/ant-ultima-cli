@@ -604,6 +604,9 @@
     float: right;
     letter-spacing: 1.6px; }
 
+body .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon:hover, body .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon:focus, body .ui-dialog .ui-dialog-titlebar .ui-dialog-titlebar-icon:active {
+  text-decoration: none; }
+
 /* ------------------------------------
     Header Styles
 ------------------------------------- */

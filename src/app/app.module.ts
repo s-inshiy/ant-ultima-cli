@@ -241,6 +241,8 @@ import {
 import {
   LandingComponent
 } from './landing/landing.component';
+import { CallComponent } from './call/call.component';
+import { MessageComponent } from './message/message.component';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -279,6 +281,8 @@ type StoreType = {
     SettingComponent,
     MasterTaskComponent,
     LandingComponent,
+    CallComponent,
+    MessageComponent,
     // ClientBidComponent,
     // ClientComponent,
   ],

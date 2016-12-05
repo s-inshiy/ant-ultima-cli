@@ -344,9 +344,9 @@ Request Modal
   <p-dialog header="Заказать звонок" [(visible)]="dialogReq" [modal]="true" showEffect="fade" [responsive]="true" [draggable]="false"
     [resizable]="false">
     <div class="ui-g form-group">
-      <div class="ui-g-12" style="margin-bottom:20px">
+      <div class="ui-g-12" style="margin-bottom:10px">
         <span class="md-inputfield">
-                <input type="text" pInputText  id="name" [(ngModel)]="request.service">
+                <input type="text" pInputText  id="service" [(ngModel)]="request.service">
                 <label>Услуга</label>
             </span>
       </div>
@@ -354,6 +354,12 @@ Request Modal
         <span class="md-inputfield">
                 <p-inputMask mask="+380999999999" placeholder="Телефон" [(ngModel)]="request.phone"></p-inputMask>
           </span>
+      </div>
+    <div class="ui-g-12" style="margin-bottom:10px">
+        <span class="md-inputfield">
+                <input type="text" pInputText  id="email" [(ngModel)]="request.email">
+                <label>Электронный ящик</label>
+            </span>
       </div>
     </div>
     <footer>

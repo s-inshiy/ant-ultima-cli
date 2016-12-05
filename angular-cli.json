@@ -32,7 +32,8 @@
       "assets/demo/js/moment.js",
       "assets/demo/js/fullcalendar.js",
       "assets/demo/js/quill.min.js",
-      "../node_modules/slick-carousel/slick/slick.min.js"
+      "../node_modules/slick-carousel/slick/slick.min.js",
+      "../node_modules/socket.io-client/dist/socket.io.min.js"
     ],
     "environments": {
       "source": "environments/environment.ts",

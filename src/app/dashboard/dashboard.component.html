@@ -215,13 +215,29 @@
               </a>
             </li>
             <!-- ------------------------------------
+    Menu Item Call
+------------------------------------ -->
+            <li role="menuitem">
+              <a [routerLink]="['/dashboard/messages']" [routerLinkActive]="['active-menulink']" class="ripplelink">
+                <i class="fa ui-icon-comment"></i><span>Сообщения</span>
+              </a>
+            </li>
+            <!-- ------------------------------------
+    Menu Item Message
+------------------------------------ -->
+            <li role="menuitem" *ngIf="(role!='client'&&role!='master')">
+              <a [routerLink]="['/dashboard/calls']" [routerLinkActive]="['active-menulink']" class="ripplelink">
+                <i class="fa ui-icon-phone-in-talk"></i><span>Звонки</span>
+              </a>
+            </li>
+            <!-- ------------------------------------
     Menu Items Tasks
 ------------------------------------ -->
             <li role="menuitem" *ngIf="(role!='client'&&role!='manager')">
               <a [routerLink]="['/dashboard/tasks']" [routerLinkActive]="['active-menulink']" class="ripplelink">
                 <i class="fa ui-icon-loupe"></i><span>Задания</span>
               </a>
-            </li>     
+            </li>
             <!-- ------------------------------------
     Menu Items Address
 ------------------------------------ -->
@@ -289,7 +305,6 @@
                 </li>
               </ul>
             </li>
-
             <!-- ------------------------------------
     Menu Items Landing
 ------------------------------------ -->
@@ -306,7 +321,6 @@
                 <i class="fa ui-icon-settings"></i><span>Настройки</span>
               </a>
             </li>
-
             <!-- ------------------------------------
     Menu Items Logout
 ------------------------------------ -->

@@ -121,9 +121,9 @@ export class LandingComponent implements OnInit {
     // console.log(this.request);
   }
 
-  setCall(service: string, phone: string) {
+  setCall(service: string, phone: string, email: string) {
     this.landingService
-      .setCall(this.request.service, this.request.phone)
+      .setCall(this.request.service, this.request.phone, this.request.email)
       .subscribe(
         data => {
           this.resCRUD = data[0].json;
@@ -241,8 +241,9 @@ class NewRegistration implements Registration {
 export interface Request {
   service ? : any;
   phone ? : any;
+  email ? : any;
 }
 
 class NewRequest implements Request {
-  constructor(public service ? : any, public phone ? : any) {}
+  constructor(public service ? : any, public phone ?: any, public email ?: any) {}
 }

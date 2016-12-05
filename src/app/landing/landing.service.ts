@@ -51,8 +51,8 @@ export class LandingService {
     });
   }
 
-  setCall(service = '', phone = '') {
-    let body = '&service=' + service + '&phone=' + phone,
+  setCall(service = '', phone = '', email = '') {
+    let body = '&service=' + service + '&phone=' + phone + '&email=' + email,
       headers = new Headers();
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     headers.append('Accept', 'application/json;q=0.9');

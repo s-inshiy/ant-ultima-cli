@@ -8,12 +8,23 @@ import {
   JwtHelper
 } from 'angular2-jwt';
 
+import {
+  DashboardService
+} from './dashboard.service';
+
+import {
+  Message
+} from 'primeng/primeng';
+
 declare var Ultima: any;
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
+  providers: [
+    DashboardService
+  ]
 })
 
 export class DashboardComponent implements AfterViewInit {
@@ -32,11 +43,15 @@ export class DashboardComponent implements AfterViewInit {
 
   role: string;
 
-  constructor(private el: ElementRef) {}
+  messages: any[] = [];
+  msgs: Message[] = [];
+
+  constructor(private el: ElementRef, private dashboardService: DashboardService) {}
 
   ngAfterViewInit() {
     Ultima.init(this.el.nativeElement);
     this.getToken();
+    this.socketMsgs();
   }
 
   changeTheme(event, theme) {
@@ -53,5 +68,16 @@ export class DashboardComponent implements AfterViewInit {
     this.role = this.jwtHelper.decodeToken(this.token).rol;
   }
 
+  socketMsgs() {
+    this.dashboardService
+      .socketMsgs().subscribe(message => {
+        this.msgs.push({
+          severity: 'info',
+          summary: message[0].senderRole,
+          detail: message[0].text
+        });
+        console.log(message);
+      });
+  }
 
 }

@@ -49,11 +49,14 @@ export class SettingComponent implements OnInit {
   street: Search = new SearchStreet();
   schedule: Schedule = new NewSсhedule();
   phone: Search = new SearchStreet();
+  area: Search = new SearchStreet();
+  settlement: Search = new SearchStreet();
 
   dialog: boolean;
   dialogAccount: boolean;
   dialogPhone: boolean;
   dialogAddress: boolean;
+  showArea: boolean = false;
   resCRUD: any;
 
   token: string;
@@ -128,8 +131,7 @@ export class SettingComponent implements OnInit {
       );
   }
 
-  updateProfile(firstName ? : string, secondName ? : string, patronymic ?
-    :
+  updateProfile(firstName ? : string, secondName ? : string, patronymic ? :
     string, phone ? : string, skype ? : string, birthday ? : string) {
     this.settingService
       .updateProfile(this.profile.firstName, this.profile.secondName,
@@ -277,8 +279,38 @@ export class SettingComponent implements OnInit {
   onRowSelect(event: any) {
     this.address.id = event.data.id;
     this.address.street = event.data.label;
-    console.log(event);
+    // console.log(event);
   }
+
+  // addressSelect(event: any) {
+  //   if (event.name) {
+  //     this.street.id = event.name;
+  //   }
+  //   this.street.id = this.street.complete;
+  //   console.log(this.street.id);
+  // }
+
+    searchAreas(event: any) {
+    this.settingService
+      .searchAreas(event.query)
+      .subscribe(
+        data => {
+          this.area.result = data[0].search.results;
+        },
+        err => console.error(err),
+      );
+  }
+
+  // searchSettlements(event: any) {
+  //   this.settingService
+  //     .searchSettlement(event.query)
+  //     .subscribe(
+  //       data => {
+  //         this.settlement.result = data[0].search.results;
+  //       },
+  //       err => console.error(err),
+  //     );
+  // }
 
   showAddress() {
     this.dialogAddress = true;
@@ -301,22 +333,37 @@ export class SettingComponent implements OnInit {
       .searchStreet(event.query)
       .subscribe(
         data => {
+          // if (this.street.result = data[0].search.results.lenght <= 1) {
+          //   this.street.result = data[0].search.results;
+            // console.log(this.street.result);
+            // console.log(this.street.id);
+            // this.showArea = true;
+          // } else {
+          // }
           this.street.result = data[0].search.results;
+          this.street.id = this.street.complete;
+          // if ( this.street.result = data[0].search.results.lenght) {
+          //   console.log('-------------------------');
+          // }
+
         },
         err => console.error(err),
-        // () => console.log('Street search...')
+        () => console.log(this.street.id)
       );
   }
 
-  createAddress(id: string, house: string, isDefault: any, description ? : any) {
+  createAddress(id: string, house: string, isDefault: any, description ? : any, areaId ?: any) {
     this.settingService
-      .createAddress(this.street.id, this.address.house, this.address.isDefault, this.address.description)
+      .createAddress(this.street.id, this.address.house, this.address.isDefault, this.address.description, this.address.area)
       .subscribe(
         data => {
           this.resCRUD = data[0].json;
         },
         err => console.error(err),
         () => {
+          this.address = new NewAddress();
+          this.street = new SearchStreet();
+          this.area = new SearchStreet();
           this.getAddress();
           this.dialogAddress = false;
           this.msgs = [];
@@ -388,14 +435,16 @@ class NewAccount implements Account {
 export interface Address {
   id ? : any;
   street ? : any;
+  area ?: any;
+  settlement ?: any;
   house ? : string;
   isDefault: boolean;
   description ? : string;
 }
 
 class NewAddress implements Address {
-  constructor(public id ? : any, public house ? : string, public street ? : string,
-    public isDefault = false, public description ? : string) {}
+  constructor(id ? : any,  house ? : string,  street ? : string, area ?: string, settlement ?: string,
+    public isDefault = false, description ? : string) {}
 }
 
 export interface Search {

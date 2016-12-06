@@ -36,9 +36,10 @@ export class SettingService {
 
   }
 
-  createAddress(street_id = '' , house = '', is_default: boolean, description = '') {
+  createAddress(street_id = '' , house = '', is_default: boolean, description = '', areaId= '') {
     let createUrl = 'http://crm.unicweb.com.ua/api/addresses/create',
-      body = '&street_id=' + street_id + '&house=' + house + '&is_default=' + is_default + '&description=' + description;
+      body = '&street_id=' + street_id + '&house=' + house + '&is_default='
+      + is_default + '&description=' + description + '&area_id=' + areaId;
 
     return this.authHttp.post(createUrl, body)
       .map((res: Response) => {
@@ -142,6 +143,27 @@ export class SettingService {
           json: res.json()
         }];
       });
+  }
+
+  searchAreas(query = '', areasIds: number[] | string = '') {
+    let areaUrl = 'http://crm.unicweb.com.ua/ajax/search/areas',
+      areaQuery = '?q=' + query + '&not_id=' + areasIds;
+
+    return this.authHttp.get(areaUrl + areaQuery).map((res: Response) => {
+      return [{
+        search: res.json()
+      }];
+    });
+  }
+
+  searchSettlement(query: string) {
+    let settlementUrl = 'http://crm.unicweb.com.ua/ajax/search/settlements',
+      settlementQuery = `?q=${query}`;
+    return this.authHttp.get(settlementUrl + settlementQuery).map((res: Response) => {
+      return [{
+        search: res.json()
+      }];
+    });
   }
 
 }

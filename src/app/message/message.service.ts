@@ -6,23 +6,23 @@ import {
   Response
 } from '@angular/http';
 
-import {
-  Observable
-} from 'rxjs/Observable';
-import 'rxjs/add/observable/from';
-import 'rxjs/add/operator/map';
+// import {
+//   Observable
+// } from 'rxjs/Observable';
+// import 'rxjs/add/observable/from';
+// import 'rxjs/add/operator/map';
 
 import {
   AuthHttp
 } from 'angular2-jwt';
 
-import * as io from 'socket.io-client';
+// import * as io from 'socket.io-client';
 
 @Injectable()
 export class MessageService {
 
-  private url = 'http://crm.unicweb.com.ua:8092';
-  private socket;
+  // private url = 'http://crm.unicweb.com.ua:8092';
+  // private socket;
 
   token = localStorage.getItem('id_token');
 
@@ -39,20 +39,20 @@ export class MessageService {
     });
   }
 
-  socketMsgs() {
-    let observable = new Observable(observer => {
-      this.socket = io(this.url, {
-        query: 'auth_token=' + this.token
-      });
-      this.socket.on('message', (data) => {
-        observer.next(data);
-      });
-      return () => {
-        this.socket.disconnect();
-      };
-    });
-    return observable;
-  }
+  // socketMsgs() {
+  //   let observable = new Observable(observer => {
+  //     this.socket = io(this.url, {
+  //       query: 'auth_token=' + this.token
+  //     });
+  //     this.socket.on('message', (data) => {
+  //       observer.next(data);
+  //     });
+  //     return () => {
+  //       this.socket.disconnect();
+  //     };
+  //   });
+  //   return observable;
+  // }
 
   searchUsers(query: string) {
     let baseUrl = 'http://crm.unicweb.com.ua/api/users/search/',

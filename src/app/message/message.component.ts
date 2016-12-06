@@ -7,6 +7,11 @@ import {
   MessageService
 } from './message.service';
 
+import {
+  Message,
+  // MenuItem,
+} from 'primeng/primeng';
+
 @Component({
   selector: 'app-message',
   templateUrl: './message.component.html',
@@ -17,8 +22,9 @@ import {
 })
 export class MessageComponent implements OnInit {
 
+  // msgs: any[] = [];
   messages: any[] = [];
-  msgs: any[] = [];
+  msgs: Message[];
   connection;
   message: Msgs = new NewMsgs();
   pag: Paginate = new NewPaginate();
@@ -29,7 +35,7 @@ export class MessageComponent implements OnInit {
   constructor(private messageService: MessageService) {}
 
   ngOnInit() {
-    this.socketMsgs();
+    // this.socketMsgs();
     this.getMsgs(this.pag.curr);
   }
 
@@ -39,6 +45,7 @@ export class MessageComponent implements OnInit {
       .subscribe(
         data => {
           this.messages = data[0].json.data;
+          this.pag.count = data[0].json['total-count'];
         },
         err => console.log(err),
         () => {
@@ -47,21 +54,27 @@ export class MessageComponent implements OnInit {
       );
   }
 
-  socketMsgs() {
-    this.messageService
-      .socketMsgs().subscribe(message => {
-        this.msgs.push({
-          severity: 'info',
-          summary: message[0].sender,
-          detail: message[0].text
-        });
-        // console.log(message);
-      });
+  // Paginate
+  paginate(event: any) {
+    this.pag.curr = Math.ceil(event.first / 20 + 1);
+    this.getMsgs(this.pag.curr);
   }
 
-showMsgs() {
-  this.dialogMsgs = true;
-}
+  // socketMsgs() {
+  //   this.messageService
+  //     .socketMsgs().subscribe(message => {
+  //       this.msgs.push({
+  //         severity: 'info',
+  //         summary: message[0].senderRole,
+  //         detail: message[0].text
+  //       });
+  //       // console.log(message);
+  //     });
+  // }
+
+  showMsgs() {
+    this.dialogMsgs = true;
+  }
 
   searchUsers(event: any) {
     this.messageService
@@ -83,37 +96,46 @@ showMsgs() {
         },
         err => console.log(err),
         () => {
-          this.message = new NewMsgs();
-          this.dialogMsgs = false;
-        }
+          // if (this.resCRUD.errors.length < 1) {
+            this.msgs = [];
+            this.dialogMsgs = false;
+            this.msgs.push({
+              severity: 'info',
+              summary: 'Сообщения отправленно',
+              detail: this.message.text
+            });
+            this.message = new NewMsgs();
+            this.users = new SearchUsers();
+          }
+        // }
       );
   }
 
 }
 
 export interface Paginate {
-  count ?: string[];
+  count ? : string[];
   curr: number;
 }
 
 class NewPaginate implements Paginate {
-  constructor(public count ?: string[], public curr = 1) {}
+  constructor(public count ? : string[], public curr = 1) {}
 }
 
 export interface Search {
-  complete ?: string;
-  result ?: string[];
+  complete ? : string;
+  result ? : string[];
 }
 
 class SearchUsers implements Search {
-  constructor(public complete ?: string, public result ?: string[]) {}
+  constructor(public complete ? : string, public result ? : string[]) {}
 }
 
 export interface Msgs {
-  id ?: any;
-  text ?: string;
+  id ? : any;
+  text ? : string;
 }
 
 class NewMsgs implements Msgs {
-  constructor( id ?: any, text ?: string) {}
+  constructor(id ? : any, text ? : string) {}
 }

@@ -1,6 +1,7 @@
 <div [ngClass]="{'layout-wrapper':true,'layout-compact':layoutCompact}">
   <div [ngClass]="{'layout-container':true,'menu-layout-static':(layoutMode=='static'||layoutMode=='horizontal'),
             'menu-layout-overlay':(layoutMode=='overlay'),'menu-layout-horizontal':(layoutMode=='horizontal')}">
+    <p-growl [value]="msgs"></p-growl>
     <!-- Top Bar -->
     <div class="topbar clearfix">
       <div class="topbar-left">
@@ -219,7 +220,7 @@
 ------------------------------------ -->
             <li role="menuitem">
               <a [routerLink]="['/dashboard/messages']" [routerLinkActive]="['active-menulink']" class="ripplelink">
-                <i class="fa ui-icon-comment"></i><span>Сообщения</span>
+                <i class="fa ui-icon-comment"></i><span>Уведомления</span>
               </a>
             </li>
             <!-- ------------------------------------

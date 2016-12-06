@@ -232,7 +232,11 @@
     <div class="ui-g form-group">
       <div class="ui-g-12" style="margin-bottom:20px">
         <p-autoComplete [(ngModel)]="street.complete" [suggestions]="street.result" (completeMethod)="searchStreet($event)" field="name"
-          [size]="27" placeholder="Поиск улицы" [minLength]="3" (onSelect)="street.id = $event.id" required></p-autoComplete>
+          [size]="27" placeholder="Поиск улицы" [minLength]="3" (onSelect)="street.id = $event.name" required></p-autoComplete>
+      </div>
+      <div class="ui-g-12" style="margin-bottom:20px" *ngIf="showArea"  >
+        <p-autoComplete [(ngModel)]="area.complete" [suggestions]="area.result" (completeMethod)="searchAreas($event)" field="name"
+          [size]="27" placeholder="Поиск нас. пункта" [minLength]="3" (onSelect)="address.area = $event.id" required></p-autoComplete>
       </div>
       <div class="ui-g-12" style="margin-bottom:20px">
         <span class="md-inputfield">

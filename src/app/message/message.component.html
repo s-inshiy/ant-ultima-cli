@@ -25,8 +25,8 @@
     Modal Msgs
 ------------------------------------ -->
 <p-dialog header="Уведомление" [(visible)]="dialogMsgs" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getMsgs(pag.curr)">
-  <div class="ui-g form-group">
-    <div class="ui-g-12" style="margin-bottom:20px">
+  <div class="ui-g form-group" style="margin-bottom:20px">
+    <div class="ui-g-12">
       <p-autoComplete [(ngModel)]="users.complete" [suggestions]="users.result" (completeMethod)="searchUsers($event)" field="name"
         [size]="27" placeholder="Поиск пользователя" [minLength]="3" (onSelect)="message.id = $event.id" required></p-autoComplete>
     </div>

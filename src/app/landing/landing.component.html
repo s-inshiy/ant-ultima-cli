@@ -29,7 +29,7 @@
           <a href="tel:0532-57-98-32" class="header__tel">(095) 530-16-16</a>
           <a href="tel:0532-57-98-32" class="header__tel">(093) 530-16-16</a>
         </div>
-        <button type="button" class="ui-ant-button ui-ant-button--small">Заказать звонок</button>
+        <button type="button" (click)="goLogin()" class="ui-ant-button ui-ant-button--small">Войти в систему</button>
       </div>
     </div>
     <!-- ------------------------------------
@@ -291,8 +291,11 @@ Registration Modal
     [resizable]="false">
     <div class="ui-g form-group">
       <div class="ui-g-12" style="margin-bottom:20px">
+      <p-dropdown [options]="types" (onChange)="registration.type = $event.value"  [(ngModel)]="type"  [style]="{'width':'90%'}"></p-dropdown>
+    </div>
+      <div class="ui-g-12" style="margin-bottom:20px">
         <span class="md-inputfield">
-                <input type="text" pInputText  id="name" [(ngModel)]="registration.secondName">
+                <input type="text" pInputText  id="name"  [(ngModel)]="registration.secondName">
                 <label>Фамилия</label>
             </span>
       </div>
@@ -334,7 +337,7 @@ Registration Modal
     </div>
     <footer>
       <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-        <button type="button" pButton (click)="setRegistration()" label="Отправить" [disabled]="!(registration.secondName&&registration.firstName)"></button>
+        <button type="button" pButton (click)="setRegistration()" label="Отправить" [disabled]="!(registration.secondName&&registration.firstName&&registration.type)"></button>
       </div>
     </footer>
   </p-dialog>

@@ -44,7 +44,8 @@ export class DashboardComponent implements AfterViewInit {
   role: string;
 
   messages: any[] = [];
-  msgs: Message[] = [];
+  msgs: Message[];
+  message: Msgs = new NewMsgs();
 
   constructor(private el: ElementRef, private dashboardService: DashboardService) {}
 
@@ -70,14 +71,34 @@ export class DashboardComponent implements AfterViewInit {
 
   socketMsgs() {
     this.dashboardService
-      .socketMsgs().subscribe(message => {
-        this.msgs.push({
-          severity: 'info',
-          summary: message[0].senderRole,
-          detail: message[0].text
-        });
-        console.log(message);
-      });
+      .socketMsgs()
+      .subscribe(
+        message => {
+          this.message = message[0];
+          this.msgs = [];
+          this.msgs.push({
+            severity: 'info',
+            summary: this.message.senderRole,
+            detail: this.message.text
+          });
+          this.message = new NewMsgs();
+        },
+        err => console.log(err)
+      );
   }
 
+  logout(): void {
+    this.token = null;
+    localStorage.removeItem('id_token');
+  }
+
+}
+
+export interface Msgs {
+  senderRole ? : string;
+  text ? : string;
+}
+
+class NewMsgs implements Msgs {
+  constructor(senderRole = '', text = '') {}
 }

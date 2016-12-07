@@ -33,7 +33,6 @@ export class SettingComponent implements OnInit {
   addresses: any[];
 
   jwtHelper: JwtHelper = new JwtHelper();
-
   ru: any;
 
   // Context Menu
@@ -56,7 +55,7 @@ export class SettingComponent implements OnInit {
   dialogAccount: boolean;
   dialogPhone: boolean;
   dialogAddress: boolean;
-  showArea: boolean = false;
+  showArea: boolean = true;
   resCRUD: any;
 
   token: string;
@@ -282,13 +281,14 @@ export class SettingComponent implements OnInit {
     // console.log(event);
   }
 
-  // addressSelect(event: any) {
-  //   if (event.name) {
-  //     this.street.id = event.name;
-  //   }
-  //   this.street.id = this.street.complete;
-  //   console.log(this.street.id);
-  // }
+  streetSelected(event: any) {
+    // if (event.name) {
+      this.street.id = event.name;
+      this.showArea = false;
+    // }
+    // this.street.id = this.street.complete;
+    console.log(this.street.id);
+  }
 
     searchAreas(event: any) {
     this.settingService
@@ -300,17 +300,6 @@ export class SettingComponent implements OnInit {
         err => console.error(err),
       );
   }
-
-  // searchSettlements(event: any) {
-  //   this.settingService
-  //     .searchSettlement(event.query)
-  //     .subscribe(
-  //       data => {
-  //         this.settlement.result = data[0].search.results;
-  //       },
-  //       err => console.error(err),
-  //     );
-  // }
 
   showAddress() {
     this.dialogAddress = true;
@@ -365,6 +354,7 @@ export class SettingComponent implements OnInit {
           this.street = new SearchStreet();
           this.area = new SearchStreet();
           this.getAddress();
+          this.showArea = true;
           this.dialogAddress = false;
           this.msgs = [];
           this.msgs.push({

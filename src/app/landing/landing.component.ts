@@ -4,16 +4,21 @@ import {
 } from '@angular/core';
 
 import {
-  PageScrollConfig
-} from 'ng2-page-scroll';
+  Router
+} from '@angular/router';
 
 import {
   LandingService
 } from './landing.service';
 
 import {
-  Message
+  Message,
+  SelectItem
 } from 'primeng/primeng';
+
+import {
+  PageScrollConfig
+} from 'ng2-page-scroll';
 
 declare var $: any;
 
@@ -34,6 +39,7 @@ export class LandingComponent implements OnInit {
   titles: any[] = [];
   lists: any[] = [];
 
+
   registration: Registration = new NewRegistration();
   request: Request = new NewRequest();
 
@@ -42,8 +48,11 @@ export class LandingComponent implements OnInit {
 
   resCRUD: any;
   msgs: Message[];
+  types: SelectItem[];
+  type: any;
+  token: string;
 
-  constructor(private landingService: LandingService) {}
+  constructor(private landingService: LandingService, private router: Router) {}
 
   ngOnInit() {
     //  Toggle Menu
@@ -105,6 +114,20 @@ export class LandingComponent implements OnInit {
     PageScrollConfig.defaultScrollOffset = 100;
     // Services
     this.getServices();
+
+    this.types = [];
+    this.types.push({
+      label: 'Выберите роль',
+      value: ''
+    });
+    this.types.push({
+      label: 'Мастер',
+      value: 'master'
+    });
+    this.types.push({
+      label: 'Клиент',
+      value: 'client'
+    });
   }
 
   // Active Card
@@ -187,15 +210,20 @@ export class LandingComponent implements OnInit {
     this.dialogReg = true;
   }
 
+  goLogin() {
+    this.router.navigate(['/login']);
+  }
+
   setRegistration(username: string, password: string, email: string, firstName: string,
     secondName: string, patronymic: string, phone: string) {
     this.landingService
-      .setRegistration(this.registration.username, this.registration.password,
+      .setRegistration(this.registration.type, this.registration.username, this.registration.password,
         this.registration.email, this.registration.firstName, this.registration.secondName,
         this.registration.patronymic, this.registration.phone)
       .subscribe(
         data => {
           this.resCRUD = data[0].json;
+          this.token = data[0].json['token']
         },
         err => console.error(err),
         () => {
@@ -216,6 +244,12 @@ export class LandingComponent implements OnInit {
               detail: this.resCRUD.errors[i]
             });
           }
+          // Set token
+          if (this.token) {
+              localStorage.setItem('id_token', this.token);
+              this.router.navigate(['/dashboard/settings']);
+              return true;
+          }
         }
       );
   }
@@ -223,6 +257,7 @@ export class LandingComponent implements OnInit {
 }
 
 export interface Registration {
+  type ? : any;
   username ? : any;
   password ? : any;
   email ? : any;
@@ -233,7 +268,7 @@ export interface Registration {
 }
 
 class NewRegistration implements Registration {
-  constructor(public username ? : any, public password ? : any,
+  constructor(public type ? : any, public username ? : any, public password ? : any,
     public email ? : any, public firstName ? : any,
     public secondName ? : any, public patronymic ? : any, public phone ? : any) {}
 }
@@ -245,5 +280,5 @@ export interface Request {
 }
 
 class NewRequest implements Request {
-  constructor(public service ? : any, public phone ?: any, public email ?: any) {}
+  constructor(public service ? : any, public phone ? : any, public email ? : any) {}
 }

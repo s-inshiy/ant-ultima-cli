@@ -107,14 +107,21 @@ export class UserComponent implements OnInit {
       .subscribe(
         data => {
           this.items = data[0].json.data;
-          this.pag.count = data[0].json['page-count'];
+          this.pag.count = data[0].json['total-count'];
+          // console.log(data[0].json);
         },
         err => console.error(err),
         () => {
-          // console.log('GET');
         }
       );
   }
+
+    // Paginate
+  paginate(event: any) {
+    this.pag.curr = Math.ceil(event.first / 20 + 1);
+    this.getUsers(this.pag.curr);
+  }
+
 
   createUser(firstName: string, secondName: string, patronymic: string, email: string, phone: string, username: string, password: string) {
     this.userService

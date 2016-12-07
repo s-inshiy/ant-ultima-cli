@@ -33,9 +33,9 @@ export class LandingService {
     });
   }
 
-  setRegistration(username = '', password = '', email = '',
+  setRegistration( type= '', username = '', password = '', email = '',
     firstName = '', secondName = '', patronymic = '', phone = '') {
-    let body = '&username=' + username + '&password=' + password +
+    let body =  '&role=' + type +  '&username=' + username + '&password=' + password +
       '&email=' + email + '&first_name=' + firstName + '&second_name=' +
       secondName + '&patronymic=' + patronymic + '&phone=' + encodeURIComponent(phone),
       headers = new Headers();

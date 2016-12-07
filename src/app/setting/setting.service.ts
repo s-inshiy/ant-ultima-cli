@@ -156,14 +156,14 @@ export class SettingService {
     });
   }
 
-  searchSettlement(query: string) {
-    let settlementUrl = 'http://crm.unicweb.com.ua/ajax/search/settlements',
-      settlementQuery = `?q=${query}`;
-    return this.authHttp.get(settlementUrl + settlementQuery).map((res: Response) => {
-      return [{
-        search: res.json()
-      }];
-    });
-  }
+  // searchSettlement(query: string) {
+  //   let settlementUrl = 'http://crm.unicweb.com.ua/ajax/search/settlements',
+  //     settlementQuery = `?q=${query}`;
+  //   return this.authHttp.get(settlementUrl + settlementQuery).map((res: Response) => {
+  //     return [{
+  //       search: res.json()
+  //     }];
+  //   });
+  // }
 
 }

@@ -38,6 +38,11 @@ export class LandingComponent implements OnInit {
 
   titles: any[] = [];
   lists: any[] = [];
+  subServices: any[] = [];
+  categories: any[] = [];
+
+one: any[] = [];
+two: any[] = [];
 
 
   registration: Registration = new NewRegistration();
@@ -116,17 +121,17 @@ export class LandingComponent implements OnInit {
     this.getServices();
 
     this.types = [];
+    // this.types.push({
+    //   label: 'Выберите роль',
+    //   value: ''
+    // });
     this.types.push({
-      label: 'Выберите роль',
-      value: ''
-    });
-    this.types.push({
-      label: 'Мастер',
-      value: 'master'
-    });
-    this.types.push({
-      label: 'Клиент',
+      label: 'Воспользуюсь услугами',
       value: 'client'
+    });
+    this.types.push({
+      label: 'Предоставляю услуги',
+      value: 'master'
     });
   }
 
@@ -180,27 +185,61 @@ export class LandingComponent implements OnInit {
       .subscribe(
         data => {
           this.services = data[0].json;
+          console.log(this.services);
         },
         err => console.error(err),
         () => {
           let i = 0;
           for (i; i < this.services.length; i++) {
             // console.log(this.services[i].data.name + '-------------------- ');
-            let a = 0;
-            for (a; a < this.services[i].children.length; a++) {
-              this.lists.push({
-                name: this.services[i].children[a].data.name
-              });
-              //  console.log(this.services[i].children[a].data.name);
+            if (this.services[i].children) {
+
+              let a = 0;
+
+              for (a; a < this.services[i].children.length; a++) {
+                this.lists.push({
+                  name: this.services[i].children[a].data.name,
+                  categories: this.categories
+                });
+
+                if (this.services[i].children[a].children) {
+                  let x = 0;
+
+                  for (x; x < this.services[i].children[a].children.length; x++) {
+                    this.categories.push({
+                      name: this.services[i].children[a].children[x].data.name
+                    });
+                  };
+                this.categories = [];
+                // console.log(this.categories);
+                // this.one = this.categories;
+                // for (b; this.subServices.length; b++) {
+                //   this.categories.push({
+                //     name: this.subServices[b].name
+                //   });
+                // }
+                // this.titles.push({
+                //   categories: this.categories
+                // });
+                }
+                // this.two = this.one;
+                // this.one = [];
+              }
+
             }
+
             this.titles.push({
               id: i,
               name: this.services[i].data.name,
               img: i + 1,
               works: this.lists,
               show: false,
+              categories: this.lists,
             });
+
+            console.log(this.lists);
             this.lists = [];
+            // this.categories = [];
           }
         }
       );
@@ -246,9 +285,9 @@ export class LandingComponent implements OnInit {
           }
           // Set token
           if (this.token) {
-              localStorage.setItem('id_token', this.token);
-              this.router.navigate(['/dashboard/settings']);
-              return true;
+            localStorage.setItem('id_token', this.token);
+            this.router.navigate(['/dashboard/settings']);
+            return true;
           }
         }
       );
@@ -281,4 +320,18 @@ export interface Request {
 
 class NewRequest implements Request {
   constructor(public service ? : any, public phone ? : any, public email ? : any) {}
+}
+
+
+export interface Card {
+  id ? : any;
+  name ? : any;
+  img ? : any;
+  works ?: any;
+  show ?: any;
+  categories ?: any;
+}
+
+class NewCard implements Card {
+  constructor(id ?: any, name ?: any, img ?: any, works ?: any, show ?: any, categories ?: any) {}
 }

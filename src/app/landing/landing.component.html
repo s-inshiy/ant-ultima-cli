@@ -125,7 +125,7 @@ Service
 ------------------------------------ -->
       <div class="container">
         <div class="row">
-          <section class="service" id="services">
+          <!--<section class="service" id="services">
             <div class="col-md-12 text-center">
               <h3 class="ui-ant-title ui-ant-title--greeting">Наши услуги</h3>
             </div>
@@ -162,6 +162,120 @@ Service
                             <li *ngFor="let work of title.works;  let i = index;" (click)="getCall($event, i, title.works)">
                               {{work.name}}
                             </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>-->
+          <section class="service" id="services">
+            <div class="col-md-12 text-center">
+              <h3 class="ui-ant-title ui-ant-title--greeting">Наши услуги</h3>
+            </div>
+            <div class="col-md-3" *ngFor="let title of titles; let i = index;">
+              <div class="service__card">
+                <div class="card" [ngClass]="{'card--active': title.show}">
+                  <div class="card__icon-container">
+                    <div class="card__cell">
+                      <img src="assets/images/{{title.img}}.svg" alt="img" class="card__icon card__icon--stretched">
+                    </div>
+                  </div>
+                  <div class="card__content">
+                    <div class="card__head">
+                      <div class="card__title">
+                        {{title.name}}
+                      </div>
+                      <div class="card__read-more">
+                        <button type="button" class="button-read-more" (click)="isActive(i)">
+                          <img src="assets/images/plus.svg" alt="plus">
+                       </button>
+                      </div>
+                      <div class="card__control-container">
+                        <button class="button-close-card" (click)="title.show = !title.show;">
+                            <img src="assets/images/close.svg" alt="plus">
+                      </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card__tabs">
+                    <div class="card__tabs-content-wrapper">
+                      <div class="card__tabs-content">
+                        <div class="card-tab-content__description">
+                          <ul class="card__list accordion">
+                            <!--<li *ngFor="let work of title.works;  let i = index;" (click)="getCall($event, i, title.works)">
+                              {{work.name}}
+                            </li>-->
+                            <li  *ngFor="let work of title.works;  let i = index;">
+                              <input type="checkbox" checked>
+                              <i></i>
+                              <h3 class="accordion__title"> {{work.name}}</h3>
+                              <ul class="accordion__item">
+                                <li *ngFor="let subCategory of work.categories;  let i = index;">{{subCategory.name}}</li>
+                              </ul>
+                            </li>
+                            <!--<li>
+                              <input type="checkbox" checked>
+                              <i></i>
+                              <h3 class="accordion__title">Красота и Здоровя</h3>
+                              <ul class="accordion__item">
+                                <li>1</li>
+                                <li>2</li>
+                                <li>3</li>
+                                <li>4</li>
+                                <li>5</li>
+                              </ul>
+                            </li>
+                            <li>
+                              <input type="checkbox" checked>
+                              <i></i>
+                              <h3 class="accordion__title">Красота и Здоровя</h3>
+                              <ul class="accordion__item">
+                                <li>1</li>
+                                <li>2</li>
+                                <li>3</li>
+                                <li>4</li>
+                                <li>5</li>
+                              </ul>
+                            </li>
+                            <li>
+                              <input type="checkbox" checked>
+                              <i></i>
+                              <h3 class="accordion__title">Красота и Здоровя</h3>
+                              <ul class="accordion__item">
+                                <li>1</li>
+                                <li>2</li>
+                                <li>3</li>
+                                <li>4</li>
+                                <li>5</li>
+                              </ul>
+                            </li>
+                            <li>
+                              <input type="checkbox" checked>
+                              <i></i>
+                              <h3 class="accordion__title">Красота и Здоровя</h3>
+                              <ul class="accordion__item">
+                                <li>1</li>
+                                <li>2</li>
+                                <li>3</li>
+                                <li>4</li>
+                                <li>5</li>
+                              </ul>
+                            </li>
+                            <li>
+                              <input type="checkbox" checked>
+                              <i></i>
+                              <h3 class="accordion__title">Красота и Здоровя</h3>
+                              <ul class="accordion__item">
+                                <li>1</li>
+                                <li>2</li>
+                                <li>3</li>
+                                <li>4</li>
+                                <li>5</li>
+                              </ul>
+                            </li>-->
                           </ul>
                         </div>
                       </div>
@@ -291,8 +405,8 @@ Registration Modal
     [resizable]="false">
     <div class="ui-g form-group">
       <div class="ui-g-12" style="margin-bottom:20px">
-      <p-dropdown [options]="types" (onChange)="registration.type = $event.value"  [(ngModel)]="type"  [style]="{'width':'90%'}"></p-dropdown>
-    </div>
+        <p-dropdown [options]="types" (onChange)="registration.type = $event.value" [(ngModel)]="type" [style]="{'width':'90%'}"></p-dropdown>
+      </div>
       <div class="ui-g-12" style="margin-bottom:20px">
         <span class="md-inputfield">
                 <input type="text" pInputText  id="name"  [(ngModel)]="registration.secondName">
@@ -358,7 +472,7 @@ Request Modal
                 <p-inputMask mask="+380999999999" placeholder="Телефон" [(ngModel)]="request.phone"></p-inputMask>
           </span>
       </div>
-    <div class="ui-g-12" style="margin-bottom:10px">
+      <div class="ui-g-12" style="margin-bottom:10px">
         <span class="md-inputfield">
                 <input type="text" pInputText  id="email" [(ngModel)]="request.email">
                 <label>Электронный ящик</label>

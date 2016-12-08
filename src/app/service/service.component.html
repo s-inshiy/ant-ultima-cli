@@ -36,9 +36,9 @@
       <p-autoComplete id="acSimple" [(ngModel)]="parent.complete" [suggestions]="parent.result" (completeMethod)="searchService($event)" field="name"
         [size]="27" placeholder="Родительская категория" [minLength]="3" (onSelect)="parent.id = $event.id" required></p-autoComplete>
     </div>
-    <!--<div class="ui-g-12" style="margin-bottom:30px">
+    <div class="ui-g-12" style="margin-bottom:30px">
       <p-checkbox [(ngModel)]="checked" binary="true" label="Работа"></p-checkbox>
-    </div>-->
+    </div>
     <div class="ui-g-12">
       <textarea rows="5" cols="27" pInputTextarea placeholder="Описание" [(ngModel)]="service.description"></textarea>
     </div>

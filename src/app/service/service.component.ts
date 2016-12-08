@@ -192,17 +192,17 @@ export class ServiceComponent implements OnInit {
   }
 
   deleteService(type: string, id: number) {
-    // type === 'Категория' ? this.deleteCategory(id) : this.deleteWork(id);
-    if (type === 'Тип работ') {
-      this.deleteWork(id);
-    } else {
-      this.msgs = [];
-      this.msgs.push({
-        severity: 'error',
-        summary: 'Ошибка',
-        detail: 'Невозможно удалить родительскую категорию'
-      });
-    }
+    type === 'Категория' ? this.deleteCategory(id) : this.deleteWork(id);
+    // if (type === 'Тип работ') {
+    //   this.deleteWork(id);
+    // } else {
+    //   this.msgs = [];
+    //   this.msgs.push({
+    //     severity: 'error',
+    //     summary: 'Ошибка',
+    //     detail: 'Невозможно удалить родительскую категорию'
+    //   });
+    // }
   }
 
   updateWork(id: number, name: string, description: string) {
@@ -271,17 +271,17 @@ export class ServiceComponent implements OnInit {
   }
 
   updateService(id: number, name: string, description: string, type: string) {
-    // type === 'Категория' ? this.updateCategory(id, name, description) : this.updateWork(id, name, description);
-    if (type === 'Тип работ') {
-      this.updateWork(id, name, description);
-    } else {
-      this.msgs = [];
-      this.msgs.push({
-        severity: 'error',
-        summary: 'Ошибка',
-        detail: 'Невозможно редактироватьы родительскую категорию'
-      });
-    }
+    type === 'Категория' ? this.updateCategory(id, name, description) : this.updateWork(id, name, description);
+    // if (type === 'Тип работ') {
+    //   this.updateWork(id, name, description);
+    // } else {
+    //   this.msgs = [];
+    //   this.msgs.push({
+    //     severity: 'error',
+    //     summary: 'Ошибка',
+    //     detail: 'Невозможно редактироватьы родительскую категорию'
+    //   });
+    // }
   }
 
 }

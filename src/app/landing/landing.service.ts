@@ -10,14 +10,10 @@ import {
 import 'rxjs/add/observable/from';
 import 'rxjs/add/operator/map';
 
-import {
-  AuthHttp
-} from 'angular2-jwt';
-
 @Injectable()
 export class LandingService {
 
-  constructor(public authHttp: AuthHttp, private http: Http) {}
+  constructor(private http: Http) {}
 
   getServices() {
     let crmUrl = 'http://crm.unicweb.com.ua/api/worktypes-categories/tree',
@@ -33,9 +29,9 @@ export class LandingService {
     });
   }
 
-  setRegistration( type= '', username = '', password = '', email = '',
+  setRegistration(type = '', username = '', password = '', email = '',
     firstName = '', secondName = '', patronymic = '', phone = '') {
-    let body =  '&role=' + type +  '&username=' + username + '&password=' + password +
+    let body = '&role=' + type + '&username=' + username + '&password=' + password +
       '&email=' + email + '&first_name=' + firstName + '&second_name=' +
       secondName + '&patronymic=' + patronymic + '&phone=' + encodeURIComponent(phone),
       headers = new Headers();

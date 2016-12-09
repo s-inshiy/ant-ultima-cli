@@ -3,24 +3,50 @@ import {
 } from '@angular/core';
 import {
   Response,
-  Headers
+  RequestOptionsArgs
 } from '@angular/http';
-import 'rxjs/add/observable/from';
-import 'rxjs/add/operator/map';
-
 import {
-  AuthHttp
+  Router
+} from '@angular/router';
+import {
+  AuthHttp as JwtAuthHttp
 } from 'angular2-jwt';
+import {
+  Observable
+} from 'rxjs/Observable';
+import 'rxjs/add/operator/share';
 
 @Injectable()
 export class ServiceService {
 
-  constructor( public authHttp: AuthHttp) {}
+  constructor(public authHttp: JwtAuthHttp, private router: Router) {}
+
+  private isUnauthorized(status: number): boolean {
+    return status === 0 || status === 401 || status === 403;
+  }
+
+  private authIntercept(response: Observable < Response > ): Observable < Response > {
+    let sharableResponse = response.share();
+    sharableResponse.subscribe(null, (err) => {
+      if (this.isUnauthorized(err.status)) {
+        this.router.navigate(['/login']);
+      }
+    });
+    return sharableResponse;
+  }
+
+  public get(url: string, options ? : RequestOptionsArgs): Observable < Response > {
+    return this.authIntercept(this.authHttp.get(url, options));
+  }
+
+  public post(url: string, body: any, options ?: RequestOptionsArgs): Observable < Response > {
+    return this.authIntercept(this.authHttp.post(url, body, options));
+  }
 
   getServices() {
     let crmUrl = 'http://crm.unicweb.com.ua/api/worktypes-categories/tree';
 
-    return this.authHttp.get(crmUrl).map((res: Response) => {
+    return this.get(crmUrl).map((res: Response) => {
       return [{
         json: res.json()
       }];
@@ -31,7 +57,7 @@ export class ServiceService {
     let streetsUrl = 'http://crm.unicweb.com.ua/ajax/search/worktype-categories',
       queryString = '?q=' + query;
 
-    return this.authHttp.get(streetsUrl + queryString).map((res: Response) => {
+    return this.get(streetsUrl + queryString).map((res: Response) => {
       return [{
         search: res.json()
       }];
@@ -43,7 +69,7 @@ export class ServiceService {
       body = '&name=' + name + '&parent=' + parerntId + '&description=' + description;
 
 
-    return this.authHttp.post(serviceUrl, body)
+    return this.post(serviceUrl, body)
       .map((res: Response) => {
         return [{
           json: res.json()
@@ -55,7 +81,7 @@ export class ServiceService {
     let serviceUrl = 'http://crm.unicweb.com.ua/api/worktypes/create',
           body = '&name=' + name + '&category_id=' + categoryId + '&description=' + description;
 
-    return this.authHttp.post(serviceUrl, body)
+    return this.post(serviceUrl, body)
       .map((res: Response) => {
         return [{
           json: res.json()
@@ -68,7 +94,7 @@ export class ServiceService {
           categoryId = 'id=' + id,
           body = '';
 
-    return this.authHttp.post(crmUrl + categoryId, body)
+    return this.post(crmUrl + categoryId, body)
     .map((res: Response) => {
       return [{
         json: res.json()
@@ -79,11 +105,9 @@ export class ServiceService {
   deleteWork(id: number | string = '') {
     let crmUrl = 'http://crm.unicweb.com.ua/api/worktypes/delete?',
           categoryId = 'id=' + id,
-          body = '',
-          headers = new Headers();
-          headers.append('Accept', 'application/json;q=0.9');
+          body = '';
 
-    return this.authHttp.post(crmUrl + categoryId, body, { headers: headers})
+    return this.post(crmUrl + categoryId, body)
     .map((res: Response) => {
       return [{
         json: res.json()
@@ -96,7 +120,7 @@ export class ServiceService {
           categoryId = 'id=' + id,
           body = '&name=' + name + '&description=' + description;
 
-    return this.authHttp.post(crmUrl + categoryId, body)
+    return this.post(crmUrl + categoryId, body)
       .map((res: Response) => {
         return [{
           json: res.json()
@@ -109,7 +133,7 @@ export class ServiceService {
           workId = 'id=' + id,
           body = '&name=' + name + '&description=' + description;
 
-    return this.authHttp.post(crmUrl + workId, body)
+    return this.post(crmUrl + workId, body)
       .map((res: Response) => {
         return [{
           json: res.json()

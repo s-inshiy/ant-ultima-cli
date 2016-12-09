@@ -3,21 +3,51 @@ import {
 } from '@angular/core';
 import {
   Response,
+  RequestOptionsArgs
 } from '@angular/http';
 import {
-  AuthHttp
+  Router
+} from '@angular/router';
+import {
+  AuthHttp as JwtAuthHttp
 } from 'angular2-jwt';
+import {
+  Observable
+} from 'rxjs/Observable';
+import 'rxjs/add/operator/share';
 
 @Injectable()
 export class SettingService {
 
-  constructor(public authHttp: AuthHttp) {}
+constructor(public authHttp: JwtAuthHttp, private router: Router) {}
+
+  private isUnauthorized(status: number): boolean {
+    return status === 0 || status === 401 || status === 403;
+  }
+
+  private authIntercept(response: Observable < Response > ): Observable < Response > {
+    let sharableResponse = response.share();
+    sharableResponse.subscribe(null, (err) => {
+      if (this.isUnauthorized(err.status)) {
+        this.router.navigate(['/login']);
+      }
+    });
+    return sharableResponse;
+  }
+
+  public get(url: string, options ? : RequestOptionsArgs): Observable < Response > {
+    return this.authIntercept(this.authHttp.get(url, options));
+  }
+
+  public post(url: string, body: any, options ?: RequestOptionsArgs): Observable < Response > {
+    return this.authIntercept(this.authHttp.post(url, body, options));
+  }
 
   // Address
 
   getAddress() {
     let crmUrl = 'http://crm.unicweb.com.ua/api/addresses';
-    return this.authHttp.get(crmUrl).map((res: Response) => {
+    return this.get(crmUrl).map((res: Response) => {
       return [{
         json: res.json()
       }];
@@ -28,7 +58,7 @@ export class SettingService {
     let areaUrl = 'http://crm.unicweb.com.ua/ajax/search/streets',
       areaQuery = `?q=${query}`;
 
-    return this.authHttp.get(areaUrl + areaQuery).map((res: Response) => {
+    return this.get(areaUrl + areaQuery).map((res: Response) => {
       return [{
         search: res.json()
       }];
@@ -41,7 +71,7 @@ export class SettingService {
       body = '&street_id=' + street_id + '&house=' + house + '&is_default='
       + is_default + '&description=' + description + '&area_id=' + areaId;
 
-    return this.authHttp.post(createUrl, body)
+    return this.post(createUrl, body)
       .map((res: Response) => {
         return [{
           json: res.json()
@@ -53,7 +83,7 @@ export class SettingService {
     let deleteUrl = 'http://crm.unicweb.com.ua/api/addresses/delete',
       deleteId = '?id=' + addressId;
 
-    return this.authHttp.post(deleteUrl + deleteId, '')
+    return this.post(deleteUrl + deleteId, '')
       .map((res: Response) => {
         return [{
           delete: res.json
@@ -66,7 +96,7 @@ export class SettingService {
   getPhones() {
     let phoneUrl = 'http://crm.unicweb.com.ua/api/phones';
 
-    return this.authHttp.get(phoneUrl).map((res: Response) => {
+    return this.get(phoneUrl).map((res: Response) => {
       return [{
         json: res.json()
       }];
@@ -77,7 +107,7 @@ export class SettingService {
     let phoneUrl = 'http://crm.unicweb.com.ua/api/phones/create',
       body = '&phone=' + encodeURIComponent(phone);
 
-    return this.authHttp.post(phoneUrl, body)
+    return this.post(phoneUrl, body)
       .map((res: Response) => {
         return [{
           json: res.json()
@@ -89,7 +119,7 @@ export class SettingService {
     let deleteUrl = 'http://crm.unicweb.com.ua/api/phones/delete',
       deleteId = '?id=' + phoneId;
 
-    return this.authHttp.post(deleteUrl + deleteId, '')
+    return this.post(deleteUrl + deleteId, '')
       .map((res: Response) => {
         return [{
           delete: res.json
@@ -102,7 +132,7 @@ export class SettingService {
   getAccount() {
     let accountUrl = 'http://crm.unicweb.com.ua/api/settings/account';
 
-    return this.authHttp.get(accountUrl).map((res: Response) => {
+    return this.get(accountUrl).map((res: Response) => {
       return [{
         json: res.json()
       }];
@@ -113,7 +143,7 @@ export class SettingService {
     let accountUrl = 'http://crm.unicweb.com.ua/api/settings/account',
       body = '&username=' + username + '&email=' + email + '&password=' + password;
 
-    return this.authHttp.post(accountUrl, body)
+    return this.post(accountUrl, body)
       .map((res: Response) => {
         return [{
           json: res.json()
@@ -125,7 +155,7 @@ export class SettingService {
 
   getProfile() {
     let profileUrl = 'http://crm.unicweb.com.ua/api/settings/profile';
-    return this.authHttp.get(profileUrl).map((res: Response) => {
+    return this.get(profileUrl).map((res: Response) => {
       return [{
         json: res.json()
       }];
@@ -137,7 +167,7 @@ export class SettingService {
       body = '&first_name=' + firstName + '&second_name=' + secondName +
        '&patronymic=' + patronymic + '&phone=' + encodeURIComponent(phone) + '&skype=' + skype + '&birthday=' + birthday;
 
-    return this.authHttp.post(profileUrl, body)
+    return this.post(profileUrl, body)
       .map((res: Response) => {
         return [{
           json: res.json()
@@ -149,21 +179,11 @@ export class SettingService {
     let areaUrl = 'http://crm.unicweb.com.ua/ajax/search/areas',
       areaQuery = '?q=' + query + '&not_id=' + areasIds;
 
-    return this.authHttp.get(areaUrl + areaQuery).map((res: Response) => {
+    return this.get(areaUrl + areaQuery).map((res: Response) => {
       return [{
         search: res.json()
       }];
     });
   }
-
-  // searchSettlement(query: string) {
-  //   let settlementUrl = 'http://crm.unicweb.com.ua/ajax/search/settlements',
-  //     settlementQuery = `?q=${query}`;
-  //   return this.authHttp.get(settlementUrl + settlementQuery).map((res: Response) => {
-  //     return [{
-  //       search: res.json()
-  //     }];
-  //   });
-  // }
 
 }

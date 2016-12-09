@@ -125,7 +125,7 @@ export class SettingComponent implements OnInit {
         },
         err => console.error(err),
         () => {
-          console.log(this.profiles);
+          // console.log(this.profiles);
         }
       );
   }

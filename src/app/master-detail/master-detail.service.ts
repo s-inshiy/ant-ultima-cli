@@ -3,25 +3,52 @@ import {
 } from '@angular/core';
 import {
   Response,
+  RequestOptionsArgs
 } from '@angular/http';
-import 'rxjs/add/observable/from';
-import 'rxjs/add/operator/map';
-
 import {
-  AuthHttp
+  Router
+} from '@angular/router';
+import {
+  AuthHttp as JwtAuthHttp
 } from 'angular2-jwt';
+import {
+  Observable
+} from 'rxjs/Observable';
+import 'rxjs/add/operator/share';
 
 
 @Injectable()
 export class MasterDetailService {
 
-  constructor(public authHttp: AuthHttp) {}
+  constructor(public authHttp: JwtAuthHttp, private router: Router) {}
+
+    private isUnauthorized(status: number): boolean {
+    return status === 0 || status === 401 || status === 403;
+  }
+
+  private authIntercept(response: Observable < Response > ): Observable < Response > {
+    let sharableResponse = response.share();
+    sharableResponse.subscribe(null, (err) => {
+      if (this.isUnauthorized(err.status)) {
+        this.router.navigate(['/login']);
+      }
+    });
+    return sharableResponse;
+  }
+
+  public get(url: string, options ? : RequestOptionsArgs): Observable < Response > {
+    return this.authIntercept(this.authHttp.get(url, options));
+  }
+
+  public post(url: string, body: any, options ?: RequestOptionsArgs): Observable < Response > {
+    return this.authIntercept(this.authHttp.post(url, body, options));
+  }
 
   getMasterDetail(id: number | string) {
     let _baseUrl = 'http://crm.unicweb.com.ua/api/masters/view?',
       masterId = '&id=' + id;
 
-    return this.authHttp.get(_baseUrl + masterId).map((res: Response) => {
+    return this.get(_baseUrl + masterId).map((res: Response) => {
       return [{
         json: res.json()
       }];
@@ -32,7 +59,7 @@ export class MasterDetailService {
     let _baseUrl = 'http://crm.unicweb.com.ua/api/masters/add-area?',
       body = '&master_id=' + masterId + '&area_id=' + areaId;
 
-    return this.authHttp.post(_baseUrl, body).map((res: Response) => {
+    return this.post(_baseUrl, body).map((res: Response) => {
       return [{
         json: res.json()
       }];
@@ -43,7 +70,7 @@ export class MasterDetailService {
     let baseUrl = 'http://crm.unicweb.com.ua/api/masters/areas?',
       masterId = '&id=' + id;
 
-    return this.authHttp.get(baseUrl + masterId).map((res: Response) => {
+    return this.get(baseUrl + masterId).map((res: Response) => {
       return [{
         json: res.json()
       }];
@@ -54,7 +81,7 @@ export class MasterDetailService {
     let areaUrl = 'http://crm.unicweb.com.ua/api/areas?',
       areaQuery = '&name=' + query + '&not_id=' + areasIds;
 
-    return this.authHttp.get(areaUrl + areaQuery).map((res: Response) => {
+    return this.get(areaUrl + areaQuery).map((res: Response) => {
       return [{
         search: res.json()
       }];
@@ -67,7 +94,7 @@ export class MasterDetailService {
     let baseUrl = 'http://crm.unicweb.com.ua/api/masters/remove-area?',
       areaId = '&area_id=' + id + '&master_id=' + masterId;
 
-    return this.authHttp.get(baseUrl + areaId).map((res: Response) => {
+    return this.get(baseUrl + areaId).map((res: Response) => {
       return [{
         json: res.json()
       }];
@@ -79,7 +106,7 @@ export class MasterDetailService {
     let baseUrl = 'http://crm.unicweb.com.ua/api/masters/services?',
       masterId = '&id=' + id;
 
-    return this.authHttp.get(baseUrl + masterId).map((res: Response) => {
+    return this.get(baseUrl + masterId).map((res: Response) => {
       return [{
         json: res.json()
       }];
@@ -90,7 +117,7 @@ export class MasterDetailService {
     let streetsUrl = 'http://crm.unicweb.com.ua/ajax/search/worktype',
       streetsQuery = '?q=' + query;
 
-    return this.authHttp.get(streetsUrl + streetsQuery).map((res: Response) => {
+    return this.get(streetsUrl + streetsQuery).map((res: Response) => {
       return [{
         search: res.json()
       }];
@@ -101,7 +128,7 @@ export class MasterDetailService {
     let baseUrl = 'http://crm.unicweb.com.ua/api/masters/add-service?',
       body = '&master_id=' + masterId + '&service_id=' + serviceId + '&price=' + price;
 
-    return this.authHttp.post(baseUrl, body).map((res: Response) => {
+    return this.post(baseUrl, body).map((res: Response) => {
       return [{
         json: res.json()
       }];
@@ -112,7 +139,7 @@ export class MasterDetailService {
     let baseUrl = 'http://crm.unicweb.com.ua/api/masters/remove-service?',
       serviceId = '&service_id=' + id + '&master_id=' + masterId;
 
-    return this.authHttp.get(baseUrl + serviceId).map((res: Response) => {
+    return this.get(baseUrl + serviceId).map((res: Response) => {
       return [{
         json: res.json()
       }];
@@ -125,7 +152,7 @@ export class MasterDetailService {
     let baseUrl = 'http://crm.unicweb.com.ua/api/shedules?',
       masterId = 'master_id=' + id;
 
-    return this.authHttp.get(baseUrl + masterId).map((res: Response) => {
+    return this.get(baseUrl + masterId).map((res: Response) => {
       return [{
         json: res.json()
       }];
@@ -137,7 +164,7 @@ export class MasterDetailService {
       eventId = '&id=' + id,
       body = '&time=' + datetime;
 
-    return this.authHttp.post(baseUrl + eventId, body).map((res: Response) => {
+    return this.post(baseUrl + eventId, body).map((res: Response) => {
       return [{
         json: res.json()
       }];
@@ -149,7 +176,7 @@ export class MasterDetailService {
       eventId = '&id=' + id,
       body = '&duration=' + eventDuration;
 
-    return this.authHttp.post(baseUrl + eventId, body).map((res: Response) => {
+    return this.post(baseUrl + eventId, body).map((res: Response) => {
       return [{
         json: res.json()
       }];
@@ -160,7 +187,7 @@ export class MasterDetailService {
     let baseUrl = 'http://crm.unicweb.com.ua/api/shedules/view?',
       eventId = '&id=' + id;
 
-    return this.authHttp.get(baseUrl + eventId).map((res: Response) => {
+    return this.get(baseUrl + eventId).map((res: Response) => {
       return [{
         json: res.json()
       }];

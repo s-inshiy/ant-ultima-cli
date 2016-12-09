@@ -41,8 +41,8 @@ export class LandingComponent implements OnInit {
   subServices: any[] = [];
   categories: any[] = [];
 
-one: any[] = [];
-two: any[] = [];
+  one: any[] = [];
+  two: any[] = [];
 
 
   registration: Registration = new NewRegistration();
@@ -133,6 +133,7 @@ two: any[] = [];
       label: 'Предоставляю услуги',
       value: 'master'
     });
+
   }
 
   // Active Card
@@ -145,13 +146,14 @@ two: any[] = [];
 
   getCall(e: MouseEvent, i: any, work: any) {
     this.request.service = work[i].name;
+    this.request.id = work[i].id;
+    console.log(work);
     this.dialogReq = true;
-    // console.log(this.request);
   }
 
   setCall(service: string, phone: string, email: string) {
     this.landingService
-      .setCall(this.request.service, this.request.phone, this.request.email)
+      .setCall(this.request.id, this.request.phone, this.request.email)
       .subscribe(
         data => {
           this.resCRUD = data[0].json;
@@ -185,7 +187,7 @@ two: any[] = [];
       .subscribe(
         data => {
           this.services = data[0].json;
-          console.log(this.services);
+          // console.log(this.services);
         },
         err => console.error(err),
         () => {
@@ -207,23 +209,13 @@ two: any[] = [];
 
                   for (x; x < this.services[i].children[a].children.length; x++) {
                     this.categories.push({
+                      id: this.services[i].children[a].children[x].data.id,
                       name: this.services[i].children[a].children[x].data.name
                     });
                   };
-                this.categories = [];
-                // console.log(this.categories);
-                // this.one = this.categories;
-                // for (b; this.subServices.length; b++) {
-                //   this.categories.push({
-                //     name: this.subServices[b].name
-                //   });
-                // }
-                // this.titles.push({
-                //   categories: this.categories
-                // });
+                  // console.log(this.categories + '---------------------------');
+                  this.categories = [];
                 }
-                // this.two = this.one;
-                // this.one = [];
               }
 
             }
@@ -237,9 +229,9 @@ two: any[] = [];
               categories: this.lists,
             });
 
-            console.log(this.lists);
+            // console.log(this.lists);
             this.lists = [];
-            // this.categories = [];
+
           }
         }
       );
@@ -313,13 +305,14 @@ class NewRegistration implements Registration {
 }
 
 export interface Request {
-  service ? : any;
-  phone ? : any;
-  email ? : any;
+  id ?: any;
+  service ?: any;
+  phone ?: any;
+  email ?: any;
 }
 
 class NewRequest implements Request {
-  constructor(public service ? : any, public phone ? : any, public email ? : any) {}
+  constructor(public id ?: any, public service ?: any, public phone ?: any, public email ? : any) {}
 }
 
 
@@ -327,11 +320,11 @@ export interface Card {
   id ? : any;
   name ? : any;
   img ? : any;
-  works ?: any;
-  show ?: any;
-  categories ?: any;
+  works ? : any;
+  show ? : any;
+  categories ? : any;
 }
 
 class NewCard implements Card {
-  constructor(id ?: any, name ?: any, img ?: any, works ?: any, show ?: any, categories ?: any) {}
+  constructor(id ? : any, name ? : any, img ? : any, works ? : any, show ? : any, categories ? : any){}
 }

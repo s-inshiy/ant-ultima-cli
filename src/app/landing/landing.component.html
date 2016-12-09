@@ -211,71 +211,11 @@ Service
                             <li  *ngFor="let work of title.works;  let i = index;">
                               <input type="checkbox" checked>
                               <i></i>
-                              <h3 class="accordion__title"> {{work.name}}</h3>
+                              <h3 class="accordion__title"> {{work.name | truncate : 23  }}</h3>
                               <ul class="accordion__item">
-                                <li *ngFor="let subCategory of work.categories;  let i = index;">{{subCategory.name}}</li>
+                                <li *ngFor="let category of work.categories;  let i = index;" (click)="getCall($event, i, work.categories)" >{{category.name | truncate : 26}}</li>
                               </ul>
                             </li>
-                            <!--<li>
-                              <input type="checkbox" checked>
-                              <i></i>
-                              <h3 class="accordion__title">Красота и Здоровя</h3>
-                              <ul class="accordion__item">
-                                <li>1</li>
-                                <li>2</li>
-                                <li>3</li>
-                                <li>4</li>
-                                <li>5</li>
-                              </ul>
-                            </li>
-                            <li>
-                              <input type="checkbox" checked>
-                              <i></i>
-                              <h3 class="accordion__title">Красота и Здоровя</h3>
-                              <ul class="accordion__item">
-                                <li>1</li>
-                                <li>2</li>
-                                <li>3</li>
-                                <li>4</li>
-                                <li>5</li>
-                              </ul>
-                            </li>
-                            <li>
-                              <input type="checkbox" checked>
-                              <i></i>
-                              <h3 class="accordion__title">Красота и Здоровя</h3>
-                              <ul class="accordion__item">
-                                <li>1</li>
-                                <li>2</li>
-                                <li>3</li>
-                                <li>4</li>
-                                <li>5</li>
-                              </ul>
-                            </li>
-                            <li>
-                              <input type="checkbox" checked>
-                              <i></i>
-                              <h3 class="accordion__title">Красота и Здоровя</h3>
-                              <ul class="accordion__item">
-                                <li>1</li>
-                                <li>2</li>
-                                <li>3</li>
-                                <li>4</li>
-                                <li>5</li>
-                              </ul>
-                            </li>
-                            <li>
-                              <input type="checkbox" checked>
-                              <i></i>
-                              <h3 class="accordion__title">Красота и Здоровя</h3>
-                              <ul class="accordion__item">
-                                <li>1</li>
-                                <li>2</li>
-                                <li>3</li>
-                                <li>4</li>
-                                <li>5</li>
-                              </ul>
-                            </li>-->
                           </ul>
                         </div>
                       </div>
@@ -481,7 +421,7 @@ Request Modal
     </div>
     <footer>
       <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-        <button type="button" pButton (click)="setCall()" label="Отправить" [disabled]="!(request.service&&request.phone)"></button>
+        <button type="button" pButton (click)="setCall()" label="Отправить" [disabled]="!(request.id&&request.phone)"></button>
       </div>
     </footer>
   </p-dialog>

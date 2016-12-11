@@ -208,19 +208,19 @@
               </a>
             </li>
             <!-- ------------------------------------
-    Menu Item Bid
------------------------------------- -->
-            <li role="menuitem" *ngIf="role!='master'">
-              <a [routerLink]="['/dashboard/bids']" [routerLinkActive]="['active-menulink']" class="ripplelink">
-                <i class="fa ui-icon ui-icon-record-voice-over"></i><span>Заявки</span>
-              </a>
-            </li>
-            <!-- ------------------------------------
     Menu Item Call
 ------------------------------------ -->
             <li role="menuitem">
               <a [routerLink]="['/dashboard/messages']" [routerLinkActive]="['active-menulink']" class="ripplelink">
                 <i class="fa ui-icon-mail-outline"></i><span>Уведомления</span>
+              </a>
+            </li>
+            <!-- ------------------------------------
+    Menu Item Bid
+------------------------------------ -->
+            <li role="menuitem" *ngIf="role!='master'">
+              <a [routerLink]="['/dashboard/bids']" [routerLinkActive]="['active-menulink']" class="ripplelink">
+                <i class="fa ui-icon ui-icon-record-voice-over"></i><span>Заявки</span>
               </a>
             </li>
             <!-- ------------------------------------

@@ -288,7 +288,7 @@ export class LandingComponent implements OnInit {
 }
 
 export interface Registration {
-  type ? : any;
+  type : any;
   username ? : any;
   password ? : any;
   email ? : any;
@@ -299,7 +299,7 @@ export interface Registration {
 }
 
 class NewRegistration implements Registration {
-  constructor(public type ? : any, public username ? : any, public password ? : any,
+  constructor(public type = 'client', public username ? : any, public password ? : any,
     public email ? : any, public firstName ? : any,
     public secondName ? : any, public patronymic ? : any, public phone ? : any) {}
 }

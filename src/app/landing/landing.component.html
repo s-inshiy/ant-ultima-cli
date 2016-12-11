@@ -344,45 +344,45 @@ Registration Modal
   <p-dialog header="Регистрация" [(visible)]="dialogReg" [modal]="true" showEffect="fade" [responsive]="true" [draggable]="false"
     [resizable]="false">
     <div class="ui-g form-group">
-      <div class="ui-g-12" style="margin-bottom:20px">
+      <div class="ui-g-12" style="margin-bottom:10px">
         <p-dropdown [options]="types" (onChange)="registration.type = $event.value" [(ngModel)]="type" [style]="{'width':'90%'}"></p-dropdown>
       </div>
-      <div class="ui-g-12" style="margin-bottom:20px">
+      <div class="ui-g-12" style="margin-bottom:10px">
         <span class="md-inputfield">
                 <input type="text" pInputText  id="name"  [(ngModel)]="registration.secondName">
                 <label>Фамилия</label>
             </span>
       </div>
-      <div class="ui-g-12" style="margin-bottom:20px">
+      <div class="ui-g-12" style="margin-bottom:10px">
         <span class="md-inputfield">
                 <input type="text" pInputText  id="name"  [(ngModel)]="registration.firstName">
                 <label>Имя</label>
             </span>
       </div>
-      <div class="ui-g-12" style="margin-bottom:20px">
+      <div class="ui-g-12" style="margin-bottom:10px">
         <span class="md-inputfield">
                 <input type="text" pInputText  id="name"  [(ngModel)]="registration.patronymic">
                 <label>Отчество</label>
             </span>
       </div>
-      <div class="ui-g-12" style="margin-bottom:20px">
+      <div class="ui-g-12" style="margin-bottom:10px">
         <span class="md-inputfield">
                 <input type="text" pInputText  id="name"  [(ngModel)]="registration.username">
                 <label>Логин</label>
             </span>
       </div>
-      <div class="ui-g-12" style="margin-bottom:20px">
+      <div class="ui-g-12" style="margin-bottom:10px">
         <span class="md-inputfield">
                    <p-inputMask mask="+380999999999" placeholder="Телефон" [(ngModel)]="registration.phone"></p-inputMask>
             </span>
       </div>
-      <div class="ui-g-12" style="margin-bottom:20px">
+      <div class="ui-g-12" style="margin-bottom:10px">
         <span class="md-inputfield">
                 <input type="text" pInputText  id="name" [(ngModel)]="registration.email">
                 <label>Електронная почта</label>
             </span>
       </div>
-      <div class="ui-g-12" style="margin-bottom:20px">
+      <div class="ui-g-12" style="margin-bottom:10px">
         <span class="md-inputfield">
                 <input type="password"  pInputText autocomplete="off" [(ngModel)]="registration.password">
                 <label>Пароль</label>

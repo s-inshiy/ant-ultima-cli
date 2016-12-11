@@ -125,6 +125,10 @@ export class BidComponent implements OnInit {
     this.getBidsMasters(this.bid.id);
   }
 
+  onRowUnselect($event) {
+    this.bid = new NewBid();
+  }
+
   addMaster() {
     this.bidService
       .addMaster(this.bid.id, this.schedule.id, this.schedule.milisec)

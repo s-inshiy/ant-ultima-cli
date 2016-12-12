@@ -14,10 +14,10 @@
           </div>
         </footer>
         <!--<p-column field="id" header="№, п/п" [filter]="false"></p-column>-->
-        <p-column field="title" header="Назавания" [filter]="false" [sortable]="false"></p-column>
-        <p-column field="start" header="Начало" [filter]="false" [sortable]="false"></p-column>
-        <p-column field="end" header="Конец" [filter]="false" [sortable]="false"></p-column>
-        <p-column field="status" header="Статус" [filter]="false" [sortable]="false"></p-column>
+        <p-column field="title" header="Назавания" [filter]="false" [sortable]="false" [sortable]="true"></p-column>
+        <p-column field="start" header="Начало" [filter]="false" [sortable]="false" [sortable]="true"></p-column>
+        <p-column field="end" header="Конец" [filter]="false" [sortable]="false" [sortable]="true"></p-column>
+        <p-column field="status" header="Статус" [filter]="false" [sortable]="false" [sortable]="true"></p-column>
       </p-dataTable>
       <p-paginator rows="20" totalRecords="{{pag.count}}" pageLinkSize="10" (onPageChange)="paginate($event)"></p-paginator>
     </div>

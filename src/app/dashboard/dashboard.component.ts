@@ -74,14 +74,16 @@ export class DashboardComponent implements AfterViewInit {
       .socketMsgs()
       .subscribe(
         message => {
-          this.message = message[0];
-          this.msgs = [];
-          this.msgs.push({
-            severity: 'info',
-            summary: this.message.senderRole,
-            detail: this.message.text
-          });
-          this.message = new NewMsgs();
+          if (message) {
+              this.message = message[0];
+              this.msgs = [];
+              this.msgs.push({
+                severity: 'info',
+                summary: this.message.senderRole,
+                detail: this.message.text
+              });
+              this.message = new NewMsgs();
+          }
         },
         err => console.log(err)
       );

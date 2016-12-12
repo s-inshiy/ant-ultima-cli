@@ -8,16 +8,16 @@
       <p-dataTable [value]="items" selectionMode="single" [(selection)]="area" (onRowSelect)="onRowSelect($event)" (onRowUnselect)="onRowUnselect($event)"
         [responsive]="true" [contextMenu]="forBids">
         <header>Заявки</header>
-        <p-column field="fio" header="ФИО" [filter]="false" [sortable]="false"></p-column>
-        <p-column field="address" header="Адрес" [filter]="false" [sortable]="false"></p-column>
-        <p-column field="service" header="Тип работ" [filter]="false" [sortable]="false"></p-column>
-        <p-column field="master" header="Мастер" [filter]="false" [sortable]="false"></p-column>
-        <p-column field="phone" header="Телефон" [filter]="false" [sortable]="false"></p-column>
-        <p-column field="created_at" header="Создано в" [filter]="false" [sortable]="false"></p-column>
-        <p-column field="planned" header="Запланировано на" [filter]="false" [sortable]="false"></p-column>
-        <p-column field="contact_person" header="Конт. лицо" [filter]="false" [sortable]="false"></p-column>
-        <p-column field="description" header="Описание" [filter]="false" [sortable]="false"></p-column>
-        <p-column field="status" header="Статус" [filter]="false"></p-column>
+        <p-column field="fio" header="ФИО" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="address" header="Адрес" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="service" header="Тип работ" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="master" header="Мастер" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="phone" header="Телефон" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="created_at" header="Создано в" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="planned" header="Назначено на" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="contact_person" header="Конт. лицо" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="description" header="Описание" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="status" header="Статус" [filter]="false" [sortable]="true"></p-column>
         <footer>
           <div class="ui-helper-clearfix" style="width:100%; margin: 8px 0;">
             <button type="button" pButton style="float:right" (click)="showBid()" label="Добавить" *ngIf="role!='manager'"></button>
@@ -34,10 +34,10 @@
 ------------------------------------ -->
 <p-dialog header="Мастер" [(visible)]="dialog" [modal]="true" showEffect="fade" [responsive]="true" width="340" (onBeforeHide)="getBids(pag.curr)">
   <div class="ui-g form-group">
-    <div class="ui-g-12" style="margin-bottom:20px">
+    <div class="ui-g-12" style="margin-bottom:10px">
       <p-dropdown [options]="master.result" [(ngModel)]="master.complete" (onChange)="schedule.id = $event.value" [style]="{'width':'100%'}"></p-dropdown>
     </div>
-    <div class="ui-g-12" style="margin-bottom:20px">
+    <div class="ui-g-12" style="margin-bottom:10px">
       <p-calendar [(ngModel)]="schedule.datetime" [showTime]="true" [inline]="true" (onSelect)="getSeconds($event)" dateFormat="dd-mm-yy"
         hourFormat="24"></p-calendar>
     </div>
@@ -54,17 +54,17 @@
 ------------------------------------ -->
 <p-dialog header="Заявка" [(visible)]="dialogBid" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getBids(pag.curr)">
   <div class="ui-g form-group">
-    <div class="ui-g-12" style="margin-bottom:20px">
+    <div class="ui-g-12" style="margin-bottom:10px">
       <p-dropdown [options]="address.result" (onChange)="address.id = $event.value" [style]="{'width':'100%'}"></p-dropdown>
     </div>
-    <div class="ui-g-12" style="margin-bottom:20px">
+    <div class="ui-g-12" style="margin-bottom:10px">
       <p-autoComplete [(ngModel)]="work.complete" [suggestions]="work.result" (completeMethod)="searchWork($event)" field="name"
         [size]="27" placeholder="Поиск работы" [minLength]="3" (onSelect)="work.id = $event.id" required></p-autoComplete>
     </div>
-    <div class="ui-g-12" style="margin-bottom:20px">
+    <div class="ui-g-12" style="margin-bottom:10px">
       <p-dropdown [options]="phone.result" [(ngModel)]="phone.complete" (onChange)="phone.id = $event.value " [style]="{'width':'100%'}"></p-dropdown>
     </div>
-    <div class="ui-g-12" style="margin-bottom:20px">
+    <div class="ui-g-12" style="margin-bottom:10px">
       <span class="md-inputfield">
                 <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="bid.contact">
                 <label>Контактное лицо</label>

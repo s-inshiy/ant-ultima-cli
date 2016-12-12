@@ -13,9 +13,10 @@
         <footer>
           <div class="ui-helper-clearfix" style="width:100%; margin: 8px 0"><button type="button" pButton style="float:right" (click)="showDialog()" label="Добавить"></button></div>
         </footer>
+        <p-column field="fio" header="ФИО" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="branch" header="Филиалы" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="binotelId" header="Номер бинотел" [filter]="false" [sortable]="true"></p-column>
         <!--<p-column field="id" header="№, п/п" [filter]="false"></p-column>-->
-        <p-column field="fio" header="ФИО" [filter]="false"></p-column>
-        <p-column field="branch" header="Филиалы" [filter]="false"></p-column>
       </p-dataTable>
       <p-paginator rows="20" totalRecords="{{pag.count}}" pageLinkSize="10" (onPageChange)="paginate($event)"></p-paginator>
     </div>
@@ -27,9 +28,15 @@
 ------------------------------------ -->
 <p-dialog header="Пользователь" [(visible)]="dialog" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getManagers(pag.curr)">
   <div class="ui-g form-group">
-    <div class="ui-g-12">
+    <div class="ui-g-12" style="margin-bottom:10px">
       <p-autoComplete [(ngModel)]="user.complete" [suggestions]="user.result" (completeMethod)="searchUser($event)" field="second_name"
         [size]="27" placeholder="Пользователь" [minLength]="3" (onSelect)="user.id = $event.id" required></p-autoComplete>
+    </div>
+    <div class="ui-g-12" style="margin-bottom:10px">
+      <span class="md-inputfield">
+                <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="manager.binotelId">
+                <label>Номер бинотел</label>
+            </span>
     </div>
     <div class="ui-g-12" style="margin-bottom:30px">
       <p-autoComplete [(ngModel)]="branch.complete" [suggestions]="branch.result" (completeMethod)="searchBranch($event)" field="name"

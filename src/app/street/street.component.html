@@ -13,9 +13,9 @@
           <div class="ui-helper-clearfix" style="width:100%; margin: 8px 0"><button type="button" pButton style="float:right" (click)="showDialog()"  label="Добавить"></button></div>
         </footer>
         <p-column field="id" header="№, п/п" [filter]="false"></p-column>
-        <p-column field="name" header="Улица" [filter]="true" [sortable]="false"></p-column>
-        <p-column field="area" header="Город" [filter]="true" [sortable]="false"></p-column>
-        <p-column field="settlement" header="Район" [filter]="true" [sortable]="false"></p-column>
+        <p-column field="name" header="Улица" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="area" header="Город" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="settlement" header="Район" [filter]="false" [sortable]="true"></p-column>
       </p-dataTable>
       <p-paginator rows="20" totalRecords="{{pag.count}}" pageLinkSize="10" (onPageChange)="paginate($event)"></p-paginator>
 
@@ -28,13 +28,13 @@
 ------------------------------------ -->
 <p-dialog header="Улица" [(visible)]="dialog" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getStreets(pag.curr)">
   <div class="ui-g form-group">
-    <div class="ui-g-12" style="margin-bottom:20px">
+    <div class="ui-g-12" style="margin-bottom:10px">
       <span class="md-inputfield">
                 <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="street.name">
                 <label>Имя</label>
             </span>
     </div>
-    <div class="ui-g-12" style="margin-bottom:20px">
+    <div class="ui-g-12" style="margin-bottom:10px">
       <p-autoComplete id="acSimple" [(ngModel)]="search.complete" [suggestions]="search.result" (completeMethod)="searchAreas($event)" field="name"
         [size]="27" placeholder="Населенный пункт" [minLength]="3" (onSelect)="street.area = $event.id" required></p-autoComplete>
     </div>

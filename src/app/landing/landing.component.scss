@@ -1008,6 +1008,12 @@ $ant-light-grey: #707a8c;
     Media Styles
 ------------------------------------- */
 
+@media (min-width:1024px){
+  .greeting--left {
+    margin-left: -15px;
+  }
+}
+
 @media (max-width: 1024px) {
   .header__info {
     display: none;

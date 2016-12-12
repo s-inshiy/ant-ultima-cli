@@ -208,11 +208,27 @@
               </a>
             </li>
             <!-- ------------------------------------
-    Menu Item Call
+    Menu Item Message
 ------------------------------------ -->
             <li role="menuitem">
               <a [routerLink]="['/dashboard/messages']" [routerLinkActive]="['active-menulink']" class="ripplelink">
                 <i class="fa ui-icon-mail-outline"></i><span>Уведомления</span>
+              </a>
+            </li>
+            <!-- ------------------------------------
+    Menu Item Binotel
+------------------------------------ -->
+            <li role="menuitem" *ngIf="(role!='client'&&role!='master')">
+              <a [routerLink]="['/dashboard/binotel']" [routerLinkActive]="['active-menulink']" class="ripplelink">
+                <i class="fa ui-icon-phone-in-talk"></i><span>Звонки</span>
+              </a>
+            </li>
+            <!-- ------------------------------------
+    Menu Item Requst
+------------------------------------ -->
+            <li role="menuitem" *ngIf="(role!='client'&&role!='master')">
+              <a [routerLink]="['/dashboard/calls']" [routerLinkActive]="['active-menulink']" class="ripplelink">
+                <i class="fa ui-icon-alarm-add"></i><span>Запросы</span>
               </a>
             </li>
             <!-- ------------------------------------
@@ -221,14 +237,6 @@
             <li role="menuitem" *ngIf="role!='master'">
               <a [routerLink]="['/dashboard/bids']" [routerLinkActive]="['active-menulink']" class="ripplelink">
                 <i class="fa ui-icon ui-icon-record-voice-over"></i><span>Заявки</span>
-              </a>
-            </li>
-            <!-- ------------------------------------
-    Menu Item Message
------------------------------------- -->
-            <li role="menuitem" *ngIf="(role!='client'&&role!='master')">
-              <a [routerLink]="['/dashboard/calls']" [routerLinkActive]="['active-menulink']" class="ripplelink">
-                <i class="fa ui-icon-phone-in-talk"></i><span>Звонки</span>
               </a>
             </li>
             <!-- ------------------------------------

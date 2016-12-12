@@ -1,6 +1,6 @@
 <div class="ui-g">
   <div class="ui-g-12">
-    <div class="card">
+    <div class="card shadow-box ui-shadow-2">
       <!-- ------------------------------------
     Table User
 ------------------------------------ -->
@@ -12,15 +12,15 @@
         <footer>
           <div class="ui-helper-clearfix" style="width:100%; margin: 8px 0"><button type="button" pButton style="float:right" (click)="showDialog()" label="Добавить"></button></div>
         </footer>
-        <p-column field="role" header="Роль" [filter]="false"></p-column>
-        <p-column field="second_name" header="Фамилия" [filter]="false"></p-column>
-        <p-column field="first_name" header="Имя" [filter]="false"></p-column>
-        <p-column field="patronymic" header="Отчество" [filter]="false"></p-column>
-        <p-column field="username" header="Логин" [filter]="false"></p-column>
-        <p-column field="phone" header="Телефон" [filter]="false"></p-column>
-        <p-column field="email" header="Почта" [filter]="false"></p-column>
-        <p-column field="status" header="Статус" [filter]="false"></p-column>
-        <p-column field="default_address" header="Адрес" [filter]="false"></p-column>
+        <p-column field="role" header="Роль"  [filter]="false" [sortable]="true"></p-column>
+        <p-column field="second_name" header="Фамилия" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="first_name" header="Имя" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="patronymic" header="Отчество" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="username" header="Логин" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="phone" header="Телефон" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="email" header="Почта" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="status" header="Статус" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="default_address" header="Адрес" [filter]="false" [sortable]="true"></p-column>
       </p-dataTable>
       <p-paginator rows="20" totalRecords="{{pag.count}}" pageLinkSize="10" (onPageChange)="paginate($event)"></p-paginator>
     </div>
@@ -32,42 +32,42 @@
 ------------------------------------ -->
 <p-dialog header="Пользователь" [(visible)]="dialog" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getUsers(pag.curr)">
   <div class="ui-g form-group">
-    <div class="ui-g-12" style="margin-bottom:20px">
+    <div class="ui-g-12" style="margin-bottom:10px">
       <span class="md-inputfield">
                 <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="user.secondName">
                 <label>Фамилия</label>
             </span>
     </div>
-    <div class="ui-g-12" style="margin-bottom:20px">
+    <div class="ui-g-12" style="margin-bottom:10px">
       <span class="md-inputfield">
                 <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="user.firstName">
                 <label>Имя</label>
             </span>
     </div>
-    <div class="ui-g-12" style="margin-bottom:20px">
+    <div class="ui-g-12" style="margin-bottom:10px">
       <span class="md-inputfield">
                 <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="user.patronymic">
                 <label>Отчество</label>
             </span>
     </div>
-    <div class="ui-g-12" style="margin-bottom:20px">
+    <div class="ui-g-12" style="margin-bottom:10px">
       <span class="md-inputfield">
                 <input type="text" pInputText   id="name" [size]="27" [(ngModel)]="user.email">
                 <label>Почта</label>
             </span>
     </div>
-    <div class="ui-g-12" style="margin-bottom:30px">
+    <div class="ui-g-12" style="margin-bottom:20px">
       <span class="md-inputfield">
                 <p-inputMask mask="+380999999999" placeholder="Телефон"  [size]="27" [(ngModel)]="user.phone"></p-inputMask>
             </span>
     </div>
-    <div class="ui-g-12" style="margin-bottom:20px">
+    <div class="ui-g-12" style="margin-bottom:10px">
       <span class="md-inputfield">
                 <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="user.userName">
                 <label>Логин</label>
             </span>
     </div>
-    <div class="ui-g-12" style="margin-bottom:20px">
+    <div class="ui-g-12" style="margin-bottom:10px">
       <span class="md-inputfield">
                 <input pPassword type="password" id="password"  [size]="27"  promptLabel="Введите пароль"  [(ngModel)]="user.password">
                 <label>Пароль</label>

@@ -45,7 +45,7 @@ export class ServiceComponent implements OnInit {
 
   nodeSelected(event: any) {
     this.service = event.node.data;
-    console.log(this.service);
+    // console.log(this.service);
   }
 
   getServices() {
@@ -56,9 +56,9 @@ export class ServiceComponent implements OnInit {
           this.items = data[0].json;
         },
         err => console.error(err),
-        // () => {
-        //   console.log('GET Tree!');
-        // }
+        () => {
+          // console.log(this.items);
+        }
       );
   }
 

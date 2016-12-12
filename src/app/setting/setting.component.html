@@ -70,36 +70,36 @@
 ------------------------------------ -->
   <p-dialog header="Профиль" width="340" [(visible)]="dialog" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getProfile()">
     <div class="ui-g form-group">
-      <div class="ui-g-12" style="margin-bottom:20px">
+      <div class="ui-g-12" style="margin-bottom:10px">
         <span class="md-inputfield">
                 <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="profile.secondName">
                 <label>Фамилия</label>
             </span>
       </div>
-      <div class="ui-g-12" style="margin-bottom:20px">
+      <div class="ui-g-12" style="margin-bottom:10px">
         <span class="md-inputfield">
                 <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="profile.firstName">
                 <label>Имя</label>
             </span>
       </div>
-      <div class="ui-g-12" style="margin-bottom:20px">
+      <div class="ui-g-12" style="margin-bottom:10px">
         <span class="md-inputfield">
                 <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="profile.patronymic">
                 <label>Отчество</label>
             </span>
       </div>
-      <div class="ui-g-12" style="margin-bottom:20px">
+      <div class="ui-g-12" style="margin-bottom:10px">
         <span class="md-inputfield">
                    <p-inputMask mask="+380999999999" [size]="27" placeholder="Телефон" [(ngModel)]="profile.phone"></p-inputMask>
             </span>
       </div>
-      <div class="ui-g-12" style="margin-bottom:20px">
+      <div class="ui-g-12" style="margin-bottom:10px">
         <span class="md-inputfield">
                 <input type="text" pInputText  id="skype" [size]="27" [(ngModel)]="profile.skype">
                 <label>Скайп</label>
             </span>
       </div>
-      <div class="ui-g-12" style="margin-bottom:20px">
+      <div class="ui-g-12" style="margin-bottom:10px">
         <span class="md-inputfield">
       <label>Дата рождения</label>  
       <p-calendar [(ngModel)]="profile.birthday" [showTime]="true" [inline]="true" (onSelect)="getSeconds($event)" dateFormat="dd-mm-yy"
@@ -143,19 +143,19 @@
 ------------------------------------ -->
   <p-dialog header="Аккаунт" [(visible)]="dialogAccount" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getAccount()">
     <div class="ui-g form-group">
-      <div class="ui-g-12" style="margin-bottom:30px">
+      <div class="ui-g-12" style="margin-bottom:10px">
         <span class="md-inputfield">
                 <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="account.username">
                 <label>Логин</label>
             </span>
       </div>
-      <div class="ui-g-12" style="margin-bottom:30px">
+      <div class="ui-g-12" style="margin-bottom:10px">
         <span class="md-inputfield">
                 <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="account.email">
                 <label>Електронная почта</label>
             </span>
       </div>
-      <div class="ui-g-12" style="margin-bottom:30px">
+      <div class="ui-g-12" style="margin-bottom:10px">
         <span class="md-inputfield">
                 <input type="password" pInputText [size]="27" autocomplete="off" [(ngModel)]="account.password">
                 <label>Пароль</label>
@@ -176,8 +176,8 @@
       <p-dataTable [value]="phones" selectionMode="single" [(selection)]="selectedBid" scrollHeight="680" (onRowSelect)="onRowPhone($event)"
         [responsive]="true" [stacked]="stacked" [contextMenu]="forPhone">
         <header>Телефоны</header>
-        <p-column field="id" header="№, п/п" [filter]="false" [sortable]="false"></p-column>
-        <p-column field="phone" header="Телефоны" [filter]="false" [sortable]="false"></p-column>
+        <p-column field="id" header="№, п/п" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="phone" header="Телефоны" [filter]="false" [sortable]="true"></p-column>
         <footer>
           <div class="ui-helper-clearfix" style="width:100%; margin: 8px 0;">
             <button type="button" pButton style="float:right" (click)="showDialogPhone()" label="Добавить"></button>
@@ -192,7 +192,7 @@
 ------------------------------------ -->
   <p-dialog header="Телефон" [(visible)]="dialogPhone" [modal]="true" showEffect="fade" [responsive]="true" (onBeforeHide)="getPhones()">
     <div class="ui-g form-group">
-      <div class="ui-g-12" style="margin-bottom:30px">
+      <div class="ui-g-12" style="margin-bottom:10px">
         <span class="md-inputfield">
                    <p-inputMask mask="+380999999999" [size]="27" placeholder="Телефон" [(ngModel)]="phone.complete"></p-inputMask>
             </span>
@@ -212,10 +212,10 @@
       <p-dataTable [value]="addresses" selectionMode="single" [(selection)]="selectedBid" scrollHeight="680" (onRowSelect)="onRowSelect($event)"
         [responsive]="true" [stacked]="stacked" [contextMenu]="forAddress">
         <header>Профиль</header>
-        <p-column field="area" header="Город" [filter]="false" [sortable]="false"></p-column>
-        <p-column field="street" header="Улица" [filter]="false" [sortable]="false"></p-column>
-        <p-column field="house" header="Дом" [filter]="false" [sortable]="false"></p-column>
-        <p-column field="description" header="Описание" [filter]="false" [sortable]="false"></p-column>
+        <p-column field="area" header="Город" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="street" header="Улица" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="house" header="Дом" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="description" header="Описание" [filter]="false" [sortable]="true"></p-column>
         <footer>
           <div class="ui-helper-clearfix" style="width:100%; margin: 8px 0;">
             <button type="button" pButton style="float:right" (click)="showAddress()" label="Добавить"></button>
@@ -238,17 +238,17 @@
         <p-autoComplete [(ngModel)]="area.complete" [suggestions]="area.result" (completeMethod)="searchAreas($event)" field="name"
           [size]="27" placeholder="Поиск нас. пункта" [minLength]="3" (onSelect)="address.area = $event.id" required></p-autoComplete>
       </div>
-      <div class="ui-g-12" style="margin-bottom:20px">
+      <div class="ui-g-12" style="margin-bottom:10px">
         <span class="md-inputfield">
                 <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="address.house">
                 <label>Дом</label>
             </span>
       </div>
-      <div class="ui-g-12" style="margin-bottom:30px">
+      <div class="ui-g-12" style="margin-bottom:10px">
         <p-checkbox [(ngModel)]="address.isDefault" binary="true" label="По умолчанию"></p-checkbox>
       </div>
-      <div class="ui-g-12" style="margin-bottom:30px">
-        <textarea rows="5" cols="27" pInputTextarea placeholder="Описание" [(ngModel)]="address.description"></textarea>
+      <div class="ui-g-12" style="margin-bottom:20px">
+        <textarea rows="3" cols="27" pInputTextarea placeholder="Описание" [(ngModel)]="address.description"></textarea>
       </div>
     </div>
     <footer>

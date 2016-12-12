@@ -250,6 +250,7 @@ import {
 import {
   TruncatePipe
 } from './landing/truncate.pipe';
+import { BinotelComponent } from './binotel/binotel.component';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -291,6 +292,7 @@ type StoreType = {
     CallComponent,
     MessageComponent,
     TruncatePipe,
+    BinotelComponent,
     // ClientBidComponent,
     // ClientComponent,
   ],
@@ -383,7 +385,7 @@ type StoreType = {
       }, {
         'Accept': 'application/json;q=0.9'
       }],
-      noJwtError: false,
+      noJwtError: true,
       noTokenScheme: true
     })
   ]

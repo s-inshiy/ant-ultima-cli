@@ -12,11 +12,11 @@
         <footer>
           <div class="ui-helper-clearfix" style="width:100%; margin: 8px 0"><button type="button" pButton style="float:right" (click)="showDialog()" label="Добавить"></button></div>
         </footer>
-        <p-column field="fullName" header="Имя" [filter]="false"></p-column>
-        <p-column field="companyName" header="Компания" [filter]="false"></p-column>
-        <p-column field="services" header="Услуги" [filter]="false"></p-column>
-        <p-column field="areas" header="Нас. пункт" [filter]="false"></p-column>
-        <p-column field="rating" header="Рейтинг" [filter]="false"></p-column>
+        <p-column field="fullName" header="Имя" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="companyName" header="Компания" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="services" header="Услуги" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="areas" header="Нас. пункт" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="rating" header="Рейтинг" [filter]="false" [sortable]="true"></p-column>
       </p-dataTable>
       <p-paginator rows="20" totalRecords="{{pag.count}}" pageLinkSize="10" (onPageChange)="paginate($event)"></p-paginator>
     </div>

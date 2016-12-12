@@ -2,18 +2,16 @@ import {
   Component,
   OnInit
 } from '@angular/core';
-
 import {
   Router
 } from '@angular/router';
-
 import {
   Message
 } from 'primeng/primeng';
 
-import {
-  JwtHelper
-} from 'angular2-jwt';
+// import {
+//   JwtHelper
+// } from 'angular2-jwt';
 
 import {
   LoginService
@@ -30,10 +28,9 @@ import {
 
 export class LoginComponent implements OnInit {
 
-  // Classes
-  user: User = new NewUser();
-  jwtHelper: JwtHelper = new JwtHelper();
+  // jwtHelper: JwtHelper = new JwtHelper();
 
+  user: User = new NewUser();
   resCRUD: any;
   msgs: Message[] = [];
   model: any = {};

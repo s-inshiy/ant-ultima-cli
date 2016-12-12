@@ -93,6 +93,10 @@ import {
   MessageComponent
 } from './message';
 
+import {
+  BinotelComponent
+} from './binotel';
+
 export const routes: Routes = [{
     path: 'dashboard',
     component: DashboardComponent,
@@ -216,6 +220,13 @@ export const routes: Routes = [{
       canActivate: [AuthGuard],
       data: {
         roles: ['admin', 'manager', 'client', 'master']
+      }
+    }, {
+      path: 'binotel',
+      canActivate: [AuthGuard],
+      component: BinotelComponent,
+      data: {
+        roles: ['admin', 'manager']
       }
     }]
   }

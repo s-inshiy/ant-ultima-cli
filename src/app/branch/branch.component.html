@@ -5,13 +5,14 @@
     Table Branch
 ------------------------------------ -->
       <p-growl [value]="msgs"></p-growl>
-                <h4>Выберите соответствующий Филиал, далее нажмите правую кнопку мишы и выберете нужный Вам пункт "<i class="fa ui-icon-edit"></i>Редактировать",
-        "<i class="fa ui-icon-delete-forever"></i>Удалить"</h4>
+      <h4>Выберите соответствующий Филиал, далее нажмите правую кнопку мишы и выберете нужный Вам пункт "<i class="fa ui-icon-edit"></i>Редактировать",
+        "
+        <i class="fa ui-icon-delete-forever"></i>Удалить"</h4>
       <p-dataTable [value]="items" (onRowSelect)="onRowSelect($event)" [responsive]="true" selectionMode="single" [contextMenu]="forBranch">
         <header>Филиалы</header>
-        <p-column field="name" header="Имя" [filter]="false"></p-column>
-        <p-column field="regions" header="Регионы" [filter]="false"></p-column>
-        <p-column field="managers" header="Менеджеры" [filter]="false"></p-column>
+        <p-column field="name" header="Имя" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="regions" header="Регионы" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="managers" header="Менеджеры" [filter]="false" [sortable]="true"></p-column>
         <footer>
           <div class="ui-helper-clearfix" style="width:100%; margin: 8px 0;">
             <button type="button" pButton style="float:right" (click)="showDialog()" label="Добавить"></button>

@@ -77,9 +77,9 @@ export class ManagerService {
     });
   }
 
-  createManager(userId = 0, branchId = 0) {
+  createManager(userId = 0, branchId = 0, binotelId = 0 || '') {
     let baseUrl = 'http://crm.unicweb.com.ua/api/managers/create?',
-      body = '&user_id=' + userId + '&branch_id=' + branchId;
+      body = '&user_id=' + userId + '&branch_id=' + branchId + '&binotelId=' + binotelId;
 
     return this.post(baseUrl, body)
       .map((res: Response) => {
@@ -89,10 +89,10 @@ export class ManagerService {
       });
   }
 
-  updateManager(id = 0, userId = 0, branchId = 0) {
+  updateManager(id = 0, userId = 0, branchId = 0, binotelId = 0) {
     let baseUrl = 'http://crm.unicweb.com.ua/api/managers/update?',
-      body = '&user_id=' + userId + '&branch_id=' + branchId,
-      managerId = '&id=' + id;
+      body = '&user_id=' + userId + '&branch_id=' + branchId + '&binotelId=' + binotelId,
+      managerId = '&id=' + id ;
 
     return this.post(baseUrl + managerId, body)
       .map((res: Response) => {

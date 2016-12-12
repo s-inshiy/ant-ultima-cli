@@ -14,7 +14,7 @@
           </div>
         </footer>
         <p-column field="id" header="№, п/п" [filter]="false"></p-column>
-        <p-column field="name" header="Назавания" [filter]="true" [sortable]="false"></p-column>
+        <p-column field="name" header="Назавания" [filter]="true" [sortable]="true"></p-column>
       </p-dataTable>
       <p-paginator rows="20" totalRecords="{{pag.count}}" pageLinkSize="10" (onPageChange)="paginate($event)"></p-paginator>
     </div>
@@ -28,7 +28,7 @@
   <div class="ui-g form-group">
     <div class="ui-g-12">
       <span class="md-inputfield">
-            <input type="text" pInputText  id="name" [size]="30" [(ngModel)]="region.name">
+            <input type="text" pInputText  id="name" [size]="27" [(ngModel)]="region.name">
             <label>Имя</label>
       </span>
     </div>

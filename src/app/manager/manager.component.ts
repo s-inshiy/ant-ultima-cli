@@ -109,9 +109,9 @@ export class ManagerComponent implements OnInit {
       );
   }
 
-  createManager(userId: number, branchId: number) {
+  createManager(userId: number, branchId: number, binotelId: number) {
     this.managerService
-      .createManager(this.user.id, this.branch.id)
+      .createManager(this.user.id, this.branch.id, this.manager.binotelId)
       .subscribe(
         data => {
           this.resCRUD = data[0].json;
@@ -130,6 +130,7 @@ export class ManagerComponent implements OnInit {
             });
             this.user = new SearchUsers();
             this.branch = new SearchUsers();
+            this.manager = new NewManager();
           }
           for (let i = 0; i < this.resCRUD.errors.length; i++) {
             this.msgs.push({
@@ -142,9 +143,9 @@ export class ManagerComponent implements OnInit {
       );
   }
 
-  updateManager(id: number, userId: number, branchId: number) {
+  updateManager(id: number, userId: number, branchId: number, binotelId: number) {
     this.managerService
-      .updateManager(this.manager.id, this.user.id, this.branch.id)
+      .updateManager(this.manager.id, this.user.id, this.branch.id, this.manager.binotelId)
       .subscribe(
         data => {
           this.resCRUD = data[0].json;
@@ -163,6 +164,7 @@ export class ManagerComponent implements OnInit {
             });
             this.user = new SearchUsers();
             this.branch = new SearchUsers();
+            this.manager = new NewManager();
           }
           for (let i = 0; i < this.resCRUD.errors.length; i++) {
             this.msgs.push({
@@ -200,12 +202,13 @@ export class ManagerComponent implements OnInit {
 
 export interface Manager {
   id ?: number;
+  binotelId ?: number;
   fio ?: string;
   branch ?: string;
 }
 
 class NewManager implements Manager {
-  constructor(public id ?: number, public fio ?: string, public branch ?: string) {}
+  constructor(public id ?: number, public binotelId ?: number, public fio ?: string, public branch ?: string) {}
 }
 
 export interface Paginate {

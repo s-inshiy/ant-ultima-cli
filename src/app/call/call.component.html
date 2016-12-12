@@ -1,6 +1,6 @@
 <div class="ui-g">
   <div class="ui-g-12">
-    <div class="card">
+    <div class="card shadow-box ui-shadow-2">
       <!-- ------------------------------------
     Table Calls
 ------------------------------------ -->
@@ -13,10 +13,10 @@
             <button type="button" pButton style="float:right" (click)="showDialog()" multiple="true" dropdown="true" label="Добавить"></button>
           </div>-->
         </footer>
-        <p-column field="phone" header="Телефон" [filter]="false" [sortable]="false"></p-column>
-        <p-column field="email" header="Электронная почта" [filter]="false" [sortable]="false"></p-column>
-        <p-column field="service" header="Услуга" [filter]="false" [sortable]="false"></p-column>
-        <p-column field="created_at" header="Создан в" [filter]="false" [sortable]="false"></p-column>
+        <p-column field="phone" header="Телефон" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="email" header="Электронная почта" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="service" header="Услуга" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="created_at" header="Создан в" [filter]="false" [sortable]="true"></p-column>
       </p-dataTable>
       <p-paginator rows="20" totalRecords="{{pag.count}}" pageLinkSize="10" (onPageChange)="paginate($event)"></p-paginator>
     </div>

@@ -38,7 +38,7 @@ Greeting
     <section class="greeting" id="home">
       <div class="container">
         <div class="row">
-          <div class="col-md-8 end">
+          <div class="col-md-8 end greeting--left">
             <h1 class="greeting__title">Агентство нового типа</h1>
             <h3 class="greeting__subtitle">Самый полный перечень услуг для бизнеса и частных лиц</h3>
             <a class="ui-ant-button ui-ant-button--large" pageScroll href="#services">Смотреть все услуги</a>
@@ -391,7 +391,7 @@ Registration Modal
     </div>
     <footer>
       <div class="ui-dialog-buttonpane ui-widget-content ui-helper-clearfix">
-        <button type="button" pButton (click)="setRegistration()" label="Отправить" [disabled]="!(registration.secondName&&registration.firstName&&registration.type)"></button>
+        <button type="button" pButton (click)="setRegistration()" label="Отправить" [disabled]="!(registration.secondName&&registration.firstName&&registration.type&&registration.patronymic&&registration.username&&registration.phone&&registration.email&&registration.password)"></button>
       </div>
     </footer>
   </p-dialog>

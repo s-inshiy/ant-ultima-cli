@@ -2,11 +2,9 @@ import {
   Component,
   OnInit
 } from '@angular/core';
-
 import {
   CallService
 } from './call.service';
-
 import {
   Message,
   MenuItem,
@@ -38,7 +36,7 @@ export class CallComponent implements OnInit {
       label: 'Удалить',
       icon: 'fa ui-icon-delete-forever',
       command: (event) => this.deleteCall(this.call.id)
-    }]
+    }];
   }
 
   getCalls(page: number) {
@@ -56,6 +54,10 @@ export class CallComponent implements OnInit {
   onRowSelect(event) {
     this.call.id = event.data.id;
     this.call.phone = event.data.phone;
+  }
+
+  onRowUnselect(event) {
+    this.call = new NewCall();
   }
 
   deleteCall(id: any) {

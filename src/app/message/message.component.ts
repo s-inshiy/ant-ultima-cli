@@ -2,15 +2,16 @@ import {
   Component,
   OnInit
 } from '@angular/core';
-
 import {
   MessageService
 } from './message.service';
-
 import {
   Message,
   // MenuItem,
 } from 'primeng/primeng';
+import {
+  JwtHelper
+} from 'angular2-jwt';
 
 @Component({
   selector: 'app-message',
@@ -22,7 +23,6 @@ import {
 })
 export class MessageComponent implements OnInit {
 
-  // msgs: any[] = [];
   messages: any[] = [];
   msgs: Message[];
   connection;
@@ -31,12 +31,14 @@ export class MessageComponent implements OnInit {
   users: Search = new SearchUsers();
   dialogMsgs: boolean;
   resCRUD: any;
+  jwtHelper: JwtHelper = new JwtHelper();
+  show = false;
 
   constructor(private messageService: MessageService) {}
 
   ngOnInit() {
-    // this.socketMsgs();
     this.getMsgs(this.pag.curr);
+    this.getRole();
   }
 
   getMsgs(page) {
@@ -49,9 +51,24 @@ export class MessageComponent implements OnInit {
         },
         err => console.log(err),
         () => {
-          console.log(this.messages);
+          // console.log(this.messages);
         }
       );
+  }
+
+  getRole() {
+     let token = localStorage.getItem('id_token'),
+            role = this.jwtHelper.decodeToken(token).rol;
+     if (token) {
+       switch (role !== null) {
+         case role === 'admin':
+          return this.show = true;
+        case role === 'manager':
+          return this.show = true;
+        default:
+        return false;
+       }
+     }
   }
 
   // Paginate
@@ -59,18 +76,6 @@ export class MessageComponent implements OnInit {
     this.pag.curr = Math.ceil(event.first / 20 + 1);
     this.getMsgs(this.pag.curr);
   }
-
-  // socketMsgs() {
-  //   this.messageService
-  //     .socketMsgs().subscribe(message => {
-  //       this.msgs.push({
-  //         severity: 'info',
-  //         summary: message[0].senderRole,
-  //         detail: message[0].text
-  //       });
-  //       // console.log(message);
-  //     });
-  // }
 
   showMsgs() {
     this.dialogMsgs = true;

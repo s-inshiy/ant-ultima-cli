@@ -7,7 +7,6 @@ import {
   ActivatedRouteSnapshot,
   RouterStateSnapshot
 } from '@angular/router';
-
 import {
   JwtHelper
 } from 'angular2-jwt';
@@ -30,7 +29,7 @@ export class AuthGuard implements CanActivate {
 
     if (this.token) {
 
-      console.log(this.jwtHelper.decodeToken(this.token));
+      // console.log(this.jwtHelper.decodeToken(this.token));
 
       let roles = route.data['roles'] as Array < string > ,
         role = this.jwtHelper.decodeToken(this.token).rol;

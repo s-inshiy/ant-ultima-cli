@@ -39,7 +39,7 @@ export class ServiceService {
     return this.authIntercept(this.authHttp.get(url, options));
   }
 
-  public post(url: string, body: any, options ?: RequestOptionsArgs): Observable < Response > {
+  public post(url: string, body: any, options ? : RequestOptionsArgs): Observable < Response > {
     return this.authIntercept(this.authHttp.post(url, body, options));
   }
 
@@ -47,6 +47,27 @@ export class ServiceService {
     let crmUrl = 'http://crm.unicweb.com.ua/api/worktypes-categories/tree';
 
     return this.get(crmUrl).map((res: Response) => {
+      return [{
+        json: res.json()
+      }];
+    });
+  }
+
+  getParentTree() {
+    let crmUrl = 'http://crm.unicweb.com.ua/api/worktypes-categories/plain';
+
+    return this.get(crmUrl).map((res: Response) => {
+      return [{
+        json: res.json()
+      }];
+    });
+  }
+
+  getChildrenTree( id: number) {
+   let crmUrl = 'http://crm.unicweb.com.ua/api/worktypes-categories/child?',
+          childrenId = '&id=' + id;
+
+    return this.get(crmUrl + childrenId).map((res: Response) => {
       return [{
         json: res.json()
       }];
@@ -79,7 +100,7 @@ export class ServiceService {
 
   createWork(name = '', categoryId = 0, description = '') {
     let serviceUrl = 'http://crm.unicweb.com.ua/api/worktypes/create',
-          body = '&name=' + name + '&category_id=' + categoryId + '&description=' + description;
+      body = '&name=' + name + '&category_id=' + categoryId + '&description=' + description;
 
     return this.post(serviceUrl, body)
       .map((res: Response) => {
@@ -91,34 +112,34 @@ export class ServiceService {
 
   deleteCategory(id: number) {
     let crmUrl = 'http://crm.unicweb.com.ua/api/worktypes-categories/delete?',
-          categoryId = 'id=' + id,
-          body = '';
+      categoryId = 'id=' + id,
+      body = '';
 
     return this.post(crmUrl + categoryId, body)
-    .map((res: Response) => {
-      return [{
-        json: res.json()
-      }];
-    });
+      .map((res: Response) => {
+        return [{
+          json: res.json()
+        }];
+      });
   }
 
   deleteWork(id: number | string = '') {
     let crmUrl = 'http://crm.unicweb.com.ua/api/worktypes/delete?',
-          categoryId = 'id=' + id,
-          body = '';
+      categoryId = 'id=' + id,
+      body = '';
 
     return this.post(crmUrl + categoryId, body)
-    .map((res: Response) => {
-      return [{
-        json: res.json()
-      }];
-    });
+      .map((res: Response) => {
+        return [{
+          json: res.json()
+        }];
+      });
   }
 
   updateCategory(id = 0, name = '', description = '') {
     let crmUrl = 'http://crm.unicweb.com.ua/api/worktypes-categories/update?',
-          categoryId = 'id=' + id,
-          body = '&name=' + name + '&description=' + description;
+      categoryId = 'id=' + id,
+      body = '&name=' + name + '&description=' + description;
 
     return this.post(crmUrl + categoryId, body)
       .map((res: Response) => {
@@ -130,8 +151,8 @@ export class ServiceService {
 
   updateWork(id = 0, name = '', description = '') {
     let crmUrl = 'http://crm.unicweb.com.ua/api/worktypes/update?',
-          workId = 'id=' + id,
-          body = '&name=' + name + '&description=' + description;
+      workId = 'id=' + id,
+      body = '&name=' + name + '&description=' + description;
 
     return this.post(crmUrl + workId, body)
       .map((res: Response) => {

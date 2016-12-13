@@ -5,7 +5,7 @@
     Tree Table Services
 ------------------------------------ -->
       <p-growl [value]="msgs"></p-growl>
-      <p-treeTable [value]="items" selectionMode="single" [(selection)]="selectedFile" (onNodeSelect)="nodeSelected($event)">
+      <p-treeTable [value]="items" selectionMode="single" [(selection)]="selectedFile" (onNodeSelect)="nodeSelected($event)" (onNodeExpand)="loadNode($event)">
         <header>Услуги</header>
         <p-column field="name" header="Имя"></p-column>
         <p-column field="description" header="Описание"></p-column>
@@ -40,7 +40,7 @@
       <p-checkbox [(ngModel)]="checked" binary="true" label="Услуга"></p-checkbox>
     </div>
     <div class="ui-g-12">
-      <textarea rows="3" cols="27" pInputTextarea placeholder="Описание" [(ngModel)]="service.description"></textarea>
+      <textarea rows="3s" cols="27" pInputTextarea placeholder="Описание" [(ngModel)]="service.description"></textarea>
     </div>
   </div>
   <footer>

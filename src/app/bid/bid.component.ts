@@ -2,16 +2,17 @@ import {
   Component,
   OnInit,
 } from '@angular/core';
-
 import {
   BidService
 } from './bid.service';
-
 import {
   Message,
   MenuItem,
   SelectItem
 } from 'primeng/primeng';
+import {
+  JwtHelper
+} from 'angular2-jwt';
 
 @Component({
   selector: 'app-bid',
@@ -24,7 +25,6 @@ import {
 
 export class BidComponent implements OnInit {
 
-  // Classes
   pag: Paginate = new NewPaginate();
   searchBid: Bid = new NewBid();
   bid: Bid = new NewBid();
@@ -33,15 +33,13 @@ export class BidComponent implements OnInit {
   address: Search = new SearchRegion();
   work: Search = new SearchRegion();
   phone: Search = new SearchRegion();
-
-  // PrimeNG
+  jwtHelper: JwtHelper = new JwtHelper();
   items: any;
   msgs: Message[];
   tieredItems: MenuItem[];
-
   dialog: boolean;
   dialogBid: boolean;
-
+  show = false;
   resCRUD: any;
   ru: any;
 
@@ -51,15 +49,24 @@ export class BidComponent implements OnInit {
     this.getBids(this.pag.curr);
     this.getAddress();
     this.getPhone();
-    this.tieredItems = [{
-      label: 'Мастер',
-      icon: 'fa ui-icon-add',
-      command: (event) => this.showDialog()
-    }, {
-      label: 'Удалить',
-      icon: 'fa ui-icon-delete-forever',
-      command: (event) => this.deleteBid(this.bid.id)
-    }];
+    this.getRole();
+    if (this.show) {
+      this.tieredItems = [{
+        label: 'Мастер',
+        icon: 'fa ui-icon-add',
+        command: (event) => this.showDialog()
+      }, {
+        label: 'Удалить',
+        icon: 'fa ui-icon-delete-forever',
+        command: (event) => this.deleteBid(this.bid.id)
+      }];
+    } else {
+      this.tieredItems = [{
+        label: 'Удалить',
+        icon: 'fa ui-icon-delete-forever',
+        command: (event) => this.deleteBid(this.bid.id)
+      }];
+    }
     // Locale Calendar
     this.ru = {
       // Date 
@@ -78,6 +85,21 @@ export class BidComponent implements OnInit {
       dayNamesMin: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
       weekHeader: 'Нед'
     };
+  }
+
+  getRole() {
+    let token = localStorage.getItem('id_token'),
+      role = this.jwtHelper.decodeToken(token).rol;
+    if (token) {
+      switch (role !== null) {
+        case role === 'admin':
+          return this.show = true;
+        case role === 'manager':
+          return this.show = true;
+        default:
+          return false;
+      }
+    }
   }
 
   showDialog() {

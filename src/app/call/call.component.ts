@@ -27,20 +27,24 @@ export class CallComponent implements OnInit {
   call: Call = new NewCall();
   resCRUD: any;
 
-  constructor(private CallService: CallService) {}
+  constructor(private callService: CallService) {}
 
   ngOnInit() {
     this.getCalls(this.pag.curr);
     // ContextMenu
     this.tieredItems = [{
+      label: 'Обработан',
+      icon: 'fa ui-icon-done',
+      command: (event) => this.acceptCall(this.call.id)
+    }, {
       label: 'Удалить',
       icon: 'fa ui-icon-delete-forever',
       command: (event) => this.deleteCall(this.call.id)
-    }];
+    }, ];
   }
 
   getCalls(page: number) {
-    this.CallService
+    this.callService
       .getCalls(this.pag.curr)
       .subscribe(
         data => {
@@ -60,8 +64,29 @@ export class CallComponent implements OnInit {
     this.call = new NewCall();
   }
 
+  acceptCall(id: any) {
+    this.callService
+      .acceptCall(this.call.id)
+      .subscribe(
+        data => {
+          this.resCRUD = data;
+        },
+        err => console.log(err),
+        () => {
+          this.msgs = [];
+          this.msgs.push({
+            severity: 'warn',
+            summary: 'Запрос на звонок принят',
+            detail: this.call.phone
+          });
+          this.call = new NewCall();
+          this.getCalls(this.pag.curr);
+        }
+      );
+  }
+
   deleteCall(id: any) {
-    this.CallService
+    this.callService
       .deleteCall(this.call.id)
       .subscribe(
         data => {

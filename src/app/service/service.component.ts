@@ -32,11 +32,14 @@ export class ServiceComponent implements OnInit {
   dialog: boolean;
   resCRUD: any;
   checked: boolean = true;
+  parentTree: any;
+  childTree: any;
 
   constructor(private serviceService: ServiceService) {}
 
   ngOnInit() {
     this.getServices();
+    // this.getParentTree();
   }
 
   showDialog() {
@@ -50,17 +53,57 @@ export class ServiceComponent implements OnInit {
 
   getServices() {
     this.serviceService
-      .getServices()
+      .getParentTree()
       .subscribe(
         data => {
-          this.items = data[0].json;
+          this.items = data[0].json.data;
         },
         err => console.error(err),
         () => {
-          // console.log(this.items);
+          console.log(this.items);
         }
       );
   }
+
+
+  loadNode(event) {
+      if (event.node) {
+      this.serviceService
+        .getChildrenTree(event.node.data.id)
+        .subscribe(
+          data => {
+            if ( data[0].json.data ) {
+              if (data[0].json.data.length  > 1 ) {
+                event.node.children = data[0].json.data;
+              }
+            }
+            // this.childTree = data[0].json.data;
+            // nodes => event.node.children = data[0].json.data;
+            // this.items.push({children : data[0].json.data})
+            console.log(event.node);
+          },
+          err => console.error(err),
+          () => {
+            // console.log(this.childTree);
+          }
+        );
+      }
+    }
+
+    // getParentTree() {
+    //   this.serviceService
+    //     .getParentTree()
+    //     .subscribe(
+    //       data => {
+    //         this.parentTree = data[0].json;
+    //       },
+    //       err => console.error(err),
+    //       () => {
+    //         console.log(this.parentTree);
+    //       }
+    //     );
+    // }
+
 
   searchService(event: any) {
     this.serviceService

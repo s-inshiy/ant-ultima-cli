@@ -29,6 +29,20 @@ export class LandingService {
     });
   }
 
+  getOtherServices() {
+    let crmUrl = 'http://crm.unicweb.com.ua/api/worktypes-categories/othertree',
+      headers = new Headers();
+    headers.append('Accept', 'application/json;q=0.9');
+
+    return this.http.get(crmUrl, {
+      headers: headers
+    }).map((res: Response) => {
+      return [{
+        json: res.json()
+      }];
+    });
+  }
+
   setRegistration(type = '', username = '', password = '', email = '',
     firstName = '', secondName = '', patronymic = '', phone = '') {
     let body = '&role=' + type + '&username=' + username + '&password=' + password +

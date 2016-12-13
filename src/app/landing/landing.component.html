@@ -175,7 +175,7 @@ Service
             <div class="col-md-12 text-center">
               <h3 class="ui-ant-title ui-ant-title--greeting">Наши услуги</h3>
             </div>
-            <div class="col-md-3" *ngFor="let title of titles; let i = index;">
+            <div class="col-md-3" *ngFor="let title of mapServices; let i = index;">
               <div class="service__card">
                 <div class="card" [ngClass]="{'card--active': title.show}">
                   <div class="card__icon-container">
@@ -208,12 +208,12 @@ Service
                             <!--<li *ngFor="let work of title.works;  let i = index;" (click)="getCall($event, i, title.works)">
                               {{work.name}}
                             </li>-->
-                            <li  *ngFor="let work of title.works;  let i = index;">
+                            <li  *ngFor="let work of title.children;  let i = index;">
                               <input type="checkbox" checked>
                               <i></i>
                               <h3 class="accordion__title"> {{work.name | truncate : 23  }}</h3>
                               <ul class="accordion__item">
-                                <li *ngFor="let category of work.categories;  let i = index;" (click)="getCall($event, i, work.categories)" >{{category.name | truncate : 26}}</li>
+                                <li *ngFor="let category of work.children;  let i = index;" (click)="getCall($event, i, work.children)" >{{category.name | truncate : 26}}</li>
                               </ul>
                             </li>
                           </ul>

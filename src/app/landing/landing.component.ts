@@ -2,20 +2,16 @@ import {
   Component,
   OnInit
 } from '@angular/core';
-
 import {
   Router
 } from '@angular/router';
-
 import {
   LandingService
 } from './landing.service';
-
 import {
   Message,
   SelectItem
 } from 'primeng/primeng';
-
 import {
   PageScrollConfig
 } from 'ng2-page-scroll';
@@ -40,6 +36,8 @@ export class LandingComponent implements OnInit {
   lists: any[] = [];
   subServices: any[] = [];
   categories: any[] = [];
+
+  mapServices: any[] = [];
 
   one: any[] = [];
   two: any[] = [];
@@ -118,13 +116,9 @@ export class LandingComponent implements OnInit {
     // ng2PageScroll
     PageScrollConfig.defaultScrollOffset = 100;
     // Services
-    this.getServices();
+    this.getOtherServices();
 
     this.types = [];
-    // this.types.push({
-    //   label: 'Выберите роль',
-    //   value: ''
-    // });
     this.types.push({
       label: 'Воспользуюсь услугами',
       value: 'client'
@@ -138,16 +132,16 @@ export class LandingComponent implements OnInit {
 
   // Active Card
   isActive(index) {
-    for (let i = 0; i < this.titles.length; i++) {
-      this.titles[i].show = false;
+    for (let i = 0; i < this.mapServices.length; i++) {
+      this.mapServices[i].show = false;
     }
-    this.titles[index].show = !this.titles[index].show;
+    this.mapServices[index].show = !this.mapServices[index].show;
   }
 
   getCall(e: MouseEvent, i: any, work: any) {
     this.request.service = work[i].name;
     this.request.id = work[i].id;
-    console.log(work);
+    // console.log(work);
     this.dialogReq = true;
   }
 
@@ -181,61 +175,83 @@ export class LandingComponent implements OnInit {
       );
   }
 
-  getServices() {
+  getOtherServices() {
     this.landingService
-      .getServices()
+      .getOtherServices()
       .subscribe(
         data => {
-          this.services = data[0].json;
-          // console.log(this.services);
+          this.mapServices = data[0].json;
+          if (this.mapServices) {
+            let i = 0;
+            for (i; i < this.mapServices.length; i++) {
+              this.mapServices[i].img = i + 1;
+              this.mapServices[i].show = false;
+            }
+          }
         },
         err => console.error(err),
         () => {
-          let i = 0;
-          for (i; i < this.services.length; i++) {
-            // console.log(this.services[i].data.name + '-------------------- ');
-            if (this.services[i].children) {
-
-              let a = 0;
-
-              for (a; a < this.services[i].children.length; a++) {
-                this.lists.push({
-                  name: this.services[i].children[a].data.name,
-                  categories: this.categories
-                });
-
-                if (this.services[i].children[a].children) {
-                  let x = 0;
-
-                  for (x; x < this.services[i].children[a].children.length; x++) {
-                    this.categories.push({
-                      id: this.services[i].children[a].children[x].data.id,
-                      name: this.services[i].children[a].children[x].data.name
-                    });
-                  };
-                  // console.log(this.categories + '---------------------------');
-                  this.categories = [];
-                }
-              }
-
-            }
-
-            this.titles.push({
-              id: i,
-              name: this.services[i].data.name,
-              img: i + 1,
-              works: this.lists,
-              show: false,
-              categories: this.lists,
-            });
-
-            // console.log(this.lists);
-            this.lists = [];
-
-          }
+          console.log(this.mapServices);
         }
       );
   }
+
+  // getServices() {
+  //   this.landingService
+  //     .getServices()
+  //     .subscribe(
+  //       data => {
+  //         this.services = data[0].json;
+  //         // console.log(this.services);
+  //       },
+  //       err => console.error(err),
+  //       () => {
+  //         let i = 0;
+  //         for (i; i < this.services.length; i++) {
+  //           // console.log(this.services[i].data.name + '-------------------- ');
+  //           if (this.services[i].children) {
+
+  //             let a = 0;
+
+  //             for (a; a < this.services[i].children.length; a++) {
+  //               this.lists.push({
+  //                 name: this.services[i].children[a].data.name,
+  //                 categories: this.categories
+  //               });
+
+  //               if (this.services[i].children[a].children) {
+  //                 let x = 0;
+
+  //                 for (x; x < this.services[i].children[a].children.length; x++) {
+  //                   this.categories.push({
+  //                     id: this.services[i].children[a].children[x].data.id,
+  //                     name: this.services[i].children[a].children[x].data.name
+  //                   });
+  //                 };
+  //                 // console.log(this.categories + '---------------------------');
+  //                 this.categories = [];
+  //               }
+  //             }
+
+  //           }
+
+  //           this.titles.unshift({
+  //             id: i,
+  //             name: this.services[i].data.name,
+  //             img: 20 - i,
+  //             show: false,
+  //             works: this.lists,
+  //             // categories: this.lists,
+  //           });
+
+  //           this.lists = [];
+
+  //         }
+  //         console.log(this.titles[3]);
+  //         // this.titles;
+  //       }
+  //     );
+  // }
 
   showReg() {
     this.dialogReg = true;
@@ -288,7 +304,7 @@ export class LandingComponent implements OnInit {
 }
 
 export interface Registration {
-  type : any;
+  type: any;
   username ? : any;
   password ? : any;
   email ? : any;
@@ -305,14 +321,14 @@ class NewRegistration implements Registration {
 }
 
 export interface Request {
-  id ?: any;
-  service ?: any;
-  phone ?: any;
-  email ?: any;
+  id ? : any;
+  service ? : any;
+  phone ? : any;
+  email ? : any;
 }
 
 class NewRequest implements Request {
-  constructor(public id ?: any, public service ?: any, public phone ?: any, public email ? : any) {}
+  constructor(public id ? : any, public service ? : any, public phone ? : any, public email ? : any) {}
 }
 
 
@@ -326,5 +342,5 @@ export interface Card {
 }
 
 class NewCard implements Card {
-  constructor(id ? : any, name ? : any, img ? : any, works ? : any, show ? : any, categories ? : any){}
+  constructor(id ? : any, name ? : any, img ? : any, works ? : any, show ? : any, categories ? : any) {}
 }

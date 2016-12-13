@@ -6,8 +6,7 @@ import {
   MessageService
 } from './message.service';
 import {
-  Message,
-  // MenuItem,
+  Message
 } from 'primeng/primeng';
 import {
   JwtHelper

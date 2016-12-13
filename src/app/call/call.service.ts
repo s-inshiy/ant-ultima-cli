@@ -44,10 +44,10 @@ export class CallService {
   }
 
   getCalls(page: number) {
-    let crmUrl = 'http://crm.unicweb.com.ua/api/requests',
+    let baseUrl = 'http://crm.unicweb.com.ua/api/requests',
       callQuery = `?per-page=20&page=${page}`;
 
-    return this.get(crmUrl + callQuery).map((res: Response) => {
+    return this.get(baseUrl + callQuery).map((res: Response) => {
       return [{
         json: res.json()
       }];
@@ -55,10 +55,10 @@ export class CallService {
   }
 
   deleteCall(id: number) {
-    let deleteUrl = 'http://crm.unicweb.com.ua/api/requests/delete',
+    let baseUrl = 'http://crm.unicweb.com.ua/api/requests/delete',
       deleteId = `?id=${id}`;
 
-    return this.post(deleteUrl + deleteId, '')
+    return this.post(baseUrl + deleteId, '')
       .map((res: Response) => {
         return [{
           delete: res.json
@@ -66,4 +66,15 @@ export class CallService {
       });
   }
 
+  acceptCall(id: number) {
+    let baseUrl = 'http://crm.unicweb.com.ua/api/requests/accepted',
+      acceptId = `?id=${id}`;
+
+    return this.post(baseUrl + acceptId, '')
+      .map((res: Response) => {
+        return [{
+          delete: res.json
+        }];
+      });
+  }
 }

@@ -13,7 +13,6 @@ import {
 @Component({
   selector: 'app-call',
   templateUrl: './call.component.html',
-  styleUrls: ['./call.component.scss'],
   viewProviders: [
     CallService
   ]

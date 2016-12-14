@@ -29,31 +29,16 @@ declare var $: any;
 
 export class LandingComponent implements OnInit {
 
-  partners: any;
   services: any;
-
-  titles: any[] = [];
-  lists: any[] = [];
-  subServices: any[] = [];
-  categories: any[] = [];
-
   mapServices: any[] = [];
-
-  one: any[] = [];
-  two: any[] = [];
-
-
   registration: Registration = new NewRegistration();
   request: Request = new NewRequest();
-
-  dialogReg: boolean;
-  dialogReq: boolean;
-
+  token: string;
   resCRUD: any;
   msgs: Message[];
   types: SelectItem[];
-  type: any;
-  token: string;
+  dialogReg: boolean;
+  dialogReq: boolean;
 
   constructor(private landingService: LandingService, private router: Router) {}
 
@@ -141,7 +126,6 @@ export class LandingComponent implements OnInit {
   getCall(e: MouseEvent, i: any, work: any) {
     this.request.service = work[i].name;
     this.request.id = work[i].id;
-    // console.log(work);
     this.dialogReq = true;
   }
 
@@ -191,74 +175,9 @@ export class LandingComponent implements OnInit {
         },
         err => console.error(err),
         () => {
-          console.log(this.mapServices);
+          // console.log(this.mapServices);
         }
       );
-  }
-
-  // getServices() {
-  //   this.landingService
-  //     .getServices()
-  //     .subscribe(
-  //       data => {
-  //         this.services = data[0].json;
-  //         // console.log(this.services);
-  //       },
-  //       err => console.error(err),
-  //       () => {
-  //         let i = 0;
-  //         for (i; i < this.services.length; i++) {
-  //           // console.log(this.services[i].data.name + '-------------------- ');
-  //           if (this.services[i].children) {
-
-  //             let a = 0;
-
-  //             for (a; a < this.services[i].children.length; a++) {
-  //               this.lists.push({
-  //                 name: this.services[i].children[a].data.name,
-  //                 categories: this.categories
-  //               });
-
-  //               if (this.services[i].children[a].children) {
-  //                 let x = 0;
-
-  //                 for (x; x < this.services[i].children[a].children.length; x++) {
-  //                   this.categories.push({
-  //                     id: this.services[i].children[a].children[x].data.id,
-  //                     name: this.services[i].children[a].children[x].data.name
-  //                   });
-  //                 };
-  //                 // console.log(this.categories + '---------------------------');
-  //                 this.categories = [];
-  //               }
-  //             }
-
-  //           }
-
-  //           this.titles.unshift({
-  //             id: i,
-  //             name: this.services[i].data.name,
-  //             img: 20 - i,
-  //             show: false,
-  //             works: this.lists,
-  //             // categories: this.lists,
-  //           });
-
-  //           this.lists = [];
-
-  //         }
-  //         console.log(this.titles[3]);
-  //         // this.titles;
-  //       }
-  //     );
-  // }
-
-  showReg() {
-    this.dialogReg = true;
-  }
-
-  goLogin() {
-    this.router.navigate(['/login']);
   }
 
   setRegistration(username: string, password: string, email: string, firstName: string,
@@ -299,6 +218,14 @@ export class LandingComponent implements OnInit {
           }
         }
       );
+  }
+
+   showReg() {
+    this.dialogReg = true;
+  }
+
+  goLogin() {
+    this.router.navigate(['/login']);
   }
 
 }

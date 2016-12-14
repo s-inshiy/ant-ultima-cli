@@ -49,19 +49,7 @@ export class AuthGuard implements CanActivate {
 
     }
 
-    // if ((roles == null || roles.indexOf('admin') !== -1)) {
-    //   // console.log('auth 2');
-    //   this.role.admin = true;
-    //   // return true;
-    // } else {
-    //   this.router.navigate(['/']);
-    //   console.log('auth 1');
-    //   return false;
-    // }
-
-
     this.router.navigate(['/']);
-    // console.log('auth');
     return false;
 
   }

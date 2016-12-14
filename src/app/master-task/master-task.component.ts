@@ -2,16 +2,13 @@ import {
   Component,
   OnInit
 } from '@angular/core';
-
 import {
   MasterTaskService
 } from './master-task.service';
-
 import {
   Message,
   MenuItem
 } from 'primeng/primeng';
-
 import {
   JwtHelper
 } from 'angular2-jwt';
@@ -27,18 +24,13 @@ import {
 export class MasterTaskComponent implements OnInit {
 
   tasks: any[];
-
   token: string;
   role: string;
-
   msgs: Message[];
   tieredItems: MenuItem[];
-
   pag: Paginate = new NewPaginate();
   task: Task = new NewTask();
-
   jwtHelper: JwtHelper = new JwtHelper();
-
   resCRUD: any;
 
   constructor(private masterTaskService: MasterTaskService) {}
@@ -69,7 +61,6 @@ export class MasterTaskComponent implements OnInit {
 
 
   onRowSelect(event: any) {
-    // console.log(event);
     this.task.id = event.data.id;
   }
 

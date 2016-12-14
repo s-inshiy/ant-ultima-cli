@@ -234,23 +234,25 @@ import {
 } from './dashboard';
 import {
   SettingComponent
-} from './setting/setting.component';
+} from './setting';
 import {
   MasterTaskComponent
-} from './master-task/master-task.component';
+} from './master-task';
 import {
   LandingComponent
-} from './landing/landing.component';
+} from './landing';
 import {
   CallComponent
-} from './call/call.component';
+} from './call';
 import {
   MessageComponent
-} from './message/message.component';
+} from './message';
+import {
+  BinotelComponent
+} from './binotel';
 import {
   TruncatePipe
 } from './landing/truncate.pipe';
-import { BinotelComponent } from './binotel/binotel.component';
 
 // Application wide providers
 const APP_PROVIDERS = [

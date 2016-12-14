@@ -19,7 +19,7 @@ import {
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss'],
+  // styleUrls: ['./user.component.scss'],
   providers: [
     UserService, LoginService
   ]

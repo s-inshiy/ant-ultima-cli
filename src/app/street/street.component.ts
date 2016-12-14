@@ -5,11 +5,9 @@ import {
 import {
   StreetService
 } from './street.service';
-
 import {
   LoginService
 } from '../login/login.service';
-
 import {
   Message,
   MenuItem
@@ -29,12 +27,10 @@ export class StreetComponent implements OnInit {
   search: Search = new SearchAreas();
   street: Street = new NewStreet();
   pag: Paginate = new NewPaginate();
-
   // PrimeNG
   items: any;
   msgs: Message[];
   tieredItems: MenuItem[];
-
   dialog: boolean;
   resCRUD: any;
 

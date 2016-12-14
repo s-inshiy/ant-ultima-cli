@@ -2,15 +2,12 @@ import {
   Component,
   OnInit
 } from '@angular/core';
-
 import {
   MasterService
 } from './master.service';
-
 import {
   Router
 } from '@angular/router';
-
 import {
   Message,
   MenuItem
@@ -48,8 +45,7 @@ export class MasterComponent implements OnInit {
       label: 'Детально',
       icon: 'fa ui-icon-search',
       command: (event) => this.gotoMasterDetail(this.master.id)
-    },
-     {
+    }, {
       label: 'Удалить',
       icon: 'fa ui-icon-delete-forever',
       command: (event) => this.deleteMaster(this.master.id, this.master.fullName)
@@ -205,35 +201,35 @@ export class MasterComponent implements OnInit {
 }
 
 export interface Master {
-  id ?: number;
-  fullName ?: string;
-  areas ?: string;
-  companyName ?: string;
-  worksCount ?: number;
-  rating ?: number;
+  id ? : number;
+  fullName ? : string;
+  areas ? : string;
+  companyName ? : string;
+  worksCount ? : number;
+  rating ? : number;
 }
 
 class NewMaster implements Master {
-  constructor(public id ?: number, public fullName ?: string, public areas ?: string,
-    public companyName ?: string, public worksCount ?: number, public rating ?: number) {}
+  constructor(public id ? : number, public fullName ? : string, public areas ? : string,
+    public companyName ? : string, public worksCount ? : number, public rating ? : number) {}
 }
 
 
 export interface Paginate {
-  count ?: string[];
+  count ? : string[];
   curr: number;
 }
 
 class NewPaginate implements Paginate {
-  constructor(public count ?: string[], public curr = 1) {}
+  constructor(public count ? : string[], public curr = 1) {}
 }
 
 export interface Search {
-  id ?: number;
-  complete ?: string;
-  result ?: any[];
+  id ? : number;
+  complete ? : string;
+  result ? : any[];
 }
 
 class SearchUsers implements Search {
-  constructor(public id ?: number, public complete ?: string, public result ?: string[]) {}
+  constructor(public id ? : number, public complete ? : string, public result ? : string[]) {}
 }

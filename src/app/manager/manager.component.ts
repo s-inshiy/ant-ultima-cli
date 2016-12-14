@@ -199,7 +199,6 @@ export class ManagerComponent implements OnInit {
 
 }
 
-
 export interface Manager {
   id ?: number;
   binotelId ?: number;

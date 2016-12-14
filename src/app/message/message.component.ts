@@ -15,7 +15,7 @@ import {
 @Component({
   selector: 'app-message',
   templateUrl: './message.component.html',
-  styleUrls: ['./message.component.scss'],
+  // styleUrls: ['./message.component.scss'],
   providers: [
     MessageService
   ]

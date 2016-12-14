@@ -5,25 +5,9 @@ import {
 import {
   SettlementService
 } from './settlement.service';
-
 import {
-  // DataTable,
-  // Column,
-  // InputText,
-  // Growl,
   Message,
-  // ContextMenu,
-  // ContextMenuModule,
-  MenuItem,
-  // Paginator,
-  // Dialog,
-  // DialogModule,
-  // Button,
-  // Header,
-  // Footer,
-  // AutoComplete,
-  // SelectItem,
-  // Dropdown
+  MenuItem
 } from 'primeng/primeng';
 
 @Component({
@@ -222,5 +206,5 @@ export interface Paginate {
 }
 
 class NewPaginate implements Paginate {
-  constructor(public count ?: string[], public curr: number = 1) {}
+  constructor(public count ?: string[], public curr = 1) {}
 }

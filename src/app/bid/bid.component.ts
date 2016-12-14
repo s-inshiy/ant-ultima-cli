@@ -17,7 +17,6 @@ import {
 @Component({
   selector: 'app-bid',
   templateUrl: './bid.component.html',
-  styleUrls: ['./bid.component.scss'],
   providers: [
     BidService
   ]
@@ -206,8 +205,6 @@ export class BidComponent implements OnInit {
 
   showBid() {
     this.dialogBid = true;
-    // this.address = new SearchRegion();
-    // this.phone = new SearchRegion();
     this.work = new SearchRegion();
     this.bid = new NewBid();
   }

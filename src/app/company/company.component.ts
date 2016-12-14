@@ -5,30 +5,14 @@ import {
 import {
   CompanyService
 } from './company.service';
-
 import {
-  // DataTableModule,
-  // SharedModule,
-  // Column,
-  // InputText,
-  // Growl,
   Message,
-  // ContextMenuModule,
-  MenuItem,
-  // Paginator,
-  // DialogModule,
-  // Button,
-  // Header,
-  // Footer,
-  // AutoComplete,
-  // SelectItem,
-  // Dropdown
+  MenuItem
 } from 'primeng/primeng';
 
 @Component({
   selector: 'app-company',
   templateUrl: './company.component.html',
-  styleUrls: ['./company.component.scss'],
   providers: [
     CompanyService
   ]
@@ -70,7 +54,6 @@ export class CompanyComponent implements OnInit {
   onRowSelect(event: any) {
     this.company.id = event.data.id;
     this.company.name = event.data.name;
-    // console.log(this.company);
   }
 
   onRowUnselect($event) {

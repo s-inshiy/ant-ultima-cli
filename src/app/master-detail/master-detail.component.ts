@@ -9,7 +9,6 @@ import {
   ActivatedRoute,
   Router
 } from '@angular/router';
-
 import {
   Message,
   MenuItem,

@@ -5,24 +5,9 @@ import {
 import {
   RegionService
 } from './region.service';
-
 import {
-  // DataTableModule,
-  // SharedModule,
-  // Column,
-  // InputText,
-  // Growl,
   Message,
-  // ContextMenuModule,
-  MenuItem,
-  // Paginator,
-  // DialogModule,
-  // Button,
-  // Header,
-  // Footer,
-  // AutoComplete,
-  // SelectItem,
-  // Dropdown
+  MenuItem
 } from 'primeng/primeng';
 
 @Component({
@@ -35,11 +20,8 @@ import {
 
 export class RegionComponent implements OnInit {
 
-  // Classes
   region: Region = new NewRegion();
   pag: Paginate = new NewPaginate();
-
-  // PrimeNG
   items: any;
   msgs: Message[];
   tieredItems: MenuItem[];
@@ -89,7 +71,6 @@ export class RegionComponent implements OnInit {
   onRowSelect(event: any) {
     this.region.id = event.data.id;
     this.region.name = event.data.name;
-    // console.log(this.region);
   }
 
   onRowUnselect($event) {
@@ -106,7 +87,6 @@ export class RegionComponent implements OnInit {
         err => console.error(err),
         () => {
           this.msgs = [];
-          console.log(this.resCRUD);
           if (this.resCRUD.errors.length < 1) {
             this.getRegions(this.pag.curr);
             this.dialog = false;

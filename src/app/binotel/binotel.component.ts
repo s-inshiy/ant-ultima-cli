@@ -8,13 +8,12 @@ import {
 import {
   Message,
   MenuItem,
-  SelectItem
+  // SelectItem
 } from 'primeng/primeng';
 
 @Component({
   selector: 'app-binotel',
   templateUrl: './binotel.component.html',
-  styleUrls: ['./binotel.component.scss'],
   providers: [
     BinotelService
   ]

@@ -1,15 +1,3 @@
-// import {
-//   Injectable
-// } from '@angular/core';
-// import {
-//   Response
-// } from '@angular/http';
-// import 'rxjs/add/observable/from';
-// import 'rxjs/add/operator/map';
-// import {
-//   AuthHttp
-// } from 'angular2-jwt';
-
 import {
   Injectable
 } from '@angular/core';

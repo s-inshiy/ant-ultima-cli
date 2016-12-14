@@ -206,8 +206,6 @@ export class BidComponent implements OnInit {
 
   showBid() {
     this.dialogBid = true;
-    // this.address = new SearchRegion();
-    // this.phone = new SearchRegion();
     this.work = new SearchRegion();
     this.bid = new NewBid();
   }

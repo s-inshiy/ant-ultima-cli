@@ -17,6 +17,7 @@
         <p-column field="email" header="Электронная почта" [filter]="false" [sortable]="true"></p-column>
         <p-column field="service" header="Услуга" [filter]="false" [sortable]="true"></p-column>
         <p-column field="created_at" header="Создан в" [filter]="false" [sortable]="true"></p-column>
+        <p-column field="status" header="Статус" [filter]="false" [sortable]="true"></p-column>
       </p-dataTable>
       <p-paginator rows="20" totalRecords="{{pag.count}}" pageLinkSize="10" (onPageChange)="paginate($event)"></p-paginator>
     </div>

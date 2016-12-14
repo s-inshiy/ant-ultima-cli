@@ -21,14 +21,10 @@ import {
 })
 export class ServiceComponent implements OnInit {
 
-  // Classses
   parent = new SearchService();
   service = new NewService();
-
-  // PrimeNG
   items: TreeNode[];
   msgs: Message[];
-
   dialog: boolean;
   resCRUD: any;
   checked: boolean = true;
@@ -39,7 +35,6 @@ export class ServiceComponent implements OnInit {
 
   ngOnInit() {
     this.getServices();
-    // this.getParentTree();
   }
 
   showDialog() {
@@ -48,7 +43,6 @@ export class ServiceComponent implements OnInit {
 
   nodeSelected(event: any) {
     this.service = event.node.data;
-    // console.log(this.service);
   }
 
   getServices() {
@@ -60,7 +54,7 @@ export class ServiceComponent implements OnInit {
         },
         err => console.error(err),
         () => {
-          console.log(this.items);
+          // console.log(this.items);
         }
       );
   }
@@ -77,10 +71,6 @@ export class ServiceComponent implements OnInit {
                 event.node.children = data[0].json.data;
               }
             }
-            // this.childTree = data[0].json.data;
-            // nodes => event.node.children = data[0].json.data;
-            // this.items.push({children : data[0].json.data})
-            console.log(event.node);
           },
           err => console.error(err),
           () => {
@@ -89,21 +79,6 @@ export class ServiceComponent implements OnInit {
         );
       }
     }
-
-    // getParentTree() {
-    //   this.serviceService
-    //     .getParentTree()
-    //     .subscribe(
-    //       data => {
-    //         this.parentTree = data[0].json;
-    //       },
-    //       err => console.error(err),
-    //       () => {
-    //         console.log(this.parentTree);
-    //       }
-    //     );
-    // }
-
 
   searchService(event: any) {
     this.serviceService

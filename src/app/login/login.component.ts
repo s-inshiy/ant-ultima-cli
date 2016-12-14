@@ -8,11 +8,6 @@ import {
 import {
   Message
 } from 'primeng/primeng';
-
-// import {
-//   JwtHelper
-// } from 'angular2-jwt';
-
 import {
   LoginService
 } from './login.service';
@@ -27,8 +22,6 @@ import {
 })
 
 export class LoginComponent implements OnInit {
-
-  // jwtHelper: JwtHelper = new JwtHelper();
 
   user: User = new NewUser();
   resCRUD: any;

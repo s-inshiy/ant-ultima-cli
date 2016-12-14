@@ -2,16 +2,13 @@ import {
   Component,
   OnInit
 } from '@angular/core';
-
 import {
   SettingService
 } from './setting.service';
-
 import {
   Message,
   MenuItem,
 } from 'primeng/primeng';
-
 import {
   JwtHelper
 } from 'angular2-jwt';
@@ -322,19 +319,8 @@ export class SettingComponent implements OnInit {
       .searchStreet(event.query)
       .subscribe(
         data => {
-          // if (this.street.result = data[0].search.results.lenght <= 1) {
-          //   this.street.result = data[0].search.results;
-            // console.log(this.street.result);
-            // console.log(this.street.id);
-            // this.showArea = true;
-          // } else {
-          // }
           this.street.result = data[0].search.results;
           this.street.id = this.street.complete;
-          // if ( this.street.result = data[0].search.results.lenght) {
-          //   console.log('-------------------------');
-          // }
-
         },
         err => console.error(err),
         () => console.log(this.street.id)

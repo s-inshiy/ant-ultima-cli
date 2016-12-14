@@ -13,11 +13,11 @@
 /.vscode
 .project
 .classpath
+.c9/
 *.launch
 .settings/
 
 # misc
-/src/.sass-cache
 /.sass-cache
 /connect.lock
 /coverage/*

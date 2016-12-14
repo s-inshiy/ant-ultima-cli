@@ -12,14 +12,16 @@ import {
   HttpModule
 } from '@angular/http';
 import {
-  RouterModule
+  RouterModule,
+  // Routes,
+  // PreloadAllModules
 } from '@angular/router';
 
 import {
   routes
 } from './app.routes';
 import {
-  Application
+  AppComponent
 } from './app.component';
 import {
   APP_RESOLVER_PROVIDERS
@@ -234,23 +236,25 @@ import {
 } from './dashboard';
 import {
   SettingComponent
-} from './setting/setting.component';
+} from './setting';
 import {
   MasterTaskComponent
-} from './master-task/master-task.component';
+} from './master-task';
 import {
   LandingComponent
-} from './landing/landing.component';
+} from './landing';
 import {
   CallComponent
-} from './call/call.component';
+} from './call';
 import {
   MessageComponent
-} from './message/message.component';
+} from './message';
+import {
+  BinotelComponent
+} from './binotel';
 import {
   TruncatePipe
 } from './landing/truncate.pipe';
-import { BinotelComponent } from './binotel/binotel.component';
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -268,9 +272,9 @@ type StoreType = {
  * `AppModule` is the main entry point into Angular2's bootstraping process
  */
 @NgModule({
-  bootstrap: [Application],
+  bootstrap: [AppComponent],
   declarations: [
-    Application,
+    AppComponent,
     NoContentComponent,
     StreetComponent,
     AreaComponent,
@@ -293,8 +297,6 @@ type StoreType = {
     MessageComponent,
     TruncatePipe,
     BinotelComponent,
-    // ClientBidComponent,
-    // ClientComponent,
   ],
   imports: [ // import Angular's modules
     BrowserModule,
@@ -304,7 +306,7 @@ type StoreType = {
     // BrowserModule,
     // FormsModule,a.
     //  AppRoutes,
-    HttpModule,
+    // HttpModule,
     AccordionModule,
     AutoCompleteModule,
     // BreadcrumbModule,
@@ -367,7 +369,7 @@ type StoreType = {
     TreeModule,
     TreeTableModule,
     RouterModule.forRoot(routes, {
-      useHash: true
+      useHash: false
     }),
     Ng2PageScrollModule.forRoot(),
   ],

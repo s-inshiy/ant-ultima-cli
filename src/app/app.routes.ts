@@ -238,6 +238,9 @@ export const routes: Routes = [{
     path: '',
     component: LandingComponent,
   }, {
+    path: 'admin',
+    loadChildren: 'admin/admin.module#AdminModule'
+  }, {
     path: '**',
     component: NoContentComponent
   }

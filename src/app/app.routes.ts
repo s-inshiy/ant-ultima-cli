@@ -229,17 +229,22 @@ export const routes: Routes = [{
         roles: ['admin', 'manager']
       }
     }]
-  }
+  },
   //  Root Routes
-  , {
+  // {
+  //   path: 'extra',
+  //   loadChildren: 'extramodule/extra.module#ExtraModule'
+  // },
+  // {
+  //   path: 'admin',
+  //   loadChildren: 'admin/admin.module#AdminModule'
+  // },
+  {
     path: 'login',
     component: LoginComponent,
   }, {
     path: '',
     component: LandingComponent,
-  }, {
-    path: 'admin',
-    loadChildren: 'admin/admin.module#AdminModule'
   }, {
     path: '**',
     component: NoContentComponent

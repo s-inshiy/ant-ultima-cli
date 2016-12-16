@@ -47,7 +47,7 @@
               </li>
             </ul>
           </li>
-          <li>
+          <!--<li>
             <a href="#/settings">
               <i class="topbar-icon material-icons">settings</i>
               <span class="topbar-item-name">Settings</span>
@@ -78,7 +78,7 @@
                 </a>
               </li>
             </ul>
-          </li>
+          </li>-->
           <!--<li>
             <a href="#">
               <i class="topbar-icon material-icons animated swing">message</i>
@@ -318,7 +318,7 @@
     Menu Items Landing
 ------------------------------------ -->
             <li role="menuitem">
-              <a href="#" class="ripplelink">
+              <a [routerLink]="['/']" class="ripplelink">
                 <i class="fa ui-icon-video-library"></i><span>Сайт</span>
               </a>
             </li>
@@ -334,7 +334,7 @@
     Menu Items Logout
 ------------------------------------ -->
             <li role="menuitem">
-              <a href="#" class="ripplelink" (click)="logout()">
+              <a [routerLink]="['/login']" class="ripplelink" (click)="logout()">
                 <i class="material-icons">power_settings_new</i>
                 <span>Выход</span>
               </a>

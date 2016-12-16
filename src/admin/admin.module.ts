@@ -1,49 +1,20 @@
 import {
   NgModule
 } from '@angular/core';
-import {
-  BrowserModule
-} from '@angular/platform-browser';
-import {
-  FormsModule
-} from '@angular/forms';
-import {
-  HttpModule
-} from '@angular/http';
-import {
-  RouterModule
-} from '@angular/router';
 
 import {
   AdminComponent
 } from './admin.component';
 
 import {
-  routes
+  routing
 } from './admin.routes';
-
-// import {
-//   APP_RESOLVER_PROVIDERS
-// } from './admin.resolver';
-
- // Application wide providers
-// const APP_PROVIDERS = [
-//   ...APP_RESOLVER_PROVIDERS,
-// ];
 
 @NgModule({
   imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    routes],
-  declarations: [AdminComponent],
-  // providers: [
-  //   APP_PROVIDERS
-  // ],
-    exports: [
-    RouterModule
-  ]
- })
+    routing
+  ],
+  declarations: [AdminComponent]
+})
 
 export class AdminModule {}

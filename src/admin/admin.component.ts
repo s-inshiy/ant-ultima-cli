@@ -1,3 +1,11 @@
+// import {Component } from '@angular/core';
+
+// @Component({
+//     template: '<p>Extra component</p>'
+// })
+
+// export class AdminComponent {}
+
 import { Component, OnInit } from '@angular/core';
 
 @Component({

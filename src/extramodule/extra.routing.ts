@@ -1,18 +1,18 @@
 import {
+  ModuleWithProviders
+} from '@angular/core';
+import {
   Routes,
   RouterModule
 } from '@angular/router';
-import {
-  ModuleWithProviders
-} from '@angular/core';
 
 import {
-  AdminComponent
-} from './admin.component';
+  ExtraComponent
+} from './extra.component';
 
 const routes: Routes = [{
   path: '',
-  component: AdminComponent
+  component: ExtraComponent
 }];
 
 export const routing: ModuleWithProviders = RouterModule.forChild(routes);

@@ -48,18 +48,6 @@ import {
   BranchService
 } from './branch/branch.service';
 import {
-  CarService
-} from './ultima/service/carservice';
-import {
-  CountryService
-} from './ultima/service/countryservice';
-import {
-  EventService
-} from './ultima/service/eventservice';
-import {
-  NodeService
-} from './ultima/service/nodeservice';
-import {
   LoginService
 } from './login/login.service';
 import {
@@ -72,49 +60,49 @@ import {
 } from 'ng2-page-scroll';
 
 // PrimeNG
-import {
-  AccordionModule
-} from 'primeng/primeng';
+// import {
+//   AccordionModule
+// } from 'primeng/primeng';
 import {
   AutoCompleteModule
-} from 'primeng/primeng';
+} from 'primeng/components/autocomplete/autocomplete';
 // import { BreadcrumbModule } from 'primeng/primeng';
 import {
   ButtonModule
-} from 'primeng/primeng';
+} from 'primeng/components/button/button';
 import {
   CalendarModule
-} from 'primeng/primeng';
+} from 'primeng/components/calendar/calendar';
 // import {CarouselModule} from 'primeng/primeng';
 // import {ChartModule} from 'primeng/primeng';
 import {
   CheckboxModule
-} from 'primeng/primeng';
+} from 'primeng/components/checkbox/checkbox';
 // import {CodeHighlighterModule} from 'primeng/primeng';
 import {
   ConfirmDialogModule
-} from 'primeng/primeng';
-import {
-  SharedModule
-} from 'primeng/primeng';
+} from 'primeng/components/confirmdialog/confirmdialog';
+// import {
+//   SharedModule
+// } from 'primeng/primeng';
 import {
   ContextMenuModule
-} from 'primeng/primeng';
+} from 'primeng/components/contextmenu/contextmenu';
 // import { DataGridModule } from 'primeng/primeng';
 import {
   DataListModule
-} from 'primeng/primeng';
+} from 'primeng/components/datalist/datalist';
 // import { DataScrollerModule } from 'primeng/primeng';
 import {
   DataTableModule
-} from 'primeng/primeng';
+} from 'primeng/components/datatable/datatable';
 import {
   DialogModule
-} from 'primeng/primeng';
+} from 'primeng/components/dialog/dialog';
 // import {DragDropModule} from 'primeng/primeng';
 import {
   DropdownModule
-} from 'primeng/primeng';
+} from 'primeng/components/dropdown/dropdown';
 // import {EditorModule} from 'primeng/primeng';
 // import { FieldsetModule } from 'primeng/primeng';
 // import {FileUploadModule} from 'primeng/primeng';
@@ -122,17 +110,17 @@ import {
 // import {GMapModule} from 'primeng/primeng';
 import {
   GrowlModule
-} from 'primeng/primeng';
+} from 'primeng/components/growl/growl';
 import {
   InputMaskModule
-} from 'primeng/primeng';
+} from 'primeng/components/inputmask/inputmask';
 // import { InputSwitchModule } from 'primeng/primeng';
 import {
   InputTextModule
-} from 'primeng/primeng';
+} from 'primeng/components/inputtext/inputtext';
 import {
   InputTextareaModule
-} from 'primeng/primeng';
+} from 'primeng/components/inputtextarea/inputtextarea';
 // import { LightboxModule } from 'primeng/primeng';
 // import { ListboxModule } from 'primeng/primeng';
 // import { MegaMenuModule } from 'primeng/primeng';
@@ -141,26 +129,26 @@ import {
 // import { MessagesModule } from 'primeng/primeng';
 import {
   MultiSelectModule
-} from 'primeng/primeng';
+} from 'primeng/components/multiselect/multiselect';
 // import {OrderListModule} from 'primeng/primeng';
 // import { OverlayPanelModule } from 'primeng/primeng';
 import {
   PaginatorModule
-} from 'primeng/primeng';
+} from 'primeng/components/paginator/paginator';
 import {
   PanelModule
-} from 'primeng/primeng';
+} from 'primeng/components/panel/panel';
 // import { PanelMenuModule } from 'primeng/primeng';
 import {
   PasswordModule
-} from 'primeng/primeng';
+} from 'primeng/components/password/password';
 // import { PickListModule } from 'primeng/primeng';
 // import { ProgressBarModule } from 'primeng/primeng';
 // import { RadioButtonModule } from 'primeng/primeng';
 // import {RatingModule} from 'primeng/primeng';
 import {
   ScheduleModule
-} from 'primeng/primeng';
+} from 'primeng/components/schedule/schedule';
 // import { SelectButtonModule } from 'primeng/primeng';
 // import { SlideMenuModule } from 'primeng/primeng';
 // import {SliderModule} from 'primeng/primeng';
@@ -178,10 +166,10 @@ import {
 // } from 'primeng/primeng';
 import {
   TreeModule
-} from 'primeng/primeng';
+} from 'primeng/components/tree/tree';
 import {
   TreeTableModule
-} from 'primeng/primeng';
+} from 'primeng/components/treetable/treetable';
 
 // Angular JWT 
 import {
@@ -307,7 +295,7 @@ type StoreType = {
     // FormsModule,a.
     //  AppRoutes,
     // HttpModule,
-    AccordionModule,
+    // AccordionModule,
     AutoCompleteModule,
     // BreadcrumbModule,
     ButtonModule,
@@ -317,7 +305,7 @@ type StoreType = {
     CheckboxModule,
     // CodeHighlighterModule,
     ConfirmDialogModule,
-    SharedModule,
+    // SharedModule,
     ContextMenuModule,
     // DataGridModule,
     DataListModule,
@@ -369,13 +357,12 @@ type StoreType = {
     TreeModule,
     TreeTableModule,
     RouterModule.forRoot(routes, {
-      useHash: false
+      useHash: true
     }),
     Ng2PageScrollModule.forRoot(),
   ],
   providers: [
     APP_PROVIDERS,
-    CarService, CountryService, EventService, NodeService,
     StreetService, AreaService, SettlementService, RegionService, BranchService, LoginService, AuthGuard,
     provideAuth({
       headerName: 'Authorization',

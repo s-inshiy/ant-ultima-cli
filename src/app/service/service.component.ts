@@ -2,13 +2,15 @@ import {
   Component,
   OnInit
 } from '@angular/core';
+
 import {
   ServiceService
 } from './service.service';
+
 import {
   Message,
   TreeNode
-} from 'primeng/primeng';
+} from 'primeng/components/common/api';
 
 
 @Component({

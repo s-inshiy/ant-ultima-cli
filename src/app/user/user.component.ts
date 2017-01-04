@@ -10,7 +10,7 @@ import {
   Message,
   MenuItem,
   SelectItem
-} from 'primeng/primeng';
+} from 'primeng/components/common/api';
 
 import {
   LoginService
@@ -19,11 +19,11 @@ import {
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  // styleUrls: ['./user.component.scss'],
   providers: [
     UserService, LoginService
   ]
 })
+
 export class UserComponent implements OnInit {
 
   // Classes

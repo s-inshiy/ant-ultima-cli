@@ -2,13 +2,16 @@ import {
   Component,
   OnInit
 } from '@angular/core';
+
 import {
   SettingService
 } from './setting.service';
+
 import {
   Message,
   MenuItem,
-} from 'primeng/primeng';
+} from 'primeng/components/common/api';
+
 import {
   JwtHelper
 } from 'angular2-jwt';

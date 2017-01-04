@@ -2,17 +2,20 @@ import {
   Component,
   OnInit
 } from '@angular/core';
+
 import {
   MasterDetailService
 } from './master-detail.service';
+
 import {
   ActivatedRoute,
   Router
 } from '@angular/router';
+
 import {
   Message,
   MenuItem,
-} from 'primeng/primeng';
+} from 'primeng/components/common/api';
 
 @Component({
   selector: 'app-master-detail',

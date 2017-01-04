@@ -9,7 +9,7 @@ import {
   Message,
   MenuItem,
   SelectItem
-} from 'primeng/primeng';
+} from 'primeng/components/common/api';
 import {
   JwtHelper
 } from 'angular2-jwt';

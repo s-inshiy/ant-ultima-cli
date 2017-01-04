@@ -2,16 +2,19 @@ import {
   Component,
   OnInit
 } from '@angular/core';
+
 import {
   MasterService
 } from './master.service';
+
 import {
   Router
 } from '@angular/router';
+
 import {
   Message,
   MenuItem
-} from 'primeng/primeng';
+} from 'primeng/components/common/api';
 
 @Component({
   selector: 'app-master',

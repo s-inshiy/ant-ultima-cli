@@ -9,7 +9,7 @@ import {
 import {
   Message,
   MenuItem,
-} from 'primeng/primeng';
+} from 'primeng/components/common/api';
 
 @Component({
   selector: 'app-area',

@@ -3,15 +3,18 @@ import {
   AfterViewInit,
   ElementRef
 } from '@angular/core';
+
 import {
   JwtHelper
 } from 'angular2-jwt';
+
 import {
   DashboardService
 } from './dashboard.service';
+
 import {
   Message
-} from 'primeng/primeng';
+} from 'primeng/components/common/api';
 
 declare var Ultima: any;
 

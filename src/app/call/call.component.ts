@@ -5,10 +5,11 @@ import {
 import {
   CallService
 } from './call.service';
+
 import {
   Message,
-  MenuItem,
-} from 'primeng/primeng';
+  MenuItem
+} from 'primeng/components/common/api';
 
 @Component({
   selector: 'app-call',

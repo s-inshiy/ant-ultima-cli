@@ -2,16 +2,19 @@ import {
   Component,
   OnInit
 } from '@angular/core';
+
 import {
   StreetService
 } from './street.service';
+
 import {
   LoginService
 } from '../login/login.service';
+
 import {
   Message,
   MenuItem
-} from 'primeng/primeng';
+} from 'primeng/components/common/api';
 
 @Component({
   selector: 'app-street',

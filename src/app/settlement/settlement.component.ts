@@ -2,13 +2,15 @@ import {
   Component,
   OnInit
 } from '@angular/core';
+
 import {
   SettlementService
 } from './settlement.service';
+
 import {
   Message,
   MenuItem
-} from 'primeng/primeng';
+} from 'primeng/components/common/api';
 
 @Component({
   selector: 'an-settlement',

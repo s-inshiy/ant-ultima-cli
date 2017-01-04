@@ -13,7 +13,7 @@ import {
   Message,
   MenuItem,
   SelectItem
-} from 'primeng/primeng';
+} from 'primeng/components/common/api';
 
 @Component({
   selector: 'app-branch',

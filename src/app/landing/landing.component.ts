@@ -2,16 +2,20 @@ import {
   Component,
   OnInit
 } from '@angular/core';
+
 import {
   Router
 } from '@angular/router';
+
 import {
   LandingService
 } from './landing.service';
+
 import {
   Message,
   SelectItem
-} from 'primeng/primeng';
+} from 'primeng/components/common/api';
+
 import {
   PageScrollConfig
 } from 'ng2-page-scroll';

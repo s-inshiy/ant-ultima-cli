@@ -2,13 +2,15 @@ import {
   Component,
   OnInit
 } from '@angular/core';
+
 import {
   CompanyService
 } from './company.service';
+
 import {
   Message,
   MenuItem
-} from 'primeng/primeng';
+} from 'primeng/components/common/api';
 
 @Component({
   selector: 'app-company',
@@ -35,7 +37,7 @@ export class CompanyComponent implements OnInit {
 
   ngOnInit() {
     this.getCompanies(this.pag.curr);
-     // ContextMenu
+    // ContextMenu
     this.tieredItems = [{
       label: 'Удалить',
       icon: 'fa ui-icon-delete-forever',
@@ -153,7 +155,7 @@ export class CompanyComponent implements OnInit {
             summary: 'Компания  удалена',
             detail: this.company.name
           });
-        this.company = new NewCompany();
+          this.company = new NewCompany();
         }
       );
   }

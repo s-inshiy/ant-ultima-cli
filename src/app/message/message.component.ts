@@ -2,12 +2,15 @@ import {
   Component,
   OnInit
 } from '@angular/core';
+
 import {
   MessageService
 } from './message.service';
+
 import {
   Message
-} from 'primeng/primeng';
+} from 'primeng/components/common/api';
+
 import {
   JwtHelper
 } from 'angular2-jwt';
@@ -15,7 +18,6 @@ import {
 @Component({
   selector: 'app-message',
   templateUrl: './message.component.html',
-  // styleUrls: ['./message.component.scss'],
   providers: [
     MessageService
   ]

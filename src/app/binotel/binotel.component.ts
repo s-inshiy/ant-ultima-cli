@@ -7,9 +7,8 @@ import {
 } from './binotel.service';
 import {
   Message,
-  MenuItem,
-  // SelectItem
-} from 'primeng/primeng';
+  MenuItem
+} from 'primeng/components/common/api';
 
 @Component({
   selector: 'app-binotel',

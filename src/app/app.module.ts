@@ -2,15 +2,21 @@ import {
   NgModule,
   ApplicationRef
 } from '@angular/core';
+
 import {
   BrowserModule
 } from '@angular/platform-browser';
+
 import {
   FormsModule
 } from '@angular/forms';
+
 import {
-  HttpModule
+  HttpModule,
+  Http,
+  RequestOptions
 } from '@angular/http';
+
 import {
   RouterModule,
   // Routes,
@@ -171,12 +177,16 @@ import {
   TreeTableModule
 } from 'primeng/components/treetable/treetable';
 
-// Angular JWT 
+// Import Angular JWT
+
 import {
-  provideAuth
+  provideAuth,
+  AuthHttp,
+  AuthConfig
 } from 'angular2-jwt';
 
-// Custom Component
+// Declarations 
+
 import {
   NoContentComponent
 } from './no-content';
@@ -243,6 +253,21 @@ import {
 import {
   TruncatePipe
 } from './landing/truncate.pipe';
+
+export function authHttpServiceFactory(http: Http, options: RequestOptions) {
+  return new AuthHttp(new AuthConfig({
+    headerName: 'Authorization',
+    headerPrefix: 'Bearer',
+    tokenName: 'id_token',
+    tokenGetter: (() => localStorage.getItem('id_token')),
+    globalHeaders: [{
+      'Accept': 'application/json;q=0.9'
+    }],
+    noJwtError: true,
+    noTokenScheme: true
+  }), http, options);
+}
+
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -364,19 +389,24 @@ type StoreType = {
   providers: [
     APP_PROVIDERS,
     StreetService, AreaService, SettlementService, RegionService, BranchService, LoginService, AuthGuard,
-    provideAuth({
-      headerName: 'Authorization',
-      headerPrefix: 'Bearer',
-      tokenName: 'id_token',
-      tokenGetter: (() => localStorage.getItem('id_token')),
-      globalHeaders: [{
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }, {
-        'Accept': 'application/json;q=0.9'
-      }],
-      noJwtError: true,
-      noTokenScheme: true
-    })
+    // provideAuth({
+    //   headerName: 'Authorization',
+    //   headerPrefix: 'Bearer',
+    //   tokenName: 'id_token',
+    //   tokenGetter: (() => localStorage.getItem('id_token')),
+    //   globalHeaders: [{
+    //     'Content-Type': 'application/x-www-form-urlencoded'
+    //   }, {
+    //     'Accept': 'application/json;q=0.9'
+    //   }],
+    //   noJwtError: true,
+    //   noTokenScheme: true
+    // })
+    {
+      provide: AuthHttp,
+      useFactory: authHttpServiceFactory,
+      deps: [Http, RequestOptions]
+    }
   ]
 })
 
